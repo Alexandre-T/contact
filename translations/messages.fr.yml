@@ -1,9 +1,8 @@
 form.login.field.mail: 'Adresse email'
 form.login.field.password: 'Mot de passe'
 form.login.field.submit: 'Se connecter'
-
 form.login.help.mail: 'Entrez votre adresse email'
 form.login.help.password: 'Entrez votre mot de passe'
-
-security.connection.successful %username%: 'Authentification réussie. Bienvenue %username% !'
+'security.connection.successful %username%': "Authentification réussie. Bienvenue %username%\_!"
 security.connection.failed: 'Cette adresse email n’est pas référencée dans l’application ou bien le mot de passe est erroné.'
+title.security.login: Connexion
