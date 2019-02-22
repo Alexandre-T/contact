@@ -1,24 +1,56 @@
+#http://symfony.com/doc/current/reference/configuration/security.html#full-default-configuration
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    # This is my password encoder
+    encoders:
+        App\Entity\User:
+            # I use bcrypt, so I do not need salt.
+            algorithm: bcrypt
+
+    # I do not want to see an invalid user... It is a security issue.
+    # FIXME remove comments
+    # hide_user_not_found:  true
+
+    # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    # https://knpuniversity.com/screencast/symfony2-ep2/user-provider
+    # https://symfony.com/doc/current/security/user_provider.html
     providers:
-        in_memory: { memory: ~ }
+        app_user_provider:
+            id: App\Security\UserProvider
+
     firewalls:
+        # Firewall without security for images, css, js and profiler
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        #Main firewall
         main:
+            # It covers all sites except precedent pattern
+            # pattern:    ^/
+            # User are provided by user_provider defined above
+            # provider: our_users
+            # Anonymous user are authorized (it is useful to see home, login and register pages
             anonymous: true
 
-            # activate different ways to authenticate
+            # We DO NOT authenticate via a form login
+            # https://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            # https://knpuniversity.com/screencast/symfony-security/all-about-firewalls#play
+            # form_login: ~
 
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+            # We use Guard !
+            # Guard is configured into prod subdirectory
 
-            # form_login: true
-            # https://symfony.com/doc/current/security/form_login_setup.html
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+    role_hierarchy:
+        ROLE_READER:     [ROLE_USER, ROLE_READ_CONTACT, ROLE_READ_ORGANIZATION]
+        ROLE_ORGANISER:  [ROLE_READER, ROLE_MANAGE_CONTACT, ROLE_MANAGE_ORGANIZATION]
+        ROLE_ADMIN:      [ROLE_MANAGE_USER, ROLE_ORGANISER]
+
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # We must be Anonymous to register or to login
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        #For the great lines, we use access_control, but when I want a special access in a controller, I use annotations
+        # use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+        # ...
+        # * @Security("is_granted('ROLE_ADMIN')")

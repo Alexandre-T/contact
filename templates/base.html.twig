@@ -9,33 +9,71 @@
         <!-- Renders a link tag (if your module requires any CSS)
              <link rel="stylesheet" href="/build/app.css"> -->
     {% endblock %}
+    <title>{% block title %}Contacts{% endblock title %}</title>
+
+
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-        <a class="navbar-brand" href="#" style="background-color: white; padding-left: 10px; padding-right: 10px;">
-            <img src="{{ asset('img/logo.svg') }}" width="30" height="45" alt="Cerema">
-            <span class="text-primary"><strong>Cerema</strong></span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav mr-auto">
-                <a class="nav-item nav-link active" href="{{ path('home') }}">Accueil <span
-                            class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">Contacts</a>
-                <a class="nav-item nav-link" href="#">Organisations</a>
-            </div>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Recherche">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Recherche</button>
-            </form>
-        </div>
-    </div>
-</nav>
 {% block body %}
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#" style="background-color: white; padding-left: 10px; padding-right: 10px;">
+                <img src="{{ asset('img/logo.svg') }}" width="30" height="45" alt="Cerema">
+                <span class="text-primary"><strong>Cerema</strong></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link active" href="{{ path('home') }}">Accueil <span
+                                class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="#">Contacts</a>
+                    <a class="nav-item nav-link" href="#">Organisations</a>
+                </div>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Recherche">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Recherche</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block headline %}<h1>Contacts</h1>{% endblock headline %}
+        {% block flashes %}
+            {% if app.session.flashbag.has('error') %}
+                {% for flashbag in app.session.flashbag.get('error') %}
+                    <div class="alert alert-danger">
+                        {{ flashbag | trans  }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% if app.session.flashbag.has('warning') %}
+                {% for flashbag in app.session.flashbag.get('warning') %}
+                    <div class="alert alert-warning">
+                        {{ flashbag | trans  }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% if app.session.flashbag.has('info') %}
+                {% for flashbag in app.session.flashbag.get('info') %}
+                    <div class="alert alert-info">
+                        {{ flashbag | trans  }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% if app.session.flashbag.has('success') %}
+                {% for flashbag in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success">
+                        {{ flashbag | trans  }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endblock flashes %}
+        {% block container %}{% endblock %}
+    </div>
 
 {% endblock %}
 {% block javascripts %}

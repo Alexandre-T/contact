@@ -1,15 +1,15 @@
 <?php
 /**
- * This file is part of the IP-Trevise Application.
+ * This file is part of the Contact Application.
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * (c) Alexandre Tranchant <alexandre.tranchant@gmail.com>
  *
  * @category Entity
  *
  * @author    Alexandre Tranchant <alexandre.tranchant@gmail.com>
- * @copyright 2017 Cerema
+ * @copyright 2019 Cerema
  * @license   CeCILL-B V1
  *
  * @see       http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt
@@ -18,7 +18,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-//use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Mapping\Annotation as Gedmo;
 use DateTime;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Serializable;
@@ -31,6 +31,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(
  *     name="ts_user",
+ *     schema="data",
  *     options={"comment":"Table entité des utilisateur","charset":"utf8mb4","collate":"utf8mb4_unicode_ci"}
  * )
  *
@@ -220,12 +221,11 @@ class User implements InformationInterface, LabelInterface, UserInterface, Seria
      */
     public function getRoles(): array
     {
-        // give everyone ROLE_USER!
-        if (!in_array('ROLE_USER', $this->roles)) {
-            $this->roles[] = 'ROLE_USER';
-        }
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
 
-        return $this->roles;
+        return array_unique($roles);
     }
 
     /**
@@ -315,9 +315,9 @@ class User implements InformationInterface, LabelInterface, UserInterface, Seria
      *
      * @return string
      */
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
-        return $this->getMail();
+        return (string) $this->getMail();
     }
 
     /**
@@ -410,6 +410,7 @@ class User implements InformationInterface, LabelInterface, UserInterface, Seria
 
     /**
      * @param User $creator
+     *
      * @return User
      */
     public function setCreator(User $creator): User

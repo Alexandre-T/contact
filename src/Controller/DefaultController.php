@@ -9,7 +9,7 @@
  * @category Controller
  *
  * @author    Alexandre Tranchant <alexandre.tranchant@gmail.com>
- * @copyright 2017 Cerema
+ * @copyright 2019 Cerema
  * @license   CeCILL-B V1
  */
 
