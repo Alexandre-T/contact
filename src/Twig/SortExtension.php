@@ -60,7 +60,7 @@ class SortExtension extends \Twig_Extension
                 case 'amount':
                     $result .= "-$type";
             }
-            dump($sort);
+
             $result .= 'desc' == $sort ? '-up' : '-down';
         }
 

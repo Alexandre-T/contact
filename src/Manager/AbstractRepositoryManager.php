@@ -75,6 +75,11 @@ abstract class AbstractRepositoryManager implements ManagerInterface
     {
         $queryBuilder = $this->repository->createQueryBuilder($this->getDefaultAlias());
 
+        //We add this because I don't want to see user.mail in query parameter
+        /* @see https://github.com/KnpLabs/KnpPaginatorBundle/issues/196 */
+        $queryBuilder->addSelect('user.mail as HIDDEN mail');
+        $queryBuilder->addSelect('user.label as HIDDEN username');
+
         return $this->paginator->paginate(
             $queryBuilder,
             $page,

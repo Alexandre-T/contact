@@ -60,7 +60,7 @@ class UserController extends AbstractController
     public function indexAction(UserManager $userManager, Request $request)
     {
         //Query parameters check
-        $field = 'user.mail' == $request->query->getAlpha('sort') ? 'user.mail' : 'user.label';
+        $field = 'mail' == $request->query->getAlpha('sort') ? 'mail' : 'username';
         $sort = 'desc' == $request->query->getAlpha('direction') ? 'desc' : 'asc';
 
         $pagination = $userManager->paginate(

@@ -17,12 +17,12 @@
         <tr>
             <th id="user-gravatar">&nbsp;&nbsp;<span class="fa fa-user-tie"></span></th>
             <th id="user-username">
-                {{ knp_pagination_sortable(pagination, 'form.user.field.username' | trans, 'user.label')}}
-                <span class="{{ faSort(pagination.isSorted('user.label'), direction, 'alpha') }}"></span>
+                {{ knp_pagination_sortable(pagination, 'form.user.field.username' | trans, 'username')}}
+                <span class="{{ faSort(pagination.isSorted('username'), direction, 'alpha') }}"></span>
             </th>
             <th id="user-mail">
-                {{ knp_pagination_sortable(pagination, 'form.user.field.mail' | trans, 'user.mail')}}
-                <span class="{{ faSort(pagination.isSorted('user.mail'), direction, 'alpha') }}"></span>
+                {{ knp_pagination_sortable(pagination, 'form.user.field.mail' | trans, 'mail')}}
+                <span class="{{ faSort(pagination.isSorted('mail'), direction, 'alpha') }}"></span>
             </th>
             <th id="user-actions">Actions</th>
         </tr>
