@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block content_content %}
+{% block container %}
     {% block content_breadcrumb %}
         {% if path is defined and path is not null %}
             <ol class="breadcrumb" id="content-breadcrumb">
@@ -14,11 +14,12 @@
     {% block content_tabs %}
     <div class="content-tabs">
         {# <!-- Nav tabs --> #}
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#general" aria-controls="home" role="tab" data-toggle="tab">{{ 'default.tab.general' | trans }}</a></li>
+        <ul class="nav nav-tabs" id="entityTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="#general" aria-controls="home" role="tab" data-toggle="tab">{{ 'entity.tab.general' | trans }}</a></li>
             {% block content_tabs_header %}{% endblock content_tabs_header %}
-            <li role="presentation"><a href="#logs" aria-controls="profile" role="tab" data-toggle="tab">{{ 'default.tab.logs' | trans }}</a></li>
-            <li role="presentation"><a href="#informations" aria-controls="messages" role="tab" data-toggle="tab">{{ 'default.tab.informations' | trans }}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#logs" aria-controls="profile" role="tab" data-toggle="tab">{{ 'entity.tab.logs' | trans }}</a></li>
+            <li class="nav-item"><a class="nav-link" href="#informations" aria-controls="messages" role="tab" data-toggle="tab">{{ 'entity.tab.informations' | trans }}</a></li>
         </ul>
         {# <!-- Tab panes --> #}
         <div class="tab-content">
@@ -112,7 +113,7 @@
         </div>
     </div>
     {% endblock content_tabs %}
-{% endblock content_content %}
+{% endblock container %}
 
 {% block content_sidebar %}
     {% block content_action %}{% endblock content_action %}

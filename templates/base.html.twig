@@ -1,6 +1,6 @@
 {# templates/base.html.twig #}
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale }}">
 <head>
     {% block stylesheets %}
         {# 'app' must match the first argument to addEntry() in webpack.config.js #}
@@ -39,40 +39,11 @@
             </div>
         </div>
     </nav>
-
+    {% include 'flash.html.twig' %}
     <div class="container">
         {% block headline %}<h1>Contacts</h1>{% endblock headline %}
-        {% block flashes %}
-            {% if app.session.flashbag.has('error') %}
-                {% for flashbag in app.session.flashbag.get('error') %}
-                    <div class="alert alert-danger">
-                        {{ flashbag | trans  }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-            {% if app.session.flashbag.has('warning') %}
-                {% for flashbag in app.session.flashbag.get('warning') %}
-                    <div class="alert alert-warning">
-                        {{ flashbag | trans  }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-            {% if app.session.flashbag.has('info') %}
-                {% for flashbag in app.session.flashbag.get('info') %}
-                    <div class="alert alert-info">
-                        {{ flashbag | trans  }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-            {% if app.session.flashbag.has('success') %}
-                {% for flashbag in app.session.flashbag.get('success') %}
-                    <div class="alert alert-success">
-                        {{ flashbag | trans  }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endblock flashes %}
-        {% block container %}{% endblock %}
+        {% block content_breadcrumb %}{% endblock content_breadcrumb %}
+        {% block container %}{% endblock container %}
     </div>
 
 {% endblock %}

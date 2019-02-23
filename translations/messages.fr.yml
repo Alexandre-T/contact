@@ -16,6 +16,7 @@ form:
     field:
       username: 'Nom de l’utilisateur'
       mail: 'Adresse email'
+      gravatar: 'Gravatar de l’utilisateur'
 
 security:
   connection:
@@ -33,3 +34,8 @@ administration:
     action:
       create:
         title: 'Créer un nouvel utilisateur'
+entity:
+  tab:
+    general: 'Généralités'
+    logs: 'Journal de bord'
+    informations: 'Informations'

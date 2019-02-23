@@ -1,0 +1,30 @@
+{% block flashes %}
+    {% if app.session.flashbag.has('error') %}
+        {% for flashbag in app.session.flashbag.get('error') %}
+            <div class="alert alert-danger">
+                {{ flashbag | trans  }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if app.session.flashbag.has('warning') %}
+        {% for flashbag in app.session.flashbag.get('warning') %}
+            <div class="alert alert-warning">
+                {{ flashbag | trans  }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if app.session.flashbag.has('info') %}
+        {% for flashbag in app.session.flashbag.get('info') %}
+            <div class="alert alert-info">
+                {{ flashbag | trans  }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if app.session.flashbag.has('success') %}
+        {% for flashbag in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">
+                {{ flashbag | trans  }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock flashes %}
