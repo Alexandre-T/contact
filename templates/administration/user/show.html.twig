@@ -3,59 +3,37 @@
 {% set administration_entity_show = 'administration_status_show' %}
 
 {% block title %}
-    {{ 'administration.user.show.title %name%'|trans({'%name%': user.username})}} · {{ parent() }}
+    {{ 'administration.user.show.title %name%'|trans({'%name%': user.label})}} · {{ parent() }}
 {% endblock title %}
 
 {% block headline %}
-    {{ 'administration.user.show.title %name%'|trans({'%name%': user.username})}}
+    <h1>
+        <span class="fa fa-user-tie"></span>
+        {{ 'administration.user.show.title %name%'|trans({'%name%': user.label})}}
+    </h1>
 {% endblock headline %}
 
 {% block content_settings %}
     <div class="panel panel-primary" id="administration-global-information">
         <div class="panel-heading">
-            <h3 class="panel-title">{{ 'administration.global-information' | trans }}</h3>
+            <h3 class="panel-title">{{ 'entity.global-information' | trans }}</h3>
         </div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-sm-10">
-                    <dl class="dl-horizontal">
-                        <dt class="lead">{{ 'form.user.field.username'| trans }}</dt>
-                        <dd class="lead">{{ user.label }}</dd>
-                        <dt>{{ 'form.user.field.mail'| trans }}</dt>
-                        <dd>{{ user.mail }}</dd>
-                        <dt>{{ 'form.user.field.roles'| trans }}</dt>
-                        <dd>{{ user.roles | roles }}</dd>
+                    <dl class="row">
+                        <dt class="col-sm-4 text-truncate">{{ 'form.user.field.username'| trans }}</dt>
+                        <dd class="col-sm-8">{{ user.label }}</dd>
+                        <dt class="col-sm-4 text-truncate">{{ 'form.user.field.mail'| trans }}</dt>
+                        <dd class="col-sm-8">{{ user.mail }}</dd>
+                        <dt class="col-sm-4 text-truncate">{{ 'form.user.field.roles'| trans }}</dt>
+                        <dd class="col-sm-8">{{ user.roles | roles }}</dd>
                     </dl>
                 </div>
                 <div class="col-sm-2 text-right">
                     <img src="{{ user.mail | gravatarFilter }}" class="img-rounded" alt="gravatar"/>
                 </div>
             </div>
-        </div>
-        <div class="panel-heading">
-            <h3 class="panel-title">{{ 'administration.access-information' | trans }}</h3>
-        </div>
-        <div class="panel-body">
-            {% if user.isAdmin %}
-                <div class="alert alert-info">
-                    {{ 'message.role.admin.all-access' | trans }}
-                </div>
-            {% else %}
-                <dl class="dl-horizontal">
-                    {% for role in user.newRoles%}
-                        <dt>{{role.site.label}}</dt>
-                        {%if role.readOnly %}
-                            <dd>{{ 'ROLE_READER' | trans }}</dd>
-                        {%else%}
-                            <dd>{{ 'ROLE_ORGANISER' | trans }}</dd>
-                        {%endif%}
-                    {% else %}
-                        <div class="alert alert-warning">
-                            {{ 'message.role.admin.no-access' | trans }}
-                        </div>
-                    {%endfor%}
-                </dl>
-            {% endif %}
         </div>
     </div>
 {% endblock content_settings %}

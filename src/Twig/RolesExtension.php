@@ -17,7 +17,7 @@
 
 namespace App\Twig;
 
-use Symfony\Component\Translation\Translator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * RolesExtension class.
@@ -33,18 +33,16 @@ use Symfony\Component\Translation\Translator;
 class RolesExtension extends \Twig_Extension
 {
     /**
-     * @var Translator
+     * @var TranslatorInterface
      */
     protected $translator;
 
     /**
-     * Set the translator.
+     * Constructor sets the translator.
      *
-     * Initialized by dependence injection.
-     *
-     * @param Translator $translator
+     * @param TranslatorInterface $translator
      */
-    public function setTranslator(Translator $translator)
+    public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
     }

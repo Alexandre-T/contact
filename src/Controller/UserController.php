@@ -17,6 +17,7 @@
 
 namespace App\Controller;
 
+use App\Entity\InformationInterface;
 use App\Form\Type\UserType;
 use App\Entity\User;
 use App\Manager\UserManager;
@@ -112,22 +113,20 @@ class UserController extends AbstractController
      *
      * @Route("/{id}", name="administration_user_show", methods={"get"})
      *
+     * @param UserManager $userManager
      * @param User $user
      *
      * @return Response
      */
-    public function showAction(User $user)
+    public function showAction(UserManager $userManager, User $user)
     {
-        /** @var USerManager $userManager */
-        $userManager = $this->get(UserManager::class);
         $deleteForm = $this->createDeleteForm($user);
-        $information = InformationFactory::createInformation($user);
-        $logs = $userManager->retrieveLogs($user);
+        //$logs = $userManager->retrieveLogs($user);
 
-        return $this->render('@App/administration/user/show.html.twig', [
+        return $this->render('administration/user/show.html.twig', [
             'isDeletable' => $userManager->isDeletable($user),
-            'logs' => $logs,
-            'information' => $information,
+            //'logs' => $logs,
+            'information' => $user,
             'user' => $user,
             'delete_form' => $deleteForm->createView(),
         ]);
@@ -164,9 +163,8 @@ class UserController extends AbstractController
             return $this->redirectToRoute('administration_user_show', array('id' => $user->getId()));
         }
         $logs = $userService->retrieveLogs($user);
-        $information = InformationFactory::createInformation($user);
 
-        return $this->render('@App/administration/user/edit.html.twig', [
+        return $this->render('administration/user/edit.html.twig', [
             'isDeletable' => $userService->isDeletable($user),
             'logs' => $logs,
             'information' => $information,
@@ -223,7 +221,8 @@ class UserController extends AbstractController
             ->setMethod('DELETE')
             ->add('delete', SubmitType::class, [
                 'attr' => ['class' => 'btn-danger confirm-delete'],
-                'icon' => 'trash-o',
+                //FIXME add icon
+                //'icon' => 'trash-o',
                 'label' => 'administration.delete.confirm.delete',
             ])
             ->getForm()

@@ -2,6 +2,27 @@ action:
   edit: 'Éditer'
   show: 'Consulter'
 
+administration:
+  created:
+    at: 'Création'
+    by: 'Créé·e par'
+  user:
+    create: 'Créer un utilisateur'
+    action:
+      create:
+      title: 'Créer un nouvel utilisateur'
+    show:
+    title %name%: 'Fiche de l’utilisateur %name%'
+  updated:
+    at: 'Dernière modification'
+
+entity:
+  global-information: 'Généralités'
+  information: 'Informations'
+  tab:
+    general: 'Généralités'
+    logs: 'Journal de bord'
+    informations: 'Informations'
 
 form:
   login:
@@ -10,13 +31,14 @@ form:
       password: 'Mot de passe'
       submit: 'Se connecter'
     help:
-        mail: 'Entrez votre adresse email'
-        password: 'Entrez votre mot de passe'
+      mail: 'Entrez votre adresse email'
+      password: 'Entrez votre mot de passe'
   user:
     field:
       username: 'Nom de l’utilisateur'
       mail: 'Adresse email'
       gravatar: 'Gravatar de l’utilisateur'
+      roles: 'Privilèges de l’utilisateur'
 
 security:
   connection:
@@ -28,14 +50,3 @@ title:
     user: 'Liste des utilisateurs'
     login: Connexion
 
-administration:
-  user:
-    create: 'Créer un utilisateur'
-    action:
-      create:
-        title: 'Créer un nouvel utilisateur'
-entity:
-  tab:
-    general: 'Généralités'
-    logs: 'Journal de bord'
-    informations: 'Informations'
