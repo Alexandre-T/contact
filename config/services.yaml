@@ -36,3 +36,8 @@ services:
         autowire: true
         tags:
             - { name: doctrine.event_subscriber }
+    #Twig extension for localized date functions
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }

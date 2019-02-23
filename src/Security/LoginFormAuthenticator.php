@@ -222,7 +222,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        die('succes');
         //We log connection.
         $this->logger->notice('Connection successful: %username%', ['%username%' => $token->getUser()->getUsername()]);
 

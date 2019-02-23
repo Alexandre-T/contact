@@ -1,3 +1,8 @@
+action:
+  edit: 'Éditer'
+  show: 'Consulter'
+
+
 form:
   login:
     field:
@@ -7,6 +12,10 @@ form:
     help:
         mail: 'Entrez votre adresse email'
         password: 'Entrez votre mot de passe'
+  user:
+    field:
+      username: 'Nom de l’utilisateur'
+      mail: 'Adresse email'
 
 security:
   connection:
@@ -15,4 +24,12 @@ security:
 
 title:
   security:
+    user: 'Liste des utilisateurs'
     login: Connexion
+
+administration:
+  user:
+    create: 'Créer un utilisateur'
+    action:
+      create:
+        title: 'Créer un nouvel utilisateur'

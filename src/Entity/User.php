@@ -40,10 +40,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity("mail", message="form.error.mail.unique")
  * @UniqueEntity("label", message="form.error.label.unique")
  */
-class User implements InformationInterface, LabelInterface, UserInterface, Serializable
+class User implements EntityInterface, InformationInterface, LabelInterface, UserInterface, Serializable
 {
     /**
-     * Identifiant.
+     * Identifier.
      *
      * @var int
      *
@@ -68,7 +68,7 @@ class User implements InformationInterface, LabelInterface, UserInterface, Seria
     private $label;
 
     /**
-     * User mail and identifiant.
+     * User mail and identifier.
      *
      * @var string
      * @Assert\Length(max="255")
@@ -214,7 +214,7 @@ class User implements InformationInterface, LabelInterface, UserInterface, Seria
     }
 
     /**
-     * Return an array of all role codes to be complient with UserInterface
+     * Return an array of all role codes to be compliant with UserInterface
      * This is NOT the Roles getter.
      *
      * @return array

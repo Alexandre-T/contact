@@ -56,9 +56,9 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
      *
      * @param string $username
      *
-     * @return mixed
+     * @return UserInterface
      */
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($username): UserInterface
     {
         $user = $this->findOneByMail($username);
 
@@ -83,6 +83,7 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
      * @return UserInterface
      *
      * @throws UnsupportedUserException if the user is not supported
+     * @throws UsernameNotFoundException if the user is not found
      */
     public function refreshUser(UserInterface $user)
     {
