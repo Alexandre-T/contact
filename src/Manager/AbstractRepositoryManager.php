@@ -73,15 +73,16 @@ abstract class AbstractRepositoryManager implements ManagerInterface
      */
     public function paginate(int $page = 1, int $limit = self::LIMIT, string $sortField = null, $sortOrder = self::SORT): PaginationInterface
     {
-        $sortField = $sortField ?? $this->getDefaultSortField();
-
         $queryBuilder = $this->repository->createQueryBuilder($this->getDefaultAlias());
 
         return $this->paginator->paginate(
             $queryBuilder,
             $page,
             $limit,
-            ['defaultSortFieldName' => $sortField, 'defaultSortDirection' => $sortOrder == 'DESC'?'DESC':'ASC']
+            [
+                PaginatorInterface::DEFAULT_SORT_FIELD_NAME => $sortField,
+                PaginatorInterface::DEFAULT_SORT_DIRECTION => $sortOrder,
+            ]
         );
     }
 
@@ -97,7 +98,7 @@ abstract class AbstractRepositoryManager implements ManagerInterface
      *
      * @throws \Doctrine\ORM\Query\QueryException
      */
-    public function paginateWithCriteria(Criteria $criteria, int $page = 1, int $limit = self::LIMIT,  string $sortField = null, $sortOrder = self::SORT): PaginationInterface
+    public function paginateWithCriteria(Criteria $criteria, int $page = 1, int $limit = self::LIMIT, string $sortField = null, $sortOrder = self::SORT): PaginationInterface
     {
         $queryBuilder = $this->repository->createQueryBuilder($this->getDefaultAlias());
         $queryBuilder->addCriteria($criteria);
@@ -106,7 +107,7 @@ abstract class AbstractRepositoryManager implements ManagerInterface
             $queryBuilder,
             $page,
             $limit,
-            ['defaultSortFieldName' => $this->getDefaultSortField(), 'defaultSortDirection' => $sort == 'ASC'?$sort:'DESC']
+            ['defaultSortFieldName' => $this->getDefaultSortField(), 'defaultSortDirection' => $sortOrder == 'ASC' ? $sortOrder : 'DESC']
         );
     }
 

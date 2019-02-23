@@ -67,7 +67,19 @@ class UserFixtures extends Fixture
             $userAdministrator->setPlainPassword('administrator');
             $userAdministrator->setRoles($roleAdmin);
 
-            //These references are perhaps unuseful.
+            //We add 30 users.
+            $user = [];
+            foreach(range(0,30) as $index){
+                $user[$index] = new User();
+                $user[$index]->setLabel("User $index");
+                $user[$index]->setMail("user.$index@example.org");
+                $user[$index]->setPlainPassword('$index');
+                $user[$index]->setRoles($roleUser);
+                $manager->persist($user[$index]);
+            }
+
+
+            //These references are perhaps unused.
             $this->addReference('user_reader', $userReader);
             $this->addReference('user_user', $userUser);
             $this->addReference('user_organiser', $userOrganiser);

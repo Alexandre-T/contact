@@ -59,11 +59,15 @@ class UserController extends AbstractController
      */
     public function indexAction(UserManager $userManager, Request $request)
     {
+        //Query parameters check
+        $field = 'user.mail' == $request->query->getAlpha('sort') ? 'user.mail' : 'user.label';
+        $sort = 'desc' == $request->query->getAlpha('direction') ? 'desc' : 'asc';
+
         $pagination = $userManager->paginate(
             $request->query->getInt('page', 1),
             self::LIMIT_PER_PAGE,
-            $request->query->getAlpha('field', null),
-            $request->query->getAlpha('sort', null)
+            $field,
+            $sort
         );
 
         return $this->render('administration/user/list.html.twig', [
