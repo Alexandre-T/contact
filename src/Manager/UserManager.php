@@ -47,7 +47,7 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface 
      *
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    protected $entityManager;
 
     /**
      * Knp Paginator.

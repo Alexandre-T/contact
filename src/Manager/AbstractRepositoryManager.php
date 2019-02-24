@@ -18,6 +18,7 @@
 namespace App\Manager;
 
 use App\Entity\EntityInterface;
+use App\Entity\User;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
@@ -120,9 +121,13 @@ abstract class AbstractRepositoryManager implements ManagerInterface
      * Save new or modified User.
      *
      * @param EntityInterface $entity
+     * @param User $user
      */
-    public function save(EntityInterface $entity): void
+    public function save(EntityInterface $entity, User $user): void
     {
+        if (empty($entity->getId())) {
+            $entity->setCreator($user);
+        }
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
     }

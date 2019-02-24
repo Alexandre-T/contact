@@ -18,6 +18,7 @@
 namespace App\Manager;
 
 use App\Entity\EntityInterface;
+use App\Entity\User;
 use Doctrine\Common\Collections\Criteria;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
@@ -94,6 +95,7 @@ interface ManagerInterface
      * Save entity.
      *
      * @param EntityInterface $entity
+     * @param User $user
      */
-    public function save(EntityInterface $entity): void;
+    public function save(EntityInterface $entity, User $user): void;
 }

@@ -37,6 +37,7 @@ administration:
     at: 'Dernière modification'
   user:
     title %name%: 'Fiche de l’utilisateur %name%'
+    updated %name%: 'Modification de l’utilisateur %name%'
 
 entity:
   global-information: 'Généralités'
@@ -46,6 +47,7 @@ entity:
     actions:
       create: 'Création'
       delete: 'Suppression'
+      update: 'Modification'
     data:
       label: 'Nouveau libellé'
       mail: 'Nouvel email'
@@ -78,7 +80,18 @@ form:
       username: 'Nom de l’utilisateur'
       mail: 'Adresse email'
       gravatar: 'Gravatar de l’utilisateur'
+      role:
+        option:
+          admin: 'Administrateur pouvant gérer les privilèges des utilisateurs.'
+          organiser: 'Utilisateur avec droit de lecture et d’écriture.'
+          reader: 'Utilisateur avec droit de lecture uniquement.'
+          user: 'Utilisateur sans aucun privilège.'
+
       roles: 'Privilèges de l’utilisateur'
+    help:
+      username: 'Entrez le prénom et le nom de l’utilisateur'
+      mail: 'Entrez l’adresse email de l’utilisateur'
+      roles: 'Sélectionnez le rôle de l’utilisateur'
 
 message:
   security:
@@ -112,10 +125,10 @@ nav:
     text: 'Utilisateurs'
     title: 'Gestion des utilisateurs'
 
-ROLE_USER: 'Utilisateur sans aucun privilège.'
-ROLE_READER: 'Utilisateur avec droit de lecture uniquement.'
-ROLE_ORGANISER: 'Utilisateur avec droit de lecture et d’écriture.'
 ROLE_ADMIN: 'Administrateur pouvant gérer les privilèges des utilisateurs.'
+ROLE_ORGANISER: 'Utilisateur avec droit de lecture et d’écriture.'
+ROLE_READER: 'Utilisateur avec droit de lecture uniquement.'
+ROLE_USER: 'Utilisateur sans aucun privilège.'
 
 security:
   connection:
@@ -126,6 +139,7 @@ title:
   security:
     login: Connexion
     user:
+      edit %name%: 'Modification de l’utilisateur « %name% »'
       list: 'Liste des utilisateurs'
       show %name%: 'Fiche de l’utilisateur « %name% »'
     register: 'Inscription'

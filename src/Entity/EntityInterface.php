@@ -24,5 +24,12 @@ namespace App\Entity;
  */
 interface EntityInterface
 {
+    /**
+     * Return the id or null if entity was never saved.
+     *
+     * @return int|null
+     */
+    public function getId(): ?int;
 
+    public function setCreator(User $user): self;
 }

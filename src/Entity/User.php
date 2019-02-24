@@ -44,8 +44,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @Gedmo\Loggable
  *
- * @UniqueEntity("mail", message="form.error.mail.unique")
- * @UniqueEntity("label", message="form.error.label.unique")
+ * @UniqueEntity("mail", message="error.user.mail.unique")
+ * @UniqueEntity("label", message="error.user.label.unique")
  */
 class User implements EntityInterface, InformationInterface, LabelInterface, UserInterface, Serializable
 {
@@ -421,7 +421,7 @@ class User implements EntityInterface, InformationInterface, LabelInterface, Use
      *
      * @return User
      */
-    public function setCreator(User $creator): User
+    public function setCreator(User $creator): EntityInterface
     {
         $this->creator = $creator;
 

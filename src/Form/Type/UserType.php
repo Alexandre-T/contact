@@ -19,7 +19,6 @@ namespace App\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -49,23 +48,23 @@ class UserType extends AbstractType
         $builder
             ->add('label', null, [
                 'label' => 'form.user.field.username',
-                'help_block' => 'form.user.help.username',
+                'help' => 'form.user.help.username',
             ])
             ->add('mail', null, [
                 'label' => 'form.user.field.mail',
-                'help_block' => 'form.user.help.mail',
+                'help' => 'form.user.help.mail',
             ])
             //FIXME Un seul au choix !
             ->add('roles', ChoiceType::class, [
                 'label' => 'form.user.field.roles',
-                'help_block' => 'form.user.help.roles',
+                'help' => 'form.user.help.roles',
                 'expanded' => true,
                 'multiple' => true,
                 'choices' => [
-                    'form.user.field.roles.option.admin' => 'ROLE_ADMIN',
-                    'form.user.field.roles.option.reader' => 'ROLE_READER',
-                    'form.user.field.roles.option.ORGANISER' => 'ROLE_ORGANISER',
-                    'form.user.field.roles.option.user' => 'ROLE_USER',
+                    'form.user.field.role.option.admin' => 'ROLE_ADMIN',
+                    'form.user.field.role.option.reader' => 'ROLE_READER',
+                    'form.user.field.role.option.organiser' => 'ROLE_ORGANISER',
+                    'form.user.field.role.option.user' => 'ROLE_USER',
                 ],
             ])
         ;

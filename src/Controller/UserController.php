@@ -28,6 +28,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * UserController class.
@@ -137,37 +138,32 @@ class UserController extends AbstractController
      *
      * @Route("/{id}/edit", name="administration_user_edit", methods={"get", "post"})
      *
-     * @param Request $request The request
-     * @param User    $user    The user entity
+     * @param User $user The user entity
      *
+     * @param Request $request The request
+     * @param UserManager $userManager
+     * @param TranslatorInterface $trans
      * @return RedirectResponse|Response
      */
-    public function editAction(Request $request, User $user)
+    public function editAction(User $user, Request $request, UserManager $userManager, TranslatorInterface $trans)
     {
-        $userService = $this->get(UserManager::class);
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm(UserType::class, $user);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $userService->save($user, $this->getUser());
-            //$user=$editForm->getData();
-            //$em = $this->getDoctrine()->getManager();
-            //$em->persist($user);
-            //$em->flush();
-            //Flash message
+            $userManager->save($user, $this->getUser());
             $session = $this->get('session');
-            $trans = $this->get('translator.default');
             $message = $trans->trans('administration.user.updated %name%', ['%name%' => $user->getLabel()]);
             $session->getFlashBag()->add('success', $message);
 
             return $this->redirectToRoute('administration_user_show', array('id' => $user->getId()));
         }
-        $logs = $userService->retrieveLogs($user);
+        $logs = $userManager->retrieveLogs($user);
 
         return $this->render('administration/user/edit.html.twig', [
-            'isDeletable' => $userService->isDeletable($user),
+            'deletable' => $userManager->isDeletable($user),
             'logs' => $logs,
-            'information' => $information,
+            'information' => $user,
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
