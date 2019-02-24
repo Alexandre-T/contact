@@ -1,28 +1,68 @@
 action:
-  edit: 'Éditer'
-  show: 'Consulter'
+  entity:
+    delete:
+      text: 'Supprimer'
+      title: 'Supprimer'
+    edit:
+      text: 'Éditer'
+      title: 'Éditer'
+    list:
+      text: 'Lister'
+      title: 'Lister'
+    show:
+      text: 'Consulter'
+      title: 'Consulter la fiche'
+  user:
+    create:
+      text: 'Créer'
+      title: 'Créer un nouvel utilisateur'
+    delete:
+      text: 'Supprimer'
+      title: 'Supprimer cet utilisateur'
+    edit:
+      text: 'Éditer'
+      title: 'Éditer l’utilisateur'
+    list:
+      text: 'Lister'
+      title: 'Accéder à la liste des utilisateurs'
+    show:
+      text: 'Consulter'
+      title: 'Consulter la fiche de l’utilisateur'
 
 administration:
   created:
     at: 'Création'
     by: 'Créé·e par'
-  user:
-    create: 'Créer un utilisateur'
-    action:
-      create:
-      title: 'Créer un nouvel utilisateur'
-    show:
-    title %name%: 'Fiche de l’utilisateur %name%'
   updated:
     at: 'Dernière modification'
+  user:
+    title %name%: 'Fiche de l’utilisateur %name%'
 
 entity:
   global-information: 'Généralités'
   information: 'Informations'
+  log:
+    action: 'Action'
+    actions:
+      create: 'Création'
+      delete: 'Suppression'
+    data:
+      label: 'Nouveau libellé'
+      mail: 'Nouvel email'
+      roles: 'Nouveaux privilèges'
+      password: 'Nouveau mot de passe'
+    date: 'Date'
+    explanation: 'Cet onglet rassemble toutes les modifications qui ont eu lieu pour la fiche en cours.'
+    new-value: 'Nouvelle(s) valeur(s)'
+    title: 'Suivi des modifications'
+    user: 'Auteur'
+    version: 'Version'
   tab:
     general: 'Généralités'
     logs: 'Journal de bord'
     informations: 'Informations'
+  user:
+    created %name%: 'L’utilisateur « %name% » a été créé avec succès.'
 
 form:
   login:
@@ -40,6 +80,11 @@ form:
       gravatar: 'Gravatar de l’utilisateur'
       roles: 'Privilèges de l’utilisateur'
 
+ROLE_USER: 'Utilisateur sans aucun privilège.'
+ROLE_READER: 'Utilisateur avec droit de lecture uniquement.'
+ROLE_ORGANISER: 'Utilisateur avec droit de lecture et d’écriture.'
+ROLE_ADMIN: 'Administrateur pouvant gérer les privilèges des utilisateurs.'
+
 security:
   connection:
     successful %username%: "Authentification réussie. Bienvenue %username%\_!"
@@ -47,6 +92,7 @@ security:
 
 title:
   security:
-    user: 'Liste des utilisateurs'
     login: Connexion
-
+    user:
+      list: 'Liste des utilisateurs'
+      show %name%: 'Fiche de l’utilisateur « %name% »'

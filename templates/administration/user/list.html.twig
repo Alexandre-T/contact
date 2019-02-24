@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'title.security.user'|trans }} · {{ parent() }}{% endblock title %}
+{% block title %}{{ 'title.security.user.list'|trans }} · {{ parent() }}{% endblock title %}
 
 {% block headline %}
     <h1>
         <span class="fa fa-fw fa-users"></span>
-        {{ 'title.security.user'|trans }}
+        {{ 'title.security.user.list'|trans }}
     </h1>
 {% endblock %}
 
@@ -35,13 +35,15 @@
                 <td headers="user-mail">{{ user.mail }}</td>
                 <td headers="user-actions">
                     <div class="btn-group-xs btn-group">
-                        <a class="btn btn-default" href="{{ path('administration_user_show', { 'id': user.id }) }}">
+                        <a class="btn btn-default" title="{{ 'action.user.show.title' | trans }}"
+                           href="{{ path('administration_user_show', { 'id': user.id }) }}">
                             <span class="fa fa-eye"></span>
-                            <span class="sr-only">{{ 'action.show' | trans }}</span>
+                            <span class="sr-only">{{ 'action.user.show.text' | trans }}</span>
                         </a>
-                        <a class="btn btn-default" href="{{ path('administration_user_edit', { 'id': user.id }) }}">
+                        <a class="btn btn-default"  title="{{ 'action.user.show.title' | trans }}"
+                           href="{{ path('administration_user_edit', { 'id': user.id }) }}">
                             <span class="fa fa-edit"></span>
-                            <span class="sr-only">{{ 'action.edit' | trans }}</span>
+                            <span class="sr-only">{{ 'action.user.edit.text' | trans }}</span>
                         </a>
                     </div>
                 </td>
@@ -57,9 +59,9 @@
 {% block content_action %}
     <div class="text-center">
         <a class="btn btn-default" href="{{ path('administration_user_new') }}"
-           data-toggle="tooltip" data-placement="left" title="{{ 'administration.user.action.create.title' | trans }}">
+           data-toggle="tooltip" data-placement="left" title="{{ 'action.user.create.title' | trans }}">
             <span class="fa fa-user"></span>
-            {{ 'administration.user.create' | trans }}
+            {{ 'action.user.create.text' | trans }}
         </a>
     </div>
 {% endblock content_action %}

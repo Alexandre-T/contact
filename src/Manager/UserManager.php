@@ -17,7 +17,6 @@
 
 namespace App\Manager;
 
-use App\Bean\Factory\LogFactory;
 use App\Entity\EntityInterface;
 use App\Entity\User;
 use App\Repository\UserRepository;
@@ -121,8 +120,7 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface 
      */
     public function isDeletable(EntityInterface $entity): bool
     {
-        //FIXME We cannot delete a user which have create an object.
-        return false;
+        return 0 === $this->repository->count(['creator' => $entity]);
     }
 
     /**

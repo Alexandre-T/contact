@@ -17,7 +17,6 @@
 
 namespace App\Controller;
 
-use App\Entity\InformationInterface;
 use App\Form\Type\UserType;
 use App\Entity\User;
 use App\Manager\UserManager;
@@ -96,13 +95,13 @@ class UserController extends AbstractController
             //Flash message
             $session = $this->get('session');
             $trans = $this->get('translator.default');
-            $message = $trans->trans('administration.user.created %name%', ['%name%' => $user->getLabel()]);
+            $message = $trans->trans('entity.user.created %name%', ['%name%' => $user->getLabel()]);
             $session->getFlashBag()->add('success', $message);
 
             return $this->redirectToRoute('administration_user_show', array('id' => $user->getId()));
         }
 
-        return $this->render('@App/administration/user/new.html.twig', [
+        return $this->render('administration/user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
@@ -113,21 +112,22 @@ class UserController extends AbstractController
      *
      * @Route("/{id}", name="administration_user_show", methods={"get"})
      *
-     * @param UserManager $userManager
      * @param User $user
+     * @param UserManager $userManager
      *
      * @return Response
      */
-    public function showAction(UserManager $userManager, User $user)
+    public function showAction(User $user, UserManager $userManager)
     {
         $deleteForm = $this->createDeleteForm($user);
         $logs = $userManager->retrieveLogs($user);
 
         return $this->render('administration/user/show.html.twig', [
             'isDeletable' => $userManager->isDeletable($user),
-//            'logs' => $logs,
+            'logs' => $logs,
             'information' => $user,
             'user' => $user,
+            'deletable' => $userManager->isDeletable($user),
             'delete_form' => $deleteForm->createView(),
         ]);
     }

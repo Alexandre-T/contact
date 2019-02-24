@@ -1,138 +1,138 @@
 {% extends 'base.html.twig' %}
 
 {% block container %}
-    {% block content_breadcrumb %}
-        {% if path is defined and path is not null %}
-            <ol class="breadcrumb" id="content-breadcrumb">
-                {%  for node in path %}
-                    <li><a href="{{ path( default_entity_show, {'slug': node.slug}) }}" title="{{ node.name }}">{{ node.name }}</a></li>
-                {% endfor %}
-            </ol>
-        {% endif %}
-    {% endblock content_breadcrumb %}
-
+    <div class="float-right btn-group-vertical btn-group-sm mx-3 my-0">
+        {% block content_action %}{% endblock content_action %}
+    </div>
     {% block content_tabs %}
-    <div class="card">
-        <div class="card-header content-tabs">
-            {# <!-- Nav tabs --> #}
-            <ul class="nav nav-tabs card-header-tabs" id="entityTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#general" aria-controls="home" role="tab" data-toggle="tab">
-                        <span class="fa fa-info-circle"></span>
-                        {{ 'entity.tab.general' | trans }}
-                    </a>
-                </li>
-                {% block content_tabs_header %}{% endblock content_tabs_header %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#logs" aria-controls="profile" role="tab" data-toggle="tab">
-                        <span class="fa fa-file-archive"></span>
-                        {{ 'entity.tab.logs' | trans }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#informations" aria-controls="messages" role="tab" data-toggle="tab">
-                        <span class="fa fa-clock"></span>
-                        {{ 'entity.tab.informations' | trans }}
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="card-body">
-            {# <!-- Tab panes --> #}
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="general">
-                    {% block content_settings %}{% endblock content_settings %}
-                </div>
-                {% block content_tabs_body %}{% endblock content_tabs_body %}
-                <div role="tabpanel" class="tab-pane" id="logs">
-                    {% block content_logs %}
-                        {% if logs is defined and logs | length > 0 %}
-                            <div class="panel panel-default" id="default-logs">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">{{ 'administration.log' | trans }}</h3>
-                                </div>
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th class="text-center" id="logs-version">{{ 'administration.log.version' | trans }}</th>
-                                        <th class="text-center" id="logs-action">{{ 'administration.log.action' | trans }}</th>
-                                        <th class="text-center" id="logs-date">{{ 'administration.log.date' | trans }}</th>
-                                        <th class="text-center" id="logs-user">{{ 'administration.log.user' | trans }}</th>
-                                        <th class="text-center" id="logs-value">{{ 'administration.log.new-value' | trans }}</th>
-                                    </tr>
-                                    </thead>
-                                    {% for log in logs %}
+        <div class="card">
+            <div class="card-header">
+                {# <!-- Nav tabs --> #}
+                <ul class="nav nav-tabs card-header-tabs" id="entityTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#general" aria-controls="home" role="tab" data-toggle="tab">
+                            <span class="fa fa-info-circle"></span>
+                            {{ 'entity.tab.general' | trans }}
+                        </a>
+                    </li>
+                    {% block content_tabs_header %}{% endblock content_tabs_header %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#logs" aria-controls="profile" role="tab" data-toggle="tab">
+                            <span class="fa fa-file-archive"></span>
+                            {{ 'entity.tab.logs' | trans }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#informations" aria-controls="messages" role="tab" data-toggle="tab">
+                            <span class="fa fa-clock"></span>
+                            {{ 'entity.tab.informations' | trans }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="">
+                {# <!-- Tab panes --> #}
+                <div class="card-body tab-content">
+                    <div role="tabpanel" class="tab-pane fade show active" id="general">
+                        {% block content_settings %}{% endblock content_settings %}
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="logs">
+                        {% block content_logs %}
+                            {% if logs is defined and logs | length > 0 %}
+                                <div class="panel panel-default" id="default-logs">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">{{ 'entity.log.title' | trans }}</h3>
+                                    </div>
+                                    <table class="table">
+                                        <thead>
                                         <tr>
-                                            <td headers="logs-version" class="text-center row{{ log.version }}">{{ log.version }}</td>
-                                            <td headers="logs-action" class="text-center row{{ log.version }}">
-                                                <span class="label label-default">{{ log.action | trans }}</span>
-                                            </td>
-                                            <td headers="logs-date" class="text-center row{{ log.version }}">{{ log.logged | localizeddate('medium','medium')}}</td>
-                                            <td headers="logs-user" class="text-center row{{ log.version }}">{{ log.username }}</td>
-                                            <td headers="logs-value" class="row{{ log.version }}">
-                                                <dl class="dl-horizontal">
-                                                    {% for row in log.data %}
-                                                        <dt>{{ row.label | trans }}</dt>
-                                                        {% if row.none %}
-                                                            <dd>{{ 'administration.none' | trans }}</dd>
-                                                        {% elseif row.noMore %}
-                                                            <dd>{{ 'administration.no-more %entity% %id%' | trans({'id': row.id, 'entity':row.entity}) }}</dd>
-                                                        {% elseif row.label == 'form.user.field.roles' %}
-                                                            <dd>{{ row.name | roles }}</dd>
-                                                        {% elseif row.translate %}
-                                                            <dd>{{ row.name | trans }}</dd>
-                                                        {% else %}
-                                                            <dd>{{ row.name }}</dd>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </dl>
-                                            </td>
+                                            <th class="text-center" id="logs-version"
+                                                scope="col">{{ 'entity.log.version' | trans }}</th>
+                                            <th class="text-center" id="logs-action"
+                                                scope="col">{{ 'entity.log.action' | trans }}</th>
+                                            <th class="text-center" id="logs-date"
+                                                scope="col">{{ 'entity.log.date' | trans }}</th>
+                                            <th class="text-center" id="logs-user"
+                                                scope="col">{{ 'entity.log.user' | trans }}</th>
+                                            <th class="text-center" id="logs-value"
+                                                scope="col">{{ 'entity.log.new-value' | trans }}</th>
                                         </tr>
-                                    {% endfor %}
-                                </table>
-                                <div class="panel-footer text-right">
-                                    <em>{{ 'default.tab.logs.explanation' | trans }}</em>
+                                        </thead>
+                                        {% for log in logs %}
+                                            <tr>
+                                                <td headers="logs-version"
+                                                    class="text-center col-sm-1 row{{ log.version }}">{{ log.version }}</td>
+                                                <td headers="logs-action"
+                                                    class="text-center col-sm-1 row{{ log.version }}">
+                                                    <span class="label label-default">{{ ('entity.log.actions.' ~ log.action) | trans }}</span>
+                                                </td>
+                                                <td headers="logs-date"
+                                                    class="text-center col-sm-2 row{{ log.version }}">{{ log.loggedAt | localizeddate('medium','medium') }}</td>
+                                                <td headers="logs-user"
+                                                    class="text-center col-sm-2 row{{ log.version }}">{{ log.username }}</td>
+                                                <td headers="logs-value" class="row{{ log.version }}">
+                                                    {% block log %}
+                                                        <dl class="row">
+                                                            {% if log.data.label is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.label' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.label }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.mail is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.mail' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.mail }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.password is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.password' | trans }}</dt>
+                                                                <dd class="col-sm-6">&bull;&bull;&bull;&bull;&bull;</dd>
+                                                            {% endif %}
+                                                            {% if log.data.roles is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.roles' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.roles | roles }}</dd>
+                                                            {% endif %}
+                                                        </dl>
+                                                    {% endblock log %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
                                 </div>
-                            </div>
-                        {% endif %}
-                    {% endblock content_logs %}
-                </div>
-                <div role="tabpanel" class="tab-pane" id="informations">
-                    {% block content_information %}
-                        {% if information is defined %}
-                            <div class="panel panel-default" id="default-creator-information">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">{{ 'entity.information' | trans }}</h3>
+                            {% endif %}
+                        {% endblock content_logs %}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="informations">
+                        {% block content_information %}
+                            {% if information is defined %}
+                                <div class="panel panel-default" id="default-creator-information">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">{{ 'entity.information' | trans }}</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <dl class="row">
+                                            {% if information.created %}
+                                                <dt class="col-sm-4 text-truncate">{{ 'administration.created.at' | trans }}</dt>
+                                                <dd class="col-sm-8">{{ information.created | localizeddate('short', 'short') }}</dd>
+                                            {% endif %}
+                                            {% if information.creator %}
+                                                <dt class="col-sm-4 text-truncate">{{ 'administration.created.by' | trans }}</dt>
+                                                <dd class="col-sm-8">{{ information.creator.label }}
+                                                    ({{ information.creator.mail }})
+                                                </dd>
+                                            {% endif %}
+                                            {% if information.updated %}
+                                                <dt class="col-sm-4 text-truncate">{{ 'administration.updated.at' | trans }}</dt>
+                                                <dd class="col-sm-8">{{ information.updated | localizeddate('short', 'short') }}</dd>
+                                            {% endif %}
+                                        </dl>
+                                    </div>
                                 </div>
-                                <div class="panel-body">
-                                    <dl class="row">
-                                        {% if information.created %}
-                                            <dt class="col-sm-4 text-truncate">{{ 'administration.created.at' | trans}}</dt>
-                                            <dd class="col-sm-8">{{ information.created | localizeddate('short', 'short') }}</dd>
-                                        {% endif %}
-                                        {% if information.creator %}
-                                            <dt class="col-sm-4 text-truncate">{{ 'administration.created.by' | trans}}</dt>
-                                            <dd class="col-sm-8">{{ information.creator.label }} ({{ information.creator.mail }})</dd>
-                                        {% endif %}
-                                        {% if information.updated %}
-                                            <dt class="col-sm-4 text-truncate">{{ 'administration.updated.at' | trans}}</dt>
-                                            <dd class="col-sm-8">{{ information.updated | localizeddate('short', 'short') }}</dd>
-                                        {% endif %}
-                                    </dl>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endblock content_information %}
+                            {% endif %}
+                        {% endblock content_information %}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     {% endblock content_tabs %}
 {% endblock container %}
-
-{% block content_sidebar %}
-    {% block content_action %}{% endblock content_action %}
-{% endblock content_sidebar %}
 
 {% block modal %}
     {% if delete_form is defined %}
@@ -141,21 +141,22 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content panel-danger">
                     <div class="modal-header panel-heading">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'administration.delete.confirm.close' | trans }}">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="{{ 'administration.delete.confirm.close' | trans }}">
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <h4 class="modal-title">{{ 'administration.delete.confirm.title' | trans }}</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                           <div class="col-sm-2">
-                               <p class="text-right">
-                                   <span class="fa fa-exclamation-triangle fa-fw fa-3x"></span>
-                               </p>
-                           </div>
+                            <div class="col-sm-2">
+                                <p class="text-right">
+                                    <span class="fa fa-exclamation-triangle fa-fw fa-3x"></span>
+                                </p>
+                            </div>
                             <div class="col-sm-10">
                                 <p>{{ 'administration.delete.confirm.core' | trans }}</p>
-                           </div>
+                            </div>
                         </div>
 
                     </div>
