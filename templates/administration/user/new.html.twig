@@ -1,37 +1,20 @@
-{% extends '@App/default/base.html.twig' %}
+{% extends 'default/entity.html.twig' %}
 
-{% block title %}{{ 'administration.user.create.title'|trans }} · {{ parent() }}{% endblock title %}
+{% block title %}{{ 'title.security.user.create'|trans }} · {{ parent() }}{% endblock title %}
 
-{% block page_header %}{% endblock %}
+{% block headline %}
+    <h1>
+        <span class="fa fa-user"></span>
+        {{ 'title.security.user.create'|trans }}
+    </h1>
+{% endblock %}
 
-{% block content_content %}
-
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h1 class="panel-title">{{ 'administration.user.create.title'|trans }}</h1>
-        </div>
-        <div class="panel-body">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
-                    <input class="btn btn-primary" type="submit" value="{{ 'administration.actions.create' | trans }}" />
-                </div>
-            </div>
-            {{ form_end(form) }}
-        </div>
-    </div>
-
-{% endblock content_content %}
-
-{% block content_action %}
-    <h3>{{ 'administration.actions' | trans }}</h3>
-    <div class="text-center" id="administration-actions">
-        <div class="btn-group-vertical">
-            <a class="btn-mini btn btn-default" href="{{ path('administration_user_index') }}"
-               data-toggle="tooltip" data-placement="left" title="{{ 'administration.user.action.list.title' | trans }}">
-                <span class="fa fa-group"></span>&nbsp;{{ 'administration.actions.back.list' | trans }}
-            </a>
-        </div>
-    </div>
-{% endblock content_action %}
+{% block content_settings %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary" type="submit">
+        <span class="fa fa-save"></span>
+        {{ 'action.user.create.text' | trans }}
+    </button>
+    {{ form_end(form) }}
+{% endblock content_settings %}

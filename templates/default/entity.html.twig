@@ -17,13 +17,13 @@
                     </li>
                     {% block content_tabs_header %}{% endblock content_tabs_header %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#logs" aria-controls="profile" role="tab" data-toggle="tab">
+                        <a class="nav-link {{ logs is not defined ? 'disabled' }}" href="#logs" aria-controls="profile" role="tab" data-toggle="tab">
                             <span class="fa fa-file-archive"></span>
                             {{ 'entity.tab.logs' | trans }}
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#informations" aria-controls="messages" role="tab" data-toggle="tab">
+                        <a class="nav-link {{ information is not defined ? 'disabled' }}" href="#informations" aria-controls="messages" role="tab" data-toggle="tab">
                             <span class="fa fa-clock"></span>
                             {{ 'entity.tab.informations' | trans }}
                         </a>

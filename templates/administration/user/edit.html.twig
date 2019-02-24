@@ -2,34 +2,27 @@
 
 {% set administration_entity_show = 'administration_user_show' %}
 
-{% block title %}{{ 'title.security.user.edit %name%'|trans({'%name%': user.username})}} · {{ parent() }}{% endblock title %}
+{% block title %}{{ 'title.security.user.edit %name%'|trans({'%name%': user.username}) }} · {{ parent() }}{% endblock title %}
 
-{% block page_header %}{% endblock %}
+{% block headline %}
+    <h1>
+        <span class="fa fa-user"></span>
+        {{ 'title.security.user.edit %name%'|trans({'%name%': user.username}) }}
+    </h1>
+{% endblock %}
 
 {% block content_settings %}
+    {{ form_start(edit_form) }}
+    {{ form_row(edit_form.label) }}
+    {{ form_row(edit_form.mail) }}
+    {{ form_row(edit_form.roles) }}
+    <button class="btn btn-primary" type="submit">
+        <span class="fa fa-save"></span>
+        {{ 'action.user.edit.text' | trans }}
+    </button>
+{{ form_end(edit_form) }}
 
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h1 class="panel-title">{{ 'title.security.user.edit %name%'|trans({'%name%': user.username})}}</h1>
-        </div>
-        <div class="panel-body" >
-            {{ form_start(edit_form) }}
-            {{ form_row(edit_form.label) }}
-            {{ form_row(edit_form.mail) }}
-            {{ form_row(edit_form.roles) }}
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
-                    <button class="btn btn-primary" type="submit">
-                        <span class="fa fa-save"></span>
-                        {{ 'action.user.edit.text' | trans }}
-                    </button>
-                </div>
-            </div>
-            {{ form_end(edit_form) }}
-        </div>
-    </div>
-
-{% endblock content_settings%}
+{% endblock content_settings %}
 
 {% block content_action %}
     {% include 'administration/user/content-action.html.twig' %}

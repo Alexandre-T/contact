@@ -153,5 +153,5 @@ title:
       edit %name%: 'Modification de l’utilisateur « %name% »'
       list: 'Liste des utilisateurs'
       show %name%: 'Fiche de l’utilisateur « %name% »'
-      deleted %name%: 'messages'
+      create: 'Création d’un nouvel utilisateur'
     register: 'Inscription'

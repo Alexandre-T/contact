@@ -81,21 +81,20 @@ class UserController extends AbstractController
      *
      * @Route("/new", name="administration_user_new", methods={"get","post"})
      *
+     * @param UserManager $userManager
      * @param Request $request
      *
      * @return RedirectResponse |Response
      */
-    public function newAction(Request $request)
+    public function newAction(UserManager $userManager, Request $request, TranslatorInterface $trans)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $userService = $this->get(UserManager::class);
-            $userService->save($user, $this->getUser());
+            $userManager->save($user, $this->getUser());
             //Flash message
             $session = $this->get('session');
-            $trans = $this->get('translator.default');
             $message = $trans->trans('entity.user.created %name%', ['%name%' => $user->getLabel()]);
             $session->getFlashBag()->add('success', $message);
 
