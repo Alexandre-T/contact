@@ -139,30 +139,30 @@
         {{ form_start(delete_form) }}
         <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmModal">
             <div class="modal-dialog" role="document">
-                <div class="modal-content panel-danger">
-                    <div class="modal-header panel-heading">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-light">
+                        <h4 class="modal-title">{{ 'modal.entity.delete.confirm' | trans }}</h4>
                         <button type="button" class="close" data-dismiss="modal"
-                                aria-label="{{ 'administration.delete.confirm.close' | trans }}">
-                            <span aria-hidden="true">&times;</span>
+                                aria-label="{{ 'action.close' | trans }}">
+                            <span aria-hidden="true">&times</span>
                         </button>
-                        <h4 class="modal-title">{{ 'administration.delete.confirm.title' | trans }}</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-2">
-                                <p class="text-right">
+                                <p class="text-right text-primary">
                                     <span class="fa fa-exclamation-triangle fa-fw fa-3x"></span>
                                 </p>
                             </div>
                             <div class="col-sm-10">
-                                <p>{{ 'administration.delete.confirm.core' | trans }}</p>
+                                <p>{{ 'modal.entity.delete.core' | trans }}</p>
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                            <span class="fa fa-close"></span>&nbsp;{{ 'administration.delete.confirm.cancel' | trans }}
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+                            <span class="fa fa-undo-alt"></span>&nbsp;{{ 'modal.entity.delete.cancel' | trans }}
                         </button>
                         {% if delete_form is defined %}
                             {{ form_widget(delete_form.delete) }}

@@ -1,4 +1,5 @@
 action:
+  close: 'Fermer'
   entity:
     delete:
       text: 'Supprimer'
@@ -65,6 +66,8 @@ entity:
     informations: 'Informations'
   user:
     created %name%: 'L’utilisateur « %name% » a été créé avec succès.'
+    deleted %name%: 'L’utilisateur « %name% » a été supprimé avec succès.'
+    updated %name%: 'L’utilisateur « %name% » a été modifié avec succès.'
 
 form:
   login:
@@ -101,6 +104,14 @@ message:
       application-name: 'le nom de l’application : « Contact »,'
       reasons: 'les raison de votre demande.'
       final: ' Si votre demande est validée, il contactera l’un des administrateurs de l’application qui créera votre compte avant de vous contacter.'
+
+modal:
+  entity:
+    delete:
+      cancel: 'Annuler'
+      confirm: 'Demande de confirmation'
+      core: 'Vous êtes sur le point de supprimer cette fiche de l’application. Êtes-vous sûr de vouloir poursuivre ?'
+      yes: 'Oui, supprimer !'
 
 nav:
   home:
@@ -142,4 +153,5 @@ title:
       edit %name%: 'Modification de l’utilisateur « %name% »'
       list: 'Liste des utilisateurs'
       show %name%: 'Fiche de l’utilisateur « %name% »'
+      deleted %name%: 'messages'
     register: 'Inscription'

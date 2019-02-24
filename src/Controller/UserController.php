@@ -153,7 +153,7 @@ class UserController extends AbstractController
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $userManager->save($user, $this->getUser());
             $session = $this->get('session');
-            $message = $trans->trans('administration.user.updated %name%', ['%name%' => $user->getLabel()]);
+            $message = $trans->trans('entity.user.updated %name%', ['%name%' => $user->getLabel()]);
             $session->getFlashBag()->add('success', $message);
 
             return $this->redirectToRoute('administration_user_show', array('id' => $user->getId()));
@@ -175,27 +175,27 @@ class UserController extends AbstractController
      *
      * @Route("/{id}", name="administration_user_delete", methods={"delete"})
      *
+     * @param User $user The $user entity
      * @param Request $request The request
-     * @param User    $user    The $user entity
+     * @param UserManager $userManager
+     * @param TranslatorInterface $trans
      *
      * @return RedirectResponse
      */
-    public function deleteAction(Request $request, User $user)
+    public function deleteAction(User $user, Request $request, UserManager $userManager, TranslatorInterface $trans)
     {
         $form = $this->createDeleteForm($user);
         $form->handleRequest($request);
-        $session = $this->get('session');
-        $trans = $this->get('translator.default');
-        $userManager = $this->get(UserManager::class);
         $isDeletable = $userManager->isDeletable($user);
 
         if ($isDeletable && $form->isSubmitted() && $form->isValid()) {
+            $session = $this->get('session');
             $userManager->delete($user);
-            $message = $trans->trans('administration.user.deleted %name%', ['%name%' => $user->getLabel()]);
+            $message = $trans->trans('entity.user.deleted %name%', ['%name%' => $user->getLabel()]);
             $session->getFlashBag()->add('success', $message);
         }elseif (!$isDeletable){
-
-            $message = $trans->trans('administration.user.not-deletable %name%', ['%name%' => $user->getLabel()]);
+            $session = $this->get('session');
+            $message = $trans->trans('entity.user.deleted %name%', ['%name%' => $user->getLabel()]);
             $session->getFlashBag()->add('warning', $message);
             return $this->redirectToRoute('administration_user_show', ['id' => $user->getId()]);
         }
@@ -219,7 +219,7 @@ class UserController extends AbstractController
                 'attr' => ['class' => 'btn-danger confirm-delete'],
                 //FIXME add icon
                 //'icon' => 'trash-o',
-                'label' => 'administration.delete.confirm.delete',
+                'label' => 'modal.entity.delete.yes',
             ])
             ->getForm()
             ;
