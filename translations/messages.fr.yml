@@ -80,6 +80,26 @@ form:
       gravatar: 'Gravatar de l’utilisateur'
       roles: 'Privilèges de l’utilisateur'
 
+message:
+  security:
+    register:
+      intro: 'Pour avoir accès à l’application « Contact », veuillez envoyer votre demande à votre RSSI en lui fournissant :'
+      email: 'votre adresse email,'
+      application-name: 'le nom de l’application : « Contact »,'
+      reasons: 'les raison de votre demande.'
+      final: ' Si votre demande est validée, il contactera l’un des administrateurs de l’application qui créera votre compte avant de vous contacter.'
+
+nav:
+  home:
+    text: 'Accueil'
+    title: 'Retour à l’accueil'
+  contacts:
+    text: 'Contacts'
+    title: 'Consulter la liste des contacts'
+  organizations:
+    text: 'Organisations'
+    title: 'Consulter la liste des organisations'
+
 ROLE_USER: 'Utilisateur sans aucun privilège.'
 ROLE_READER: 'Utilisateur avec droit de lecture uniquement.'
 ROLE_ORGANISER: 'Utilisateur avec droit de lecture et d’écriture.'
@@ -96,3 +116,4 @@ title:
     user:
       list: 'Liste des utilisateurs'
       show %name%: 'Fiche de l’utilisateur « %name% »'
+    register: 'Inscription'

@@ -42,7 +42,7 @@ class SecurityController extends AbstractController
      *
      * @Route("/login", name="security_login", methods={"get","post"})
      */
-    public function loginAction(AuthenticationUtils $authenticationUtils)
+    public function loginAction(AuthenticationUtils $authenticationUtils): Response
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -69,5 +69,17 @@ class SecurityController extends AbstractController
     public function logoutAction()
     {
         throw new \Exception('this should not be reached!');
+    }
+
+    /**
+     * The registration is not available.
+     *
+     * @Route("/register", name="security_register")
+     *
+     * @return Response
+     */
+    public function registerAction(): Response
+    {
+        return $this->render('security/register.html.twig');
     }
 }

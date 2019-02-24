@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-0">
+    <div class="container">
+        <a class="navbar-brand" href="#" style="background-color: white; padding-left: 10px; padding-right: 10px;">
+            <img src="{{ asset('img/logo.svg') }}" width="30" height="45" alt="Cerema">
+            <span class="text-primary"><strong>Cerema</strong></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="{{ path('home') }}" title="{{ 'nav.home.title' | trans }}">
+                    <span class="fa fa-home"></span>
+                    {{ 'nav.home.text' | trans }}
+                </a>
+                <a class="nav-item nav-link" href="#" title="{{ 'nav.contacts.title' | trans }}">
+                    <span class="fa fa-address-card"></span>
+                    {{ 'nav.contacts.text' | trans }}
+                </a>
+                <a class="nav-item nav-link" href="#" title="{{ 'nav.organizations.title' | trans }}">
+                    <span class="fa fa-building"></span>
+                    {{ 'nav.organizations.text' | trans }}
+                </a>
+            </div>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Recherche">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Recherche</button>
+            </form>
+            <div class="navbar-nav ml-auto">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <a class="nav-item nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="{{ path('security_register') }}">
+                        <span class="fa fa-sign-in-alt fa-rotate-270"></span>
+                        Inscription
+                    </a>
+                    <a class="nav-item nav-link" href="{{ path('security_login') }}">
+                        <span class="fa fa-sign-in-alt"></span>
+                        Connexion
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
