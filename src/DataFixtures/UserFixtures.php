@@ -22,7 +22,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 /**
  * UserFixtures class.
  *
- * Description.
+ * Load user.
  */
 class UserFixtures extends Fixture
 {
@@ -39,42 +39,50 @@ class UserFixtures extends Fixture
             $roleOrganiser = ['ROLE_ORGANISER'];
             $roleUser = ['ROLE_USER'];
 
-            //Reader
-            $userReader = new User();
-            $userReader->setLabel('Reader');
-            $userReader->setMail('reader@example.org');
-            $userReader->setPlainPassword('reader');
-            $userReader->setRoles($roleReader);
-
-            //ORGANISER
-            $userOrganiser = new User();
-            $userOrganiser->setLabel('Organiser');
-            $userOrganiser->setMail('organiser@example.org');
-            $userOrganiser->setPlainPassword('organiser');
-            $userOrganiser->setRoles($roleOrganiser);
-
-            //User
-            $userUser = new User();
-            $userUser->setLabel('User');
-            $userUser->setMail('user@example.org');
-            $userUser->setPlainPassword('user');
-            $userUser->setRoles($roleUser);
 
             //Admin
             $userAdministrator = new User();
-            $userAdministrator->setLabel('Administrator');
-            $userAdministrator->setMail('administrator@example.org');
-            $userAdministrator->setPlainPassword('administrator');
-            $userAdministrator->setRoles($roleAdmin);
+            $userAdministrator
+                ->setLabel('Administrator')
+                ->setMail('administrator@example.org')
+                ->setPlainPassword('administrator')
+                ->setCreator($userAdministrator)
+                ->setRoles($roleAdmin);
+
+            //Reader
+            $userReader = new User();
+            $userReader
+                ->setLabel('Reader')
+                ->setMail('reader@example.org')
+                ->setPlainPassword('reader')
+                ->setCreator($userAdministrator)
+                ->setRoles($roleReader);
+
+            //ORGANISER
+            $userOrganiser = new User();
+            $userOrganiser->setLabel('Organiser')
+                ->setMail('organiser@example.org')
+                ->setPlainPassword('organiser')
+                ->setCreator($userAdministrator)
+                ->setRoles($roleOrganiser);
+
+            //User
+            $userUser = new User();
+            $userUser->setLabel('User')
+                ->setMail('user@example.org')
+                ->setPlainPassword('user')
+                ->setCreator($userAdministrator)
+                ->setRoles($roleUser);
 
             //We add 30 users.
             $user = [];
-            foreach(range(0,30) as $index){
+            foreach (range(0, 30) as $index) {
                 $user[$index] = new User();
-                $user[$index]->setLabel("User $index");
-                $user[$index]->setMail("user.$index@example.org");
-                $user[$index]->setPlainPassword('$index');
-                $user[$index]->setRoles($roleUser);
+                $user[$index]->setLabel("User $index")
+                    ->setMail("user.$index@example.org")
+                    ->setPlainPassword('$index')
+                    ->setCreator($userAdministrator)
+                    ->setRoles($roleUser);
                 $manager->persist($user[$index]);
             }
 

@@ -121,11 +121,11 @@ class UserController extends AbstractController
     public function showAction(UserManager $userManager, User $user)
     {
         $deleteForm = $this->createDeleteForm($user);
-        //$logs = $userManager->retrieveLogs($user);
+        $logs = $userManager->retrieveLogs($user);
 
         return $this->render('administration/user/show.html.twig', [
             'isDeletable' => $userManager->isDeletable($user),
-            //'logs' => $logs,
+//            'logs' => $logs,
             'information' => $user,
             'user' => $user,
             'delete_form' => $deleteForm->createView(),

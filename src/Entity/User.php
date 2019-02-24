@@ -32,7 +32,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(
  *     name="ts_user",
  *     schema="data",
- *     options={"comment":"Table entité des utilisateur","charset":"utf8mb4","collate":"utf8mb4_unicode_ci"}
+ *     options={"comment":"Table entité des utilisateur","charset":"utf8mb4","collate":"utf8mb4_unicode_ci"},
+ *     indexes={
+ *          @ORM\Index(name="ndx_user_creator", columns={"creator_id"}),
+ *     },
+ *     uniqueConstraints={
+ *          @ORM\UniqueConstraint(name="uk_user_mail", columns={"usr_mail"}),
+ *          @ORM\UniqueConstraint(name="uk_user_label", columns={"usr_label"})
+ *     }
  * )
  *
  * @Gedmo\Loggable
@@ -106,7 +113,8 @@ class User implements EntityInterface, InformationInterface, LabelInterface, Use
      *
      * @var User
      *
-     * FIXME add link to creator
+     * @ORM\ManyToOne(targetEntity="User", fetch="EAGER")
+     * @ORM\JoinColumn(name="creator_id", referencedColumnName="usr_id")
      */
     private $creator;
 

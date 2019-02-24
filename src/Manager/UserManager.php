@@ -65,6 +65,13 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface 
     protected $repository;
 
     /**
+     * Log repository.
+     *
+     * @var LogEntryRepository
+     */
+    private $logRepository;
+
+    /**
      * UserManager constructor.
      *
      * @param EntityManagerInterface $entityManager
@@ -75,6 +82,7 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface 
         $this->entityManager = $entityManager;
         $this->paginator = $paginator;
         $this->repository = $this->entityManager->getRepository(User::class);
+        $this->logRepository = $this->entityManager->getRepository(LogEntry::class);
     }
 
     /**
@@ -122,14 +130,12 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface 
      *
      * @param User $entity
      *
-     * @return array
+     * @return LogEntry[]
      */
     public function retrieveLogs($entity): array
     {
-        /** @var LogEntryRepository $logRepository */
-        $logRepository = $this->entityManager->getRepository(LogEntry::class); // we use default log entry class
-        $logs = $logRepository->getLogEntries($entity);
+        return $this->logRepository->getLogEntries($entity);
 
-        return LogFactory::createUserLogs($logs);
+        //return LogFactory::createUserLogs($logs);
     }
 }

@@ -112,7 +112,7 @@
                                         {% endif %}
                                         {% if information.creator %}
                                             <dt class="col-sm-4 text-truncate">{{ 'administration.created.by' | trans}}</dt>
-                                            <dd class="col-sm-8">{{ information.creator }}</dd>
+                                            <dd class="col-sm-8">{{ information.creator.label }} ({{ information.creator.mail }})</dd>
                                         {% endif %}
                                         {% if information.updated %}
                                             <dt class="col-sm-4 text-truncate">{{ 'administration.updated.at' | trans}}</dt>
