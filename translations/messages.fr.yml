@@ -96,9 +96,21 @@ nav:
   contacts:
     text: 'Contacts'
     title: 'Consulter la liste des contacts'
+  login:
+    text: 'Connexion'
+    title: 'Connectez-vous à l’application'
+  logout:
+    text: 'Déconnexion'
+    title: 'Déconnectez-vous de l’application'
   organizations:
     text: 'Organisations'
     title: 'Consulter la liste des organisations'
+  register:
+    text: 'Inscription'
+    title: 'Accès à la procédure d’inscription'
+  user:
+    text: 'Utilisateurs'
+    title: 'Gestion des utilisateurs'
 
 ROLE_USER: 'Utilisateur sans aucun privilège.'
 ROLE_READER: 'Utilisateur avec droit de lecture uniquement.'
