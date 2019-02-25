@@ -39,7 +39,6 @@ class UserFixtures extends Fixture
             $roleOrganiser = ['ROLE_ORGANISER'];
             $roleUser = ['ROLE_USER'];
 
-
             //Admin
             $userAdministrator = new User();
             $userAdministrator
@@ -85,7 +84,6 @@ class UserFixtures extends Fixture
                     ->setRoles($roleUser);
                 $manager->persist($user[$index]);
             }
-
 
             //These references are perhaps unused.
             $this->addReference('user_reader', $userReader);

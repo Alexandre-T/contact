@@ -88,7 +88,7 @@ class RolesExtension extends \Twig_Extension
         sort($result);
 
         //ROLE_USER is a technical role, it will not to be displayed.
-        if (($key = array_search('ROLE_USER', $result)) !== false) {
+        if (false !== ($key = array_search('ROLE_USER', $result))) {
             unset($result[$key]);
         }
 

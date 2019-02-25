@@ -12,15 +12,26 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20190224091730 extends AbstractMigration
 {
-    public function getDescription() : string
+    /**
+     * Get description.
+     *
+     * @return string
+     */
+    public function getDescription(): string
     {
-        return '';
+        return 'Creates user table.';
     }
 
-    public function up(Schema $schema) : void
+    /**
+     * Alter user table indexes.
+     *
+     * @param Schema $schema
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
+        $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('ALTER TABLE data.ts_user ADD creator_id INT DEFAULT NULL');
         $this->addSql('COMMENT ON COLUMN data.ts_user.creator_id IS \'Identifiant de l\'\'utilisateur\'');
@@ -30,10 +41,16 @@ final class Version20190224091730 extends AbstractMigration
         $this->addSql('ALTER INDEX data.uniq_1a98c2993048d892 RENAME TO uk_user_label');
     }
 
-    public function down(Schema $schema) : void
+    /**
+     * Alter user table indexes.
+     *
+     * @param Schema $schema
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
+        $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('ALTER TABLE data.ts_user DROP CONSTRAINT FK_1A98C29961220EA6');
         $this->addSql('DROP INDEX ndx_user_creator');

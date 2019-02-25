@@ -54,7 +54,7 @@ class UserController extends AbstractController
      * @Route("/", name="administration_user_index", methods={"get"})
      *
      * @param UserManager $userManager
-     * @param Request $request
+     * @param Request     $request
      *
      * @return Response
      */
@@ -82,7 +82,7 @@ class UserController extends AbstractController
      * @Route("/new", name="administration_user_new", methods={"get","post"})
      *
      * @param UserManager $userManager
-     * @param Request $request
+     * @param Request     $request
      *
      * @return RedirectResponse |Response
      */
@@ -112,7 +112,7 @@ class UserController extends AbstractController
      *
      * @Route("/{id}", name="administration_user_show", methods={"get"})
      *
-     * @param User $user
+     * @param User        $user
      * @param UserManager $userManager
      *
      * @return Response
@@ -137,11 +137,11 @@ class UserController extends AbstractController
      *
      * @Route("/{id}/edit", name="administration_user_edit", methods={"get", "post"})
      *
-     * @param User $user The user entity
-     *
-     * @param Request $request The request
-     * @param UserManager $userManager
+     * @param User                $user        The user entity
+     * @param Request             $request     The request
+     * @param UserManager         $userManager
      * @param TranslatorInterface $trans
+     *
      * @return RedirectResponse|Response
      */
     public function editAction(User $user, Request $request, UserManager $userManager, TranslatorInterface $trans)
@@ -174,9 +174,9 @@ class UserController extends AbstractController
      *
      * @Route("/{id}", name="administration_user_delete", methods={"delete"})
      *
-     * @param User $user The $user entity
-     * @param Request $request The request
-     * @param UserManager $userManager
+     * @param User                $user        The $user entity
+     * @param Request             $request     The request
+     * @param UserManager         $userManager
      * @param TranslatorInterface $trans
      *
      * @return RedirectResponse
@@ -192,10 +192,11 @@ class UserController extends AbstractController
             $userManager->delete($user);
             $message = $trans->trans('entity.user.deleted %name%', ['%name%' => $user->getLabel()]);
             $session->getFlashBag()->add('success', $message);
-        }elseif (!$isDeletable){
+        } elseif (!$isDeletable) {
             $session = $this->get('session');
             $message = $trans->trans('entity.user.deleted %name%', ['%name%' => $user->getLabel()]);
             $session->getFlashBag()->add('warning', $message);
+
             return $this->redirectToRoute('administration_user_show', ['id' => $user->getId()]);
         }
 

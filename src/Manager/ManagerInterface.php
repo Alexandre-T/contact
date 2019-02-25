@@ -24,8 +24,6 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
  * Manager Interface.
- *
- * @package App\Manager
  */
 interface ManagerInterface
 {
@@ -38,10 +36,12 @@ interface ManagerInterface
      * Default limit rows: 25.
      */
     const LIMIT = 25;
+
     /**
      * Each entity stored is countable.
      *
      * @param array $criteria
+     *
      * @return int
      */
     public function count(array $criteria = []): int;
@@ -63,7 +63,8 @@ interface ManagerInterface
     /**
      * Is this entity deletable?
      *
-     * @param  EntityInterface $entity
+     * @param EntityInterface $entity
+     *
      * @return bool true if entity is deletable
      */
     public function isDeletable(EntityInterface $entity): bool;
@@ -71,8 +72,8 @@ interface ManagerInterface
     /**
      * Get pagination for a class.
      *
-     * @param int $page
-     * @param int $limit
+     * @param int    $page
+     * @param int    $limit
      * @param string $sort
      *
      * @return PaginationInterface
@@ -83,9 +84,9 @@ interface ManagerInterface
      * Get pagination with criteria for a class.
      *
      * @param Criteria $criteria
-     * @param int $page
-     * @param int $limit
-     * @param string $sort
+     * @param int      $page
+     * @param int      $limit
+     * @param string   $sort
      *
      * @return PaginationInterface
      */
@@ -95,7 +96,7 @@ interface ManagerInterface
      * Save entity.
      *
      * @param EntityInterface $entity
-     * @param User $user
+     * @param User            $user
      */
     public function save(EntityInterface $entity, User $user): void;
 }

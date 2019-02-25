@@ -74,7 +74,7 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface 
      * UserManager constructor.
      *
      * @param EntityManagerInterface $entityManager
-     * @param PaginatorInterface $paginator
+     * @param PaginatorInterface     $paginator
      */
     public function __construct(EntityManagerInterface $entityManager, PaginatorInterface $paginator)
     {
@@ -99,7 +99,7 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface 
      */
     public function getDefaultSortField(): string
     {
-        return self::ALIAS . '.label';
+        return self::ALIAS.'.label';
     }
 
     /**
@@ -116,6 +116,7 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface 
      * Is this entity deletable?
      *
      * @param EntityInterface $entity
+     *
      * @return bool true if entity is deletable
      */
     public function isDeletable(EntityInterface $entity): bool

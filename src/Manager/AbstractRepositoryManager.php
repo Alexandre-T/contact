@@ -40,6 +40,7 @@ abstract class AbstractRepositoryManager implements ManagerInterface
      * Return the number of current entities registered in database.
      *
      * @param array $criteria
+     *
      * @return int
      */
     public function count(array $criteria = []): int
@@ -66,10 +67,11 @@ abstract class AbstractRepositoryManager implements ManagerInterface
     /**
      * Get pagination for a class.
      *
-     * @param int $page
-     * @param int $limit
+     * @param int         $page
+     * @param int         $limit
      * @param string|null $sortField
-     * @param string $sortOrder
+     * @param string      $sortOrder
+     *
      * @return PaginationInterface
      */
     public function paginate(int $page = 1, int $limit = self::LIMIT, string $sortField = null, $sortOrder = self::SORT): PaginationInterface
@@ -95,11 +97,12 @@ abstract class AbstractRepositoryManager implements ManagerInterface
     /**
      * Get pagination with criteria for a class.
      *
-     * @param Criteria $criteria
-     * @param int $page
-     * @param int $limit
+     * @param Criteria    $criteria
+     * @param int         $page
+     * @param int         $limit
      * @param string|null $sortField
-     * @param string $sortOrder
+     * @param string      $sortOrder
+     *
      * @return PaginationInterface
      *
      * @throws \Doctrine\ORM\Query\QueryException
@@ -113,7 +116,7 @@ abstract class AbstractRepositoryManager implements ManagerInterface
             $queryBuilder,
             $page,
             $limit,
-            ['defaultSortFieldName' => $this->getDefaultSortField(), 'defaultSortDirection' => $sortOrder == 'ASC' ? $sortOrder : 'DESC']
+            ['defaultSortFieldName' => $this->getDefaultSortField(), 'defaultSortDirection' => 'ASC' == $sortOrder ? $sortOrder : 'DESC']
         );
     }
 
@@ -121,7 +124,7 @@ abstract class AbstractRepositoryManager implements ManagerInterface
      * Save new or modified User.
      *
      * @param EntityInterface $entity
-     * @param User $user
+     * @param User            $user
      */
     public function save(EntityInterface $entity, User $user): void
     {

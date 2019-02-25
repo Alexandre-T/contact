@@ -44,9 +44,10 @@ class SortExtension extends \Twig_Extension
     /**
      * sort Function.
      *
-     * @param bool $sorted
+     * @param bool   $sorted
      * @param string $sort
      * @param string $type
+     *
      * @return string
      */
     public function sortFunction(bool $sorted = false, string $sort = 'asc', string $type = null)
