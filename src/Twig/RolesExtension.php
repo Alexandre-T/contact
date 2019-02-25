@@ -72,7 +72,7 @@ class RolesExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function rolesFilter($roles, $inputDelimiter = ', ', $outputDelimiter = ', ')
+    public function rolesFilter($roles, $inputDelimiter = ', ', $outputDelimiter = ' ')
     {
         $result = [];
 
@@ -86,6 +86,11 @@ class RolesExtension extends \Twig_Extension
 
         //Tri
         sort($result);
+
+        //ROLE_USER is a technical role, it will not to be displayed.
+        if (($key = array_search('ROLE_USER', $result)) !== false) {
+            unset($result[$key]);
+        }
 
         return implode($outputDelimiter, $result);
     }

@@ -43,7 +43,7 @@ security:
     role_hierarchy:
         ROLE_READER:     [ROLE_USER, ROLE_READ_CONTACT, ROLE_READ_ORGANIZATION]
         ROLE_ORGANISER:  [ROLE_READER, ROLE_MANAGE_CONTACT, ROLE_MANAGE_ORGANIZATION]
-        ROLE_ADMIN:      [ROLE_MANAGE_USER, ROLE_ORGANISER]
+        ROLE_ADMIN:      [ROLE_USER, ROLE_MANAGE_USER]
 
     access_control:
         # We must be Anonymous to register or to login

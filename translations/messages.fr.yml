@@ -139,7 +139,6 @@ nav:
 ROLE_ADMIN: 'Administrateur pouvant gérer les privilèges des utilisateurs.'
 ROLE_ORGANISER: 'Utilisateur avec droit de lecture et d’écriture.'
 ROLE_READER: 'Utilisateur avec droit de lecture uniquement.'
-ROLE_USER: 'Utilisateur sans aucun privilège.'
 
 security:
   connection:
