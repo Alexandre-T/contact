@@ -6,7 +6,7 @@
  *
  * (c) Alexandre Tranchant <alexandre.tranchant@gmail.com>
  *
- * @category Controller
+ * @category Fixtures
  *
  * @author    Alexandre Tranchant <alexandre.tranchant@gmail.com>
  * @copyright 2019 Cerema
