@@ -26,6 +26,7 @@ final class Version20190224091730 extends AbstractMigration
      * Alter user table indexes.
      *
      * @param Schema $schema
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function up(Schema $schema): void
@@ -45,6 +46,7 @@ final class Version20190224091730 extends AbstractMigration
      * Alter user table indexes.
      *
      * @param Schema $schema
+     *
      * @throws \Doctrine\DBAL\DBALException
      */
     public function down(Schema $schema): void
