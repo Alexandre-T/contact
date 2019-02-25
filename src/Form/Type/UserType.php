@@ -54,7 +54,6 @@ class UserType extends AbstractType
                 'label' => 'form.user.field.mail',
                 'help' => 'form.user.help.mail',
             ])
-            //FIXME Un seul au choix !
             ->add('roles', ChoiceType::class, [
                 'label' => 'form.user.field.roles',
                 'help' => 'form.user.help.roles',

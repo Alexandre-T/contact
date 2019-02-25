@@ -34,8 +34,7 @@ use Knp\Component\Pager\PaginatorInterface;
  * @author  Alexandre Tranchant <alexandre.tranchant@gmail.com>
  * @license CeCILL-B V1
  */
-// FIXME implements all interfaces
-class UserManager extends AbstractRepositoryManager implements ManagerInterface //, LoggableManagerInterface
+class UserManager extends AbstractRepositoryManager implements ManagerInterface
 {
     /**
      * Const for the alias query.
