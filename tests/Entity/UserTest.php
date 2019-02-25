@@ -58,7 +58,7 @@ class UserTest extends TestCase
         self::assertNotNull($this->user->getRoles());
         self::assertEquals(['ROLE_USER'], $this->user->getRoles());
         self::assertNull($this->user->getUpdated());
-        self::assertNull($this->user->getUsername());
+        self::assertEmpty($this->user->getUsername());
         self::assertNull($this->user->getSalt());
     }
 
