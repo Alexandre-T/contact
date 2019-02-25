@@ -18,11 +18,12 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\ORM\EntityRepository;
 
 /**
  * UserRepository class.
@@ -37,8 +38,13 @@ use Doctrine\ORM\EntityRepository;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends EntityRepository implements UserLoaderInterface
+class UserRepository extends ServiceEntityRepository implements UserLoaderInterface
 {
+    public function __construct(RegistryInterface $registry)
+    {
+        parent::__construct($registry, User::class);
+    }
+
     /**
      * Find one user by his mail.
      *
