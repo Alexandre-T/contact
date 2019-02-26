@@ -7,8 +7,7 @@ security:
             algorithm: bcrypt
 
     # I do not want to see an invalid user... It is a security issue.
-    # FIXME remove comments
-    # hide_user_not_found:  true
+    hide_user_not_found:  true
 
     # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     # https://knpuniversity.com/screencast/symfony2-ep2/user-provider
