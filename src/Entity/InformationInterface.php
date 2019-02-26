@@ -17,7 +17,7 @@
 
 namespace App\Entity;
 
-use DateTime;
+use DateTimeInterface;
 
 /**
  * Interface InformationInterface.
@@ -29,9 +29,9 @@ interface InformationInterface
     /**
      * Return date time creation.
      *
-     * @return DateTime | null
+     * @return DateTimeInterface | null
      */
-    public function getCreated(): ?DateTime;
+    public function getCreated(): ?DateTimeInterface;
 
     /**
      * Return creator (user entity).
@@ -43,7 +43,7 @@ interface InformationInterface
     /**
      * Return date time of the last update.
      *
-     * @return DateTime | null
+     * @return DateTimeInterface | null
      */
-    public function getUpdated(): ?DateTime;
+    public function getUpdated(): ?DateTimeInterface;
 }

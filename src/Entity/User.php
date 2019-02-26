@@ -49,6 +49,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class User implements EntityInterface, InformationInterface, LabelInterface, UserInterface, Serializable
 {
+    use EntityTrait;
+
     /**
      * Identifier.
      *
@@ -199,26 +201,6 @@ class User implements EntityInterface, InformationInterface, LabelInterface, Use
     public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
-    }
-
-    /**
-     * Creation datetime getter.
-     *
-     * @return DateTime
-     */
-    public function getCreated(): ?DateTime
-    {
-        return $this->created;
-    }
-
-    /**
-     * Update datetime getter.
-     *
-     * @return DateTime
-     */
-    public function getUpdated(): ?DateTime
-    {
-        return $this->updated;
     }
 
     /**
@@ -404,28 +386,6 @@ class User implements EntityInterface, InformationInterface, LabelInterface, Use
     public function hasRole(string $role): bool
     {
         return in_array($role, $this->getRoles());
-    }
-
-    /**
-     * Get the creator of this user.
-     *
-     * @return User|null
-     */
-    public function getCreator(): ?User
-    {
-        return $this->creator;
-    }
-
-    /**
-     * @param User $creator
-     *
-     * @return User
-     */
-    public function setCreator(User $creator): EntityInterface
-    {
-        $this->creator = $creator;
-
-        return $this;
     }
 
     /**
