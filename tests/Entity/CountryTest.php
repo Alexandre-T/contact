@@ -60,7 +60,7 @@ class CountryTest extends TestCase
         $expected = $actual = 'french';
 
         self::assertEquals($this->country, $this->country->setFrench($actual));
-        self:self::assertEquals($expected, $this->country->getFrench());
+        self::assertEquals($expected, $this->country->getFrench());
     }
 
     /**

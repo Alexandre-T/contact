@@ -55,7 +55,6 @@ final class Version20190224091730 extends AbstractMigration
         $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('ALTER TABLE data.ts_user DROP CONSTRAINT FK_1A98C29961220EA6');
-        $this->addSql('DROP INDEX ndx_user_creator');
         $this->addSql('ALTER TABLE data.ts_user DROP creator_id');
         $this->addSql('ALTER INDEX data.uk_user_label RENAME TO uniq_1a98c2993048d892');
         $this->addSql('ALTER INDEX data.uk_user_mail RENAME TO uniq_1a98c299d0d90daf');

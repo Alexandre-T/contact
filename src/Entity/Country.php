@@ -40,6 +40,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Country
 {
+    const FRANCE = 'FR';
+
     /**
      * Country identifier.
      *
