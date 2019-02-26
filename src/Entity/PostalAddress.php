@@ -21,7 +21,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
-//FIXME implement entity and information interfaces
 /**
  * Postal address entity.
  *
@@ -39,8 +38,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @Gedmo\Loggable
  */
-class PostalAddress
+class PostalAddress implements EntityInterface, InformationInterface
 {
+    use EntityTrait;
     /**
      * Postal identifier.
      *
