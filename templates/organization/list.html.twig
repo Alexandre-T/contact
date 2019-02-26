@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'title.organization.list'|trans }} · {{ parent() }}{% endblock title %}
+
+{% block headline %}
+    <h1>
+        <span class="fa fa-fw fa-building"></span>
+        {{ 'title.organization.list'|trans }}
+    </h1>
+{% endblock %}
+
+{% set direction = pagination.getDirection() %}
+
+{% block container %}
+    <table class="table">
+        <thead>
+        <tr>
+            <td headers="organization-logo"><span class="fa fa-building"></span></td>
+            <th id="organization-label">
+                {{ knp_pagination_sortable(pagination, 'form.organization.field.label' | trans, 'label')}}
+                <span class="{{ faSort(pagination.isSorted('label'), direction, 'alpha') }}"></span>
+            </th>
+            <th id="organization-legal">
+                {{ knp_pagination_sortable(pagination, 'form.organization.field.legal-name' | trans, 'legal')}}
+                <span class="{{ faSort(pagination.isSorted('legal'), direction, 'alpha') }}"></span>
+            </th>
+            <th id="user-actions">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for organization in pagination %}
+            <tr>
+                {# TODO add a logo #}
+                <td headers="organization-logo"><span class="fa fa-building fa-fw"></span></td>
+                <td headers="organization-label">{{ organization.label }}</td>
+                <td headers="organization-legal">{{ organization.legalName }}</td>
+                <td headers="user-actions">
+                    <div class="btn-group-xs btn-group">
+                        <a class="btn btn-default" title="{{ 'action.organization.show.title' | trans }}"
+                           href="{{ path('organization_show', { 'id': organization.id }) }}">
+                            <span class="fa fa-eye"></span>
+                            <span class="sr-only">{{ 'action.organization.show.text' | trans }}</span>
+                        </a>
+                        <a class="btn btn-default"  title="{{ 'action.organization.edit.title' | trans }}"
+                           href="{{ path('organization_edit', { 'id': organization.id }) }}">
+                            <span class="fa fa-edit"></span>
+                            <span class="sr-only">{{ 'action.organization.edit.text' | trans }}</span>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row justify-content-between">
+        <div>
+            {{ knp_pagination_render(pagination) }}
+        </div>
+        <div>
+            <a class="btn btn-outline-primary" href="{{ path('organization_new') }}"
+               data-toggle="tooltip" data-placement="left" title="{{ 'action.organization.create.title' | trans }}">
+                <span class="fa fa-user"></span>
+                {{ 'action.organization.create.text' | trans }}
+            </a>
+        </div>
+    </div>
+
+{% endblock container %}
+
+{% block content_action %}
+{% endblock content_action %}

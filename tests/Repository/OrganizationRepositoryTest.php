@@ -57,7 +57,7 @@ class OrganizationRepositoryTest extends KernelTestCase
      */
     public function testFindByEnglishFirstLetters()
     {
-        $expected = 36;
+        $expected = 35;
 
         $organizations = $this->organizationRepository->findLikeLabel('Org');
         self::assertNotEmpty($organizations);

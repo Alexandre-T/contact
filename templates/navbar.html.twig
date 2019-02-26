@@ -1,5 +1,4 @@
 {% set route = app.request.get('_route') %}
-{% dump(route) %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-0">
     <div class="container">
         <a class="navbar-brand" href="#" style="background-color: white; padding-left: 10px; padding-right: 10px;">
@@ -22,7 +21,7 @@
                 </a>
                 {% endif %}
                 {% if is_granted('ROLE_READ_ORGANIZATION') %}
-                <a class="nav-item nav-link {{ route starts with 'organization' ? 'active' }}" href="#" title="{{ 'nav.organizations.title' | trans }}">
+                <a class="nav-item nav-link {{ route starts with 'organization' ? 'active' }}" href="{{ path('organization_index') }}" title="{{ 'nav.organizations.title' | trans }}">
                     <span class="fa fa-building"></span>
                     {{ 'nav.organizations.text' | trans }}
                 </a>

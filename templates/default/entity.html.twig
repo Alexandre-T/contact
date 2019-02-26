@@ -73,9 +73,18 @@
                                                 <td headers="logs-value" class="row{{ log.version }}">
                                                     {% block log %}
                                                         <dl class="row">
+                                                            {% dump(log.data) %}
+                                                            {% if log.data.acronymDefinition is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.acronym-definition' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.acronymDefinition }}</dd>
+                                                            {% endif %}
                                                             {% if log.data.label is defined %}
                                                                 <dt class="col-sm-6 text-right">{{ 'entity.log.data.label' | trans }}</dt>
                                                                 <dd class="col-sm-6">{{ log.data.label }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.legalName is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.legal-name' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.legalName }}</dd>
                                                             {% endif %}
                                                             {% if log.data.mail is defined %}
                                                                 <dt class="col-sm-6 text-right">{{ 'entity.log.data.mail' | trans }}</dt>

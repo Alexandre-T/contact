@@ -94,8 +94,9 @@ class Organization implements EntityInterface, InformationInterface
      *
      * @var string
      *
+     * @Assert\NotNull()
      * @Assert\NotBlank()
-     * @Assert\Length(max="2")
+     * @Assert\Length(min="2")
      * @Assert\Length(max="255")
      *
      * @ORM\Column(type="string", length=255, name="org_label", options={"comment":"Organization label"})
@@ -112,6 +113,8 @@ class Organization implements EntityInterface, InformationInterface
      * @Assert\Length(max="255")
      *
      * @ORM\Column(type="string", length=255, name="org_legal", nullable=true, options={"comment":"Legal name organization"})
+     *
+     * @Gedmo\Versioned
      */
     private $legalName;
 
@@ -153,7 +156,7 @@ class Organization implements EntityInterface, InformationInterface
      *
      * @return Organization
      */
-    public function setLabel(string $label): self
+    public function setLabel($label): self
     {
         $this->label = $label;
 

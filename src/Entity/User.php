@@ -68,6 +68,7 @@ class User implements EntityInterface, InformationInterface, LabelInterface, Use
      *
      * @var string
      *
+     * @Assert\NotNull()
      * @Assert\NotBlank()
      * @Assert\Length(max="32")
      *
@@ -83,6 +84,7 @@ class User implements EntityInterface, InformationInterface, LabelInterface, Use
      * @Assert\Length(max="255")
      *
      * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Assert\Email()
      *
      * @ORM\Column(type="string", unique=true, length=255, nullable=false, name="usr_mail")

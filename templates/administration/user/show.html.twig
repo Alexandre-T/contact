@@ -14,26 +14,19 @@
 {% endblock headline %}
 
 {% block content_settings %}
-    <div class="panel panel-primary" id="administration-global-information">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{ 'entity.global-information' | trans }}</h3>
+    <div class="row">
+        <div class="col-sm-10">
+            <dl class="row">
+                <dt class="col-sm-4 text-truncate">{{ 'form.user.field.username'| trans }}</dt>
+                <dd class="col-sm-8">{{ user.label }}</dd>
+                <dt class="col-sm-4 text-truncate">{{ 'form.user.field.mail'| trans }}</dt>
+                <dd class="col-sm-8">{{ user.mail }}</dd>
+                <dt class="col-sm-4 text-truncate">{{ 'form.user.field.roles'| trans }}</dt>
+                <dd class="col-sm-8">{{ user.roles | roles }}</dd>
+            </dl>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-10">
-                    <dl class="row">
-                        <dt class="col-sm-4 text-truncate">{{ 'form.user.field.username'| trans }}</dt>
-                        <dd class="col-sm-8">{{ user.label }}</dd>
-                        <dt class="col-sm-4 text-truncate">{{ 'form.user.field.mail'| trans }}</dt>
-                        <dd class="col-sm-8">{{ user.mail }}</dd>
-                        <dt class="col-sm-4 text-truncate">{{ 'form.user.field.roles'| trans }}</dt>
-                        <dd class="col-sm-8">{{ user.roles | roles }}</dd>
-                    </dl>
-                </div>
-                <div class="col-sm-2 text-right">
-                    <img src="{{ user.mail | gravatarFilter }}" class="img-rounded" alt="gravatar"/>
-                </div>
-            </div>
+        <div class="col-sm-2 text-right">
+            <img src="{{ user.mail | gravatarFilter }}" class="img-rounded" alt="gravatar"/>
         </div>
     </div>
 {% endblock content_settings %}

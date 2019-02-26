@@ -1,0 +1,27 @@
+{% extends 'default/entity.html.twig' %}
+
+{% block title %}
+    {{ 'title.organization.show %name%'|trans({'%name%': organization.label}) }} · {{ parent() }}
+{% endblock title %}
+
+{% block headline %}
+    <h1>
+        <span class="fa fa-building"></span>
+        {{ 'title.organization.show %name%'|trans({'%name%': organization.label}) }}
+    </h1>
+{% endblock headline %}
+
+{% block content_settings %}
+    <dl class="row">
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.organization.field.label'| trans }}</dt>
+        <dd class="col-sm-8 ">{{ organization.label }}</dd>
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.organization.field.legal-name'| trans }}</dt>
+        <dd class="col-sm-8">{{ organization.legalName }}</dd>
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.organization.field.acronym-definition'| trans }}</dt>
+        <dd class="col-sm-8">{{ organization.acronymDefinition }}</dd>
+    </dl>
+{% endblock content_settings %}
+
+{% block content_action %}
+    {% include 'organization/content-action.html.twig' %}
+{% endblock content_action %}

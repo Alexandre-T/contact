@@ -22,6 +22,7 @@ use App\Entity\User;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -65,6 +66,23 @@ abstract class AbstractRepositoryManager implements ManagerInterface
     abstract public function getDefaultAlias(): string;
 
     /**
+     * Get the default field for ordering data.
+     *
+     * @return string
+     */
+    abstract public function getDefaultSortField(): string;
+
+    /**
+     * Return the Query builder needed by the paginator.
+     *
+     * @return QueryBuilder
+     */
+    public function getQueryBuilder()
+    {
+        return $this->repository->createQueryBuilder($this->getDefaultAlias());
+    }
+
+    /**
      * Get pagination for a class.
      *
      * @param int         $page
@@ -78,10 +96,7 @@ abstract class AbstractRepositoryManager implements ManagerInterface
     {
         $queryBuilder = $this->repository->createQueryBuilder($this->getDefaultAlias());
 
-        //We add this because I don't want to see user.mail in query parameter
-        /* @see https://github.com/KnpLabs/KnpPaginatorBundle/issues/196 */
-        $queryBuilder->addSelect('user.mail as HIDDEN mail');
-        $queryBuilder->addSelect('user.label as HIDDEN username');
+        $queryBuilder = $this->addHiddenField($queryBuilder);
 
         return $this->paginator->paginate(
             $queryBuilder,
@@ -134,4 +149,15 @@ abstract class AbstractRepositoryManager implements ManagerInterface
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
     }
+
+    /**
+     * This method will add the HIDDEN field, the sortable field.
+     *
+     * @see https://github.com/KnpLabs/KnpPaginatorBundle/issues/196
+     *
+     * @param QueryBuilder $queryBuilder
+     *
+     * @return QueryBuilder
+     */
+    abstract protected function addHiddenField(QueryBuilder $queryBuilder): QueryBuilder;
 }

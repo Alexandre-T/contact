@@ -6,7 +6,7 @@
  *
  * (c) Alexandre Tranchant <alexandre.tranchant@gmail.com>
  *
- * @category Entity
+ * @category Form
  *
  * @author    Alexandre Tranchant <alexandre.tranchant@gmail.com>
  * @copyright 2019 Cerema

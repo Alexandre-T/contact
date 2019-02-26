@@ -29,6 +29,18 @@ action:
     show:
       text: 'Consulter'
       title: 'Consulter la fiche de l’utilisateur'
+  organization:
+    create:
+      text: 'Créer'
+      title: 'Créer une nouvelle organisations'
+    edit:
+      text: 'Éditer'
+      title: 'Éditer l’organisation'
+    show:
+      text: 'Consulter'
+      title: 'Consulter la fiche de l’organisation'
+    list:
+      text: 'Lister'
 
 administration:
   created:
@@ -54,6 +66,8 @@ entity:
       mail: 'Nouvel email'
       roles: 'Nouveaux privilèges'
       password: 'Nouveau mot de passe'
+      legal-name: 'Nouveau nom juridique'
+      acronym-definition: 'Nouvelle définition'
     date: 'Date'
     explanation: 'Cet onglet rassemble toutes les modifications qui ont eu lieu pour la fiche en cours.'
     new-value: 'Nouvelle(s) valeur(s)'
@@ -68,6 +82,10 @@ entity:
     created %name%: 'L’utilisateur « %name% » a été créé avec succès.'
     deleted %name%: 'L’utilisateur « %name% » a été supprimé avec succès.'
     updated %name%: 'L’utilisateur « %name% » a été modifié avec succès.'
+  organization:
+    deleted %name%: 'Cette organisation n’est plus référencée dans l’application.'
+    updated %name%: 'Les modifications sur cette organisation ont été correctement enregistrées.'
+    created %name%: 'Cette nouvelle organisation a été correctement enregistrée.'
 
 form:
   login:
@@ -95,6 +113,16 @@ form:
       username: 'Entrez le prénom et le nom de l’utilisateur'
       mail: 'Entrez l’adresse email de l’utilisateur'
       roles: 'Sélectionnez le rôle de l’utilisateur'
+  organization:
+    field:
+      acronym-definition: 'Nom complet'
+      label: 'Nom'
+      legal-name: 'Nom juridique'
+    help:
+      acronym-definition: 'Entrez la signification de l’acronyme de l’organisation.'
+      label: 'Entrez le nom de l’organisation'
+      legal-name: 'Entrez le nom juridique de l’organisation, pour une entreprise il s’agit du nom de la SA.'
+
 
 message:
   security:
@@ -142,10 +170,15 @@ ROLE_READER: 'Utilisateur avec droit de lecture uniquement.'
 
 security:
   connection:
-    successful %username%: "Authentification réussie. Bienvenue %username%\_!"
+    successful %username%: "Authentification réussie. Bienvenue %username% !"
     failed: 'Cette adresse email n’est pas référencée dans l’application ou bien le mot de passe est erroné.'
 
 title:
+  organization:
+    list: 'Liste des organisations référencées'
+    show %name%: 'Fiche de l’organisation « %name% »'
+    create: 'Formulaire de création d’une nouvelle organisation'
+    edit %name%: 'Formulaire de modification de l’organisation « %name% »'
   security:
     login: Connexion
     user:

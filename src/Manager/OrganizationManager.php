@@ -18,8 +18,8 @@
 namespace App\Manager;
 
 use App\Entity\EntityInterface;
-use App\Entity\User;
-use App\Repository\UserRepository;
+use App\Entity\Organization;
+use App\Repository\OrganizationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Loggable\Entity\LogEntry;
@@ -27,19 +27,19 @@ use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * User Manager.
+ * Organization Manager.
  *
  * @category Manager
  *
  * @author  Alexandre Tranchant <alexandre.tranchant@gmail.com>
  * @license CeCILL-B V1
  */
-class UserManager extends AbstractRepositoryManager implements ManagerInterface
+class OrganizationManager extends AbstractRepositoryManager implements ManagerInterface
 {
     /**
      * Const for the alias query.
      */
-    const ALIAS = 'user';
+    const ALIAS = 'organization';
 
     /**
      * Entity manager.
@@ -58,7 +58,7 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface
     /**
      * Repository.
      *
-     * @var UserRepository
+     * @var OrganizationRepository
      */
     protected $repository;
 
@@ -70,7 +70,7 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface
     private $logRepository;
 
     /**
-     * UserManager constructor.
+     * OrganizationManager constructor.
      *
      * @param EntityManagerInterface $entityManager
      * @param PaginatorInterface     $paginator
@@ -79,7 +79,7 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface
     {
         $this->entityManager = $entityManager;
         $this->paginator = $paginator;
-        $this->repository = $this->entityManager->getRepository(User::class);
+        $this->repository = $this->entityManager->getRepository(Organization::class);
         $this->logRepository = $this->entityManager->getRepository(LogEntry::class);
     }
 
@@ -120,21 +120,20 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface
      */
     public function isDeletable(EntityInterface $entity): bool
     {
-        return 0 === $this->repository->count(['creator' => $entity]);
+        return true;
+        //return 0 === $this->repository->count(['creator' => $entity]);
     }
 
     /**
      * Retrieve logs of the axe.
      *
-     * @param User $entity
+     * @param Organization $entity
      *
      * @return LogEntry[]
      */
     public function retrieveLogs($entity): array
     {
         return $this->logRepository->getLogEntries($entity);
-
-        //return LogFactory::createUserLogs($logs);
     }
 
     /**
@@ -149,7 +148,7 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface
     protected function addHiddenField(QueryBuilder $queryBuilder): QueryBuilder
     {
         return $queryBuilder
-            ->addSelect('user.mail as HIDDEN mail')
-            ->addSelect('user.label as HIDDEN username');
+            ->addSelect('organization.legalName as HIDDEN legal')
+            ->addSelect('organization.label as HIDDEN label');
     }
 }
