@@ -36,7 +36,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          @ORM\Index(name="ndx_organization_label", columns={"org_legal"})
  *     },
  *     uniqueConstraints={
- *          @ORM\UniqueConstraint(name="uk_organization_label", columns={"org_label"})
+ *          @ORM\UniqueConstraint(name="uk_organization_label", columns={"org_label"}),
+ *          @ORM\UniqueConstraint(name="uk_organization_address", columns={"address_id"})
  *     }
  * )
  * @Gedmo\Loggable
@@ -68,6 +69,16 @@ class Organization implements EntityInterface, InformationInterface
      * @Gedmo\Versioned
      */
     private $acronymDefinition;
+
+    /**
+     * Postal address.
+     *
+     * @var PostalAddress
+     *
+     * @ORM\OneToOne(targetEntity="PostalAddress",cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="address_id", referencedColumnName="pad_id", onDelete="CASCADE", unique=true)
+     */
+    private $address;
 
     /**
      * Creation datetime.
@@ -183,6 +194,30 @@ class Organization implements EntityInterface, InformationInterface
     public function setAcronymDefinition(?string $acronymDefinition): self
     {
         $this->acronymDefinition = $acronymDefinition;
+
+        return $this;
+    }
+
+    /**
+     * Address getter.
+     *
+     * @return PostalAddress
+     */
+    public function getAddress(): ?PostalAddress
+    {
+        return $this->address;
+    }
+
+    /**
+     * Address fluent setter.
+     *
+     * @param PostalAddress $address
+     *
+     * @return Organization
+     */
+    public function setAddress(PostalAddress $address): Organization
+    {
+        $this->address = $address;
 
         return $this;
     }

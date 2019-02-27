@@ -118,17 +118,17 @@
                                     <div class="panel-body">
                                         <dl class="row">
                                             {% if information.created %}
-                                                <dt class="col-sm-4 text-truncate">{{ 'administration.created.at' | trans }}</dt>
+                                                <dt class="col-sm-4 text-truncate text-right">{{ 'administration.created.at' | trans }}</dt>
                                                 <dd class="col-sm-8">{{ information.created | localizeddate('short', 'short') }}</dd>
                                             {% endif %}
                                             {% if information.creator %}
-                                                <dt class="col-sm-4 text-truncate">{{ 'administration.created.by' | trans }}</dt>
+                                                <dt class="col-sm-4 text-truncate text-right">{{ 'administration.created.by' | trans }}</dt>
                                                 <dd class="col-sm-8">{{ information.creator.label }}
                                                     ({{ information.creator.mail }})
                                                 </dd>
                                             {% endif %}
                                             {% if information.updated %}
-                                                <dt class="col-sm-4 text-truncate">{{ 'administration.updated.at' | trans }}</dt>
+                                                <dt class="col-sm-4 text-truncate text-right">{{ 'administration.updated.at' | trans }}</dt>
                                                 <dd class="col-sm-8">{{ information.updated | localizeddate('short', 'short') }}</dd>
                                             {% endif %}
                                         </dl>

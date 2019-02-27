@@ -54,6 +54,9 @@ class OrganizationType extends AbstractType
                 'label' => 'form.organization.field.acronym-definition',
                 'help' => 'form.organization.help.acronym-definition',
             ])
+            ->add('address', PostalAddressType::class,[
+                'label' => 'form.organization.field.address'
+            ])
         ;
     }
 

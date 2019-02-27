@@ -88,6 +88,19 @@ entity:
     created %name%: 'Cette nouvelle organisation a été correctement enregistrée.'
 
 form:
+  address:
+    field:
+      box: 'Complément'
+      code: 'Code postal'
+      country: 'Pays'
+      locality: 'Ville'
+      street: 'Adresse'
+    help:
+      box: 'Entrez le complément d’adresse'
+      code: 'Entrez le code postal'
+      country: 'Choisissez le pays parmi cette liste'
+      locality: 'Entrez la ville'
+      street: 'Entrez l’adresse'
   login:
     field:
       mail: 'Adresse email'
@@ -116,6 +129,7 @@ form:
   organization:
     field:
       acronym-definition: 'Nom complet'
+      address: 'Adresse'
       label: 'Nom'
       legal-name: 'Nom juridique'
     help:
