@@ -61,7 +61,7 @@ class PersonTest extends TestCase
         self::assertNull($this->person->getUpdated());
         self::assertNull($this->person->getUrl());
     }
-    
+
     /**
      * Test the method GetAddress.
      */
@@ -126,7 +126,6 @@ class PersonTest extends TestCase
 
         self::assertEquals($this->person, $this->person->setNationality($actual));
         self::assertEquals($expected, $this->person->getNationality());
-
     }
 
     /**

@@ -20,10 +20,10 @@ namespace App\Manager;
 use App\Entity\Country;
 use App\Entity\EntityInterface;
 use App\Entity\InformationInterface;
-use App\Entity\Organization;
+use App\Entity\Person;
 use App\Entity\PostalAddress;
 use App\Repository\CountryRepository;
-use App\Repository\OrganizationRepository;
+use App\Repository\PersonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Loggable\Entity\LogEntry;
@@ -31,19 +31,19 @@ use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Organization Manager.
+ * Person Manager.
  *
  * @category Manager
  *
  * @author  Alexandre Tranchant <alexandre.tranchant@gmail.com>
  * @license CeCILL-B V1
  */
-class OrganizationManager extends AbstractRepositoryManager implements ManagerInterface
+class PersonManager extends AbstractRepositoryManager implements ManagerInterface
 {
     /**
      * Const for the alias query.
      */
-    const ALIAS = 'organization';
+    const ALIAS = 'person';
 
     /**
      * Entity manager.
@@ -62,7 +62,7 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
     /**
      * Repository.
      *
-     * @var OrganizationRepository
+     * @var PersonRepository
      */
     protected $repository;
 
@@ -81,7 +81,7 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
     private $countryRepository;
 
     /**
-     * OrganizationManager constructor.
+     * PersonManager constructor.
      *
      * @param EntityManagerInterface $entityManager
      * @param PaginatorInterface     $paginator
@@ -90,7 +90,7 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
     {
         $this->entityManager = $entityManager;
         $this->paginator = $paginator;
-        $this->repository = $this->entityManager->getRepository(Organization::class);
+        $this->repository = $this->entityManager->getRepository(Person::class);
         $this->countryRepository = $this->entityManager->getRepository(Country::class);
         $this->logRepository = $this->entityManager->getRepository(LogEntry::class);
     }
@@ -110,7 +110,7 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
      */
     public function getDefaultSortField(): string
     {
-        return self::ALIAS.'.label';
+        return self::ALIAS.'.familyName';
     }
 
     /**
@@ -132,9 +132,7 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
      */
     public function isDeletable(EntityInterface $entity): bool
     {
-        return
-            0 === $this->repository->count(['members' => $entity]) &&
-            0 === $this->repository->count(['alumni' => $entity]);
+        return true;
     }
 
     /**
@@ -150,23 +148,24 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
     }
 
     /**
-     * Create a new organization.
+     * Create a new person.
      *
      * @param string $code
      *
-     * @return Organization
+     * @return Person
      */
-    public function createOrganization($code = 'FR'): Organization
+    public function createPerson($code = 'FR'): Person
     {
-        $organization = new Organization();
+        $person = new Person();
         $postalAddress = new PostalAddress();
         $france = $this->countryRepository->findOneByCode($code);
         if ($france) {
             $postalAddress->setCountry($france);
+            $person->setNationality($france);
         }
-        $organization->setAddress($postalAddress);
+        $person->setAddress($postalAddress);
 
-        return $organization;
+        return $person;
     }
 
     /**
@@ -181,7 +180,7 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
     protected function addHiddenField(QueryBuilder $queryBuilder): QueryBuilder
     {
         return $queryBuilder
-            ->addSelect('organization.legalName as HIDDEN legal')
-            ->addSelect('organization.label as HIDDEN label');
+            ->addSelect('person.familyName as HIDDEN family')
+            ->addSelect('person.jobTitle as HIDDEN job');
     }
 }

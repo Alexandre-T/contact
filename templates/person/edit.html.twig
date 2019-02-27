@@ -1,0 +1,14 @@
+{% extends 'default/_entity.html.twig' %}
+
+{% block title %}{{ 'title.person.edit %name%'|trans({'%name%': person.label}) }} · {{ parent() }}{% endblock title %}
+
+{% block headline %}
+    <h1>
+        <span class="fa fa-building"></span>
+        {{ 'title.person.edit %name%'|trans({'%name%': person.label}) }}
+    </h1>
+{% endblock %}
+
+{% block content_settings %}{% include 'person/_form.html.twig' %}{% endblock content_settings %}
+
+{% block content_action %}{% include 'person/_content-action.html.twig' %}{% endblock content_action %}

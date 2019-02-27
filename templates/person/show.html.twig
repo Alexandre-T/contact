@@ -1,0 +1,74 @@
+{% extends 'default/_entity.html.twig' %}
+
+{% block title %}
+    {{ 'title.person.show %name%'|trans({'%name%': person.label}) }} · {{ parent() }}
+{% endblock title %}
+
+{% block headline %}
+    <h1>
+        <span class="fa fa-building"></span>
+        {{ 'title.person.show %name%'|trans({'%name%': person.label}) }}
+    </h1>
+{% endblock headline %}
+
+{% block content_settings %}
+    <dl class="row">
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.label'| trans }}</dt>
+        <dd class="col-sm-8 ">{{ person.label }}</dd>
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.job-title'| trans }}</dt>
+        <dd class="col-sm-8">{{ person.jobTitle }}</dd>
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.member-of'| trans }}</dt>
+        <dd class="col-sm-8">
+            {% if person.memberOf is empty -%}
+                <small>{{ 'none' | trans }}</small>
+            {%- else -%}
+            <a href="{{ path('organization_show', {id: person.memberOf.id}) }}" title="link.organization.show.title">
+                {{ person.memberOf.label }}
+            </a>
+            {%- endif %}
+        </dd>
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.alumnus'| trans }}</dt>
+        <dd class="col-sm-8">
+            {% if person.alumnus is empty -%}
+                <small>{{ 'none' | trans }}</small>
+            {%- else -%}
+                <a href="{{ path('organization_show', {id: person.alumnus.id}) }}" title="link.organization.show.title">
+                    {{ person.alumnus.label }}
+                </a>
+            {%- endif %}
+        </dd>
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.email'| trans }}</dt>
+        <dd class="col-sm-8">{{ person.email }}</dd>
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.gender'| trans }}</dt>
+        <dd class="col-sm-8">{{ person.gender | gender }}</dd>
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.nationality'| trans }}</dt>
+        <dd class="col-sm-8">{{ person.nationality.french }}</dd>
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.url'| trans }}</dt>
+        <dd class="col-sm-8">{{ person.url }}</dd>
+    </dl>
+    {% if person.address is not empty %}
+        <hr/>
+        <dl class="row">
+            <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.address'| trans }}</dt>
+            <dd class="col-sm-8">
+                {% if person.address.postOfficeBoxNumber is not empty -%}
+                    {{ person.address.postOfficeBoxNumber }}<br/>
+                {%- endif %}
+                {% if person.address.streetAddress is not empty -%}
+                    {{ person.address.streetAddress }}<br/>
+                {%- endif %}
+                {% if person.address.postalCode is not empty or person.address.locality -%}
+                    {{ person.address.postalCode }} {{ person.address.locality }}<br/>
+                {%- endif %}
+                {% if person.address.country is not empty -%}
+                    {{ person.address.country.french }}
+                {%- endif %}
+            </dd>
+        </dl>
+    {% else %}
+        <p class="alert alert-info">Aucune adresse n’a été renseignée pour ce contact.</p>
+    {% endif %}
+
+{% endblock content_settings %}
+
+{% block content_action %}{% include 'person/_content-action.html.twig' %}{% endblock content_action %}

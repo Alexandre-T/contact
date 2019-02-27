@@ -15,7 +15,7 @@
                     <span class="fa fa-home"></span>&nbsp;{{ 'nav.home.text' | trans }}
                 </a>
                 {% if is_granted('ROLE_READ_CONTACT') %}
-                <a class="nav-item nav-link {{ route starts with 'contact' ? 'active' }}" href="#" title="{{ 'nav.contacts.title' | trans }}">
+                <a class="nav-item nav-link {{ route starts with 'contact' ? 'active' }}" href="{{ path('person_index') }}" title="{{ 'nav.contacts.title' | trans }}">
                     <span class="fa fa-address-card"></span>
                     {{ 'nav.contacts.text' | trans }}
                 </a>

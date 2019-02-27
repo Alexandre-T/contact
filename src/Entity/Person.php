@@ -52,11 +52,21 @@ class Person implements EntityInterface, InformationInterface
     use EntityTrait;
 
     /**
+     * Gender constants.
+     */
+    const FEMALE = 1;
+    const MALE = 2;
+    const OTHER = 3;
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    //TODO add this columns : Tel, Smartphone,
+    //TODO add as trait Facebook, Instagram, LinkedIn, Twitter
 
     /**
      * Postal address.
@@ -75,6 +85,8 @@ class Person implements EntityInterface, InformationInterface
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Organization", inversedBy="alumni")
      * @ORM\JoinColumn(name="school_id", referencedColumnName="org_id")
+     *
+     * @Gedmo\Versioned()
      */
     private $alumnus;
 
@@ -83,7 +95,11 @@ class Person implements EntityInterface, InformationInterface
      *
      * @var string
      *
+     * @Assert\Length(max="32")
+     *
      * @ORM\Column(type="string", length=32, nullable=true, name="per_birthName", options={"comment":"Birth name"})
+     *
+     * @Gedmo\Versioned()
      */
     private $birthName;
 
@@ -114,7 +130,12 @@ class Person implements EntityInterface, InformationInterface
      *
      * @var string
      *
+     * @Assert\Length(max="255")
+     * @Assert\Email()
+     *
      * @ORM\Column(type="string", length=255, nullable=true, name="per_email", options={"comment":"Email"})
+     *
+     * @Gedmo\Versioned()
      */
     private $email;
 
@@ -125,8 +146,11 @@ class Person implements EntityInterface, InformationInterface
      *
      * @Assert\NotNull()
      * @Assert\NotBlank()
+     * @Assert\Length(max="32")
      *
      * @ORM\Column(type="string", length=32, name="per_familyName", options={"comment":"Family and usage name"})
+     *
+     * @Gedmo\Versioned()
      */
     private $familyName;
 
@@ -135,9 +159,11 @@ class Person implements EntityInterface, InformationInterface
      *
      * @var int
      *
-     * @Assert\Choice(min="1", max="2",message="form.person.error.gender")
+     * @Assert\Choice(callback="getGenders", message="form.person.error.gender")
      *
      * @ORM\Column(type="smallint", nullable=true, name="per_gender", options={"comment": "Gender 1 for male, 2 for female, 3 for others."})
+     *
+     * @Gedmo\Versioned()
      */
     private $gender;
 
@@ -147,6 +173,8 @@ class Person implements EntityInterface, InformationInterface
      * @var string
      *
      * @ORM\Column(type="string", length=32, nullable=true, name="per_givenName", options={"comment":"Given name"})
+     *
+     * @Gedmo\Versioned()
      */
     private $givenName;
 
@@ -156,6 +184,8 @@ class Person implements EntityInterface, InformationInterface
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=true, name="per_jobTitle", options={"comment":"Job title"})
+     *
+     * @Gedmo\Versioned()
      */
     private $jobTitle;
 
@@ -166,6 +196,8 @@ class Person implements EntityInterface, InformationInterface
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Organization", inversedBy="members")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="org_id")
+     *
+     * @Gedmo\Versioned()
      */
     private $memberOf;
 
@@ -176,11 +208,19 @@ class Person implements EntityInterface, InformationInterface
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Country")
      * @ORM\JoinColumn(name="birthCountry_id", referencedColumnName="cou_id", nullable=false)
+     *
+     * @Gedmo\Versioned()
      */
     private $nationality;
 
     /**
+     * Website contact.
+     *
+     * @Assert\Url()
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Gedmo\Versioned()
      */
     private $url;
 
@@ -198,6 +238,22 @@ class Person implements EntityInterface, InformationInterface
     private $updated;
 
     /**
+     * Return available genders.
+     *
+     * This function is used by Assert\Choice callback.
+     *
+     * @return array
+     */
+    public static function getGenders(): array
+    {
+        return [
+            self::FEMALE,
+            self::MALE,
+            self::OTHER,
+        ];
+    }
+
+    /**
      * Identifier getter.
      *
      * @return int|null
@@ -205,78 +261,6 @@ class Person implements EntityInterface, InformationInterface
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * Given name getter.
-     *
-     * @return string|null
-     */
-    public function getGivenName(): ?string
-    {
-        return $this->givenName;
-    }
-
-    /**
-     * Given name fluent setter.
-     *
-     * @param string|null $givenName
-     *
-     * @return Person
-     */
-    public function setGivenName(?string $givenName): self
-    {
-        $this->givenName = $givenName;
-
-        return $this;
-    }
-
-    /**
-     * Birth name getter.
-     *
-     * @return string|null
-     */
-    public function getBirthName(): ?string
-    {
-        return $this->birthName;
-    }
-
-    /**
-     * Birth name fluent setter.
-     *
-     * @param string|null $birthName
-     *
-     * @return Person
-     */
-    public function setBirthName(?string $birthName): self
-    {
-        $this->birthName = $birthName;
-
-        return $this;
-    }
-
-    /**
-     * Family name getter.
-     *
-     * @return string|null
-     */
-    public function getFamilyName(): ?string
-    {
-        return $this->familyName;
-    }
-
-    /**
-     * Family name fluent setter.
-     *
-     * @param string $familyName
-     *
-     * @return Person
-     */
-    public function setFamilyName(string $familyName): self
-    {
-        $this->familyName = $familyName;
-
-        return $this;
     }
 
     /**
@@ -467,6 +451,98 @@ class Person implements EntityInterface, InformationInterface
     public function setMemberOf(?Organization $memberOf): self
     {
         $this->memberOf = $memberOf;
+
+        return $this;
+    }
+
+    /**
+     * Return name.
+     *
+     * @return string|null name of person
+     */
+    public function getLabel(): ?string
+    {
+        if (is_null($this->getGivenName()) && is_null($this->getBirthName()) && is_null($this->getFamilyName())) {
+            return null;
+        }
+
+        $result = $this->getGivenName() ?? '';
+
+        if (empty($this->getBirthName()) || $this->getBirthName() === $this->getFamilyName()) {
+            return $result.' '.$this->getFamilyName();
+        }
+
+        return "$result {$this->getFamilyName()} ({$this->getBirthName()})";
+    }
+
+    /**
+     * Given name getter.
+     *
+     * @return string|null
+     */
+    public function getGivenName(): ?string
+    {
+        return $this->givenName;
+    }
+
+    /**
+     * Given name fluent setter.
+     *
+     * @param string|null $givenName
+     *
+     * @return Person
+     */
+    public function setGivenName(?string $givenName): self
+    {
+        $this->givenName = $givenName;
+
+        return $this;
+    }
+
+    /**
+     * Birth name getter.
+     *
+     * @return string|null
+     */
+    public function getBirthName(): ?string
+    {
+        return $this->birthName;
+    }
+
+    /**
+     * Birth name fluent setter.
+     *
+     * @param string|null $birthName
+     *
+     * @return Person
+     */
+    public function setBirthName(?string $birthName): self
+    {
+        $this->birthName = $birthName;
+
+        return $this;
+    }
+
+    /**
+     * Family name getter.
+     *
+     * @return string|null
+     */
+    public function getFamilyName(): ?string
+    {
+        return $this->familyName;
+    }
+
+    /**
+     * Family name fluent setter.
+     *
+     * @param string $familyName
+     *
+     * @return Person
+     */
+    public function setFamilyName(string $familyName): self
+    {
+        $this->familyName = $familyName;
 
         return $this;
     }

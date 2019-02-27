@@ -50,6 +50,7 @@ class PostalAddressType extends AbstractType
                 'label' => 'form.address.field.locality',
                 'help' => 'form.address.help.locality',
             ])
+            //FIXME replace with a CountryType
             ->add('country', EntityType::class, [
                 'class' => Country::class,
                 'query_builder' => function (CountryRepository $cr) {

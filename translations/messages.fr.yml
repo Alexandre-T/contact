@@ -1,6 +1,8 @@
 action:
   close: 'Fermer'
   entity:
+    create:
+      text: 'Créer'
     delete:
       text: 'Supprimer'
       title: 'Supprimer'
@@ -45,6 +47,13 @@ action:
     show:
       text: 'Consulter'
       title: 'Consulter la fiche de l’utilisateur'
+  person:
+    create:
+      title: 'Créer un nouveau contact'
+    show:
+      title: 'Consulter la fiche de ce contact'
+    edit:
+      title: 'Modifier la fiche de ce contact'
 
 administration:
   created:
@@ -68,17 +77,25 @@ entity:
       delete: 'Suppression'
       update: 'Modification'
     data:
-      label: 'Nouveau libellé'
-      mail: 'Nouvel email'
-      roles: 'Nouveaux privilèges'
-      password: 'Nouveau mot de passe'
-      legal-name: 'Nouveau nom juridique'
       acronym-definition: 'Nouvelle définition'
-      streetAddress: 'Nouvelle rue'
+      alumnus: 'Nouvelle école'
+      birthName: 'Nouveau nom de naissance'
+      country: 'Nouveau pays'
+      family-name: 'Nouveau nom de famille'
+      gender: 'Nouveau genre'
+      givenName: 'Nouveau prénom'
+      job-title: 'Nouvelle profession'
+      label: 'Nouveau libellé'
+      legal-name: 'Nouveau nom juridique'
+      locality: 'Nouvelle ville'
+      mail: 'Nouvel email'
+      member-of: 'Nouvelle organisation'
+      password: 'Nouveau mot de passe'
       postal-box-office-number: 'Nouveau complément'
       postal-code: 'Nouveau code postal'
-      country: 'Nouveau pays'
-      locality: 'Nouvelle ville'
+      roles: 'Nouveaux privilèges'
+      streetAddress: 'Nouvelle rue'
+      url: 'Nouveau site web'
     date: 'Date'
     explanation: 'Cet onglet rassemble toutes les modifications qui ont eu lieu pour la fiche en cours.'
     new-value: 'Nouvelle(s) valeur(s)'
@@ -100,6 +117,10 @@ entity:
     created %name%: 'Cette nouvelle organisation a été correctement enregistrée.'
   addressLog:
     title: 'Changements d’adresse'
+  person:
+    created %name%: 'Le contact « %name% » a été créé avec succès.'
+    deleted %name%: 'Le contact « %name% » a été supprimé avec succès.'
+    updated %name%: 'Le contact « %name% » a été modifié avec succès.'
 
 form:
   address:
@@ -150,6 +171,31 @@ form:
       acronym-definition: 'Entrez la signification de l’acronyme de l’organisation.'
       label: 'Entrez le nom de l’organisation'
       legal-name: 'Entrez le nom juridique de l’organisation, pour une entreprise il s’agit du nom de la SA.'
+  person:
+    field:
+      address: 'Adresse'
+      alumnus: 'Ancien élève de'
+      birth-name: 'Nom de naissance'
+      email: 'Adresse email'
+      family-name: 'Nom de famille'
+      gender: 'Genre'
+      given-name: 'Prénom'
+      job-title: 'Profession'
+      label: 'Nom'
+      member-of: 'Membre de'
+      nationality: 'Nationalité'
+      url: 'Site web'
+    help:
+      alumnus: 'Choisissez l’école de ce contact pour faire des recherches sur les anciens élèves d’une école'
+      birth-name: 'Entrez le nom de famille de naissance de ce contact'
+      email: 'Entrez l’adresse email de ce contact'
+      family-name: 'Entrez son nom de famille'
+      gender: 'Sélectionnez son genre'
+      given-name: 'Entrez son prénom'
+      job-title: 'Entrez sa profession'
+      member-of: 'Entrez l’organisation à laquelle ce contact est principalement rattaché'
+      nationality: 'Sélectionnez le pays dans la liste.'
+      url: 'Entrez le site web de ce contact'
 
 home:
   card1:
@@ -180,6 +226,12 @@ modal:
       confirm: 'Demande de confirmation'
       core: 'Vous êtes sur le point de supprimer cette fiche de l’application. Êtes-vous sûr de vouloir poursuivre ?'
       yes: 'Oui, supprimer !'
+
+gender:
+  female: 'Femme'
+  male: 'Homme'
+  other: 'Autre'
+  unknown: 'Non renseigné'
 
 nav:
   home:
@@ -224,11 +276,16 @@ title:
   security:
     login: Connexion
     user:
+      create: 'Création d’un nouvel utilisateur'
       edit %name%: 'Modification de l’utilisateur « %name% »'
       list: 'Liste des utilisateurs'
       show %name%: 'Fiche de l’utilisateur « %name% »'
-      create: 'Création d’un nouvel utilisateur'
     register: 'Inscription'
+  person:
+    create: 'Création d’un nouveau contact'
+    edit %name%: 'Modification du contact « %name% »'
+    list: 'Liste des contacts'
+    show %name%: 'Fiche du contact « %name% »'
 img:
   business-card:
     alt: 'Homme tendant une carte de visite'
@@ -236,3 +293,5 @@ img:
     alt: 'Homme cliquant sur un bouton pour envoyer un mail'
   laptop:
     alt: 'Femme prenant des notes dans une salle de réunion sur son portable'
+
+none: 'Non renseigné'

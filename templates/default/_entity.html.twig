@@ -79,9 +79,40 @@
                                                 <td headers="logs-value" class="row{{ log.version }}">
                                                     {% block log %}
                                                         <dl class="row">
+                                                            {% dump(log) %}
                                                             {% if log.data.acronymDefinition is defined %}
                                                                 <dt class="col-sm-6 text-right">{{ 'entity.log.data.acronym-definition' | trans }}</dt>
+                                                                {# FIXME add an empty filter to display the not available data #}
                                                                 <dd class="col-sm-6">{{ log.data.acronymDefinition }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.alumnus is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.alumnus' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.alumnus }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.birthName is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.birthName' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.birthName }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.email is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.mail' | trans }}</dt>
+                                                                {# TODO add a crypt extension to display email #}
+                                                                <dd class="col-sm-6">{{ log.data.email }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.familyName is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.family-name' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.familyName }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.gender is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.gender' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.gender |gender }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.givenName is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.givenName' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.givenName }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.jobTitle is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.job-title' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.jobTitle }}</dd>
                                                             {% endif %}
                                                             {% if log.data.label is defined %}
                                                                 <dt class="col-sm-6 text-right">{{ 'entity.log.data.label' | trans }}</dt>
@@ -95,6 +126,10 @@
                                                                 <dt class="col-sm-6 text-right">{{ 'entity.log.data.mail' | trans }}</dt>
                                                                 <dd class="col-sm-6">{{ log.data.mail }}</dd>
                                                             {% endif %}
+                                                            {% if log.data.memberOf is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.member-of' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.memberOf }}</dd>
+                                                            {% endif %}
                                                             {% if log.data.password is defined %}
                                                                 <dt class="col-sm-6 text-right">{{ 'entity.log.data.password' | trans }}</dt>
                                                                 <dd class="col-sm-6">&bull;&bull;&bull;&bull;&bull;</dd>
@@ -102,6 +137,10 @@
                                                             {% if log.data.roles is defined %}
                                                                 <dt class="col-sm-6 text-right">{{ 'entity.log.data.roles' | trans }}</dt>
                                                                 <dd class="col-sm-6">{{ log.data.roles | roles }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.url is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.url' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.url }}</dd>
                                                             {% endif %}
                                                         </dl>
                                                     {% endblock log %}
