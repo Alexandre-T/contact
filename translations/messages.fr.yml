@@ -29,6 +29,7 @@ action:
     show:
       text: 'Consulter'
       title: 'Consulter la fiche de l’utilisateur'
+  next: 'Suivant'
   organization:
     create:
       text: 'Créer'
@@ -41,6 +42,7 @@ action:
       title: 'Consulter la fiche de l’organisation'
     list:
       text: 'Lister'
+  previous: 'Précédent'
 
 administration:
   created:
@@ -51,6 +53,8 @@ administration:
   user:
     title %name%: 'Fiche de l’utilisateur %name%'
     updated %name%: 'Modification de l’utilisateur %name%'
+
+Address: 'Adresse'
 
 entity:
   global-information: 'Généralités'
@@ -177,6 +181,8 @@ nav:
   user:
     text: 'Utilisateurs'
     title: 'Gestion des utilisateurs'
+
+Organization: 'Organisation'
 
 ROLE_ADMIN: 'Administrateur pouvant gérer les privilèges des utilisateurs.'
 ROLE_ORGANISER: 'Utilisateur avec droit de lecture et d’écriture.'
