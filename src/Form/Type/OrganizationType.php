@@ -45,6 +45,9 @@ class OrganizationType extends AbstractType
             ->add('label', TextType::class, [
                 'label' => 'form.organization.field.label',
                 'help' => 'form.organization.help.label',
+                'attr' => [
+                    'autofocus' => true,
+                ]
             ])
             ->add('legalName', null, [
                 'label' => 'form.organization.field.legal-name',

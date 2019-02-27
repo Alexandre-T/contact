@@ -9,10 +9,26 @@ action:
       title: 'Éditer'
     list:
       text: 'Lister'
-      title: 'Lister'
+      title: 'Retourner à la liste complète'
     show:
       text: 'Consulter'
       title: 'Consulter la fiche'
+  next: 'Suivant'
+  organization:
+    create:
+      text: 'Créer'
+      title: 'Créer une nouvelle organisation'
+    edit:
+      text: 'Éditer'
+      title: 'Éditer l’organisation'
+    show:
+      text: 'Consulter'
+      title: 'Consulter la fiche de l’organisation'
+    list:
+      text: 'Lister'
+  previous: 'Précédent'
+  save:
+    text: 'Enregistrer'
   user:
     create:
       text: 'Créer'
@@ -29,20 +45,6 @@ action:
     show:
       text: 'Consulter'
       title: 'Consulter la fiche de l’utilisateur'
-  next: 'Suivant'
-  organization:
-    create:
-      text: 'Créer'
-      title: 'Créer une nouvelle organisations'
-    edit:
-      text: 'Éditer'
-      title: 'Éditer l’organisation'
-    show:
-      text: 'Consulter'
-      title: 'Consulter la fiche de l’organisation'
-    list:
-      text: 'Lister'
-  previous: 'Précédent'
 
 administration:
   created:

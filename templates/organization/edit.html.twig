@@ -9,50 +9,6 @@
     </h1>
 {% endblock %}
 
-{% block content_settings %}
-    {{ form_start(edit_form) }}
-    <nav>
-        <div class="nav nav-tabs" id="nav-form-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-form-general-tab" data-toggle="tab" href="#form-general-tab"
-               role="tab" aria-controls="form-general-tab" aria-selected="true">{{ 'Organization' | trans }}</a>
-            <a class="nav-item nav-link" id="nav-form-address-tab" data-toggle="tab" href="#form-address-tab" role="tab"
-               aria-controls="form-address-tab" aria-selected="false">{{ 'Address' | trans }}</a>
-        </div>
-    </nav>
-    <div class="tab-content" id="nav-form-tabContent">
-        <div class="tab-pane fade show active" id="form-general-tab" role="tabpanel"
-             aria-labelledby="nav-form-general-tab">
-            <div class="m-0  border border-top-0 p-2 pt-4">
-                {{ form_row(edit_form.label) }}
-                {{ form_row(edit_form.legalName) }}
-                {{ form_row(edit_form.acronymDefinition) }}
-                <p class="text-right">
-                    <button class="btn btn-primary" type="button" onclick="$('#nav-form-address-tab').tab('show');">
-                        {{ 'action.next' | trans }}
-                        <span class="fa fa-arrow-right"></span>
-                    </button>
-                </p>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="form-address-tab" role="tabpanel" aria-labelledby="nav-form-address-tab">
-            <div class="m-0  border border-top-0 p-2 pt-4">
-                {{ form_row(edit_form.address) }}
-                <div class="d-flex justify-content-between">
-                    <button class="btn btn-secondary" type="button" onclick="$('#nav-form-general-tab').tab('show');">
-                        <span class="fa fa-arrow-left"></span>
-                        {{ 'action.previous' | trans }}
-                    </button>
-                    <button class="btn btn-primary" type="submit">
-                        <span class="fa fa-save"></span>
-                        {{ 'action.organization.edit.text' | trans }}
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{ form_end(edit_form) }}
-{% endblock content_settings %}
+{% block content_settings %}{% include 'organization/_form.html.twig' %}{% endblock content_settings %}
 
-{% block content_action %}
-    {% include 'organization/content-action.html.twig' %}
-{% endblock content_action %}
+{% block content_action %}{% include 'organization/_content-action.html.twig' %}{% endblock content_action %}

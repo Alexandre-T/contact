@@ -160,7 +160,7 @@ class OrganizationController extends AbstractController
             'logs' => $logs,
             'information' => $organization,
             'organization' => $organization,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }

@@ -9,12 +9,4 @@
     </h1>
 {% endblock %}
 
-{% block content_settings %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary" type="submit">
-        <span class="fa fa-save"></span>
-        {{ 'action.user.create.text' | trans }}
-    </button>
-    {{ form_end(form) }}
-{% endblock content_settings %}
+{% block content_settings %}{% include 'organization/_form.html.twig' %}{% endblock content_settings %}
