@@ -1,4 +1,55 @@
 {% extends 'base.html.twig' %}
 {% block container %}
-    <p class="alert alert-danger">index.html</p>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card animated bounceInLeft">
+                        <img class="card-img-top" src="{{ asset('img/laptop_640.jpg') }}"
+                             alt="{{ 'img.laptop.alt' | trans }}">
+                        <div class="card card-body">
+                            <h4 class="card-title">{{ 'home.card1.text' | trans }}</h4>
+                            <p class="card-text">{{ 'home.card1.description' | trans }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card animated bounceInUp">
+                        <img class="card-img-top" src="{{ asset('img/contact_640.jpg') }}"
+                             alt="{{ 'img.contact.alt' | trans }}">
+                        <div class="card card-body">
+                            <h4 class="card-title">{{ 'home.card2.text' | trans }}</h4>
+                            <p class="card-text">{{ 'home.card2.description' | trans }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mt-5">
+                <h4 class="card-header">Demande d’accès</h4>
+                <div class="card-body">
+                    <p class="text-justify">
+                        Pour accéder à l’application, vous devez recevor l’autorisation de votre RSSI et celle de la
+                        cellule communication. Veuillez contacter votre correspondant informatique local en lui
+                        précisant :
+                    </p>
+                    <ul>
+                        <li>le nom de l'application (Contact),</li>
+                        <li>l’usage que vous ferez de l’utilisation de ces données,</li>
+                        <li>le rôle souhaité (lecture seule ou lecture et écriture).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card animated bounceInRight">
+                <img class="card-img-top" src="{{ asset('img/business-card_640.jpg') }}"
+                     alt="{{ 'img.business-card.alt' | trans }}">
+                <div class="card card-body">
+                    <h4 class="card-title">{{ 'home.card3.text' | trans }}</h4>
+                    <p class="card-text">{{ 'home.card3.description' | trans }}</p>
+                </div>
+            </div>
+            <img class="img-fluid mt-2 animated pulse delay-5s" src="{{ asset('img/logo.svg') }}" alt="Logo du Cerema"/>
+        </div>
+    </div>
 {% endblock %}

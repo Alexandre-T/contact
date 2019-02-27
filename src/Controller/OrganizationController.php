@@ -74,12 +74,13 @@ class OrganizationController extends AbstractController
      *
      * @param OrganizationManager $organizationManager
      * @param Request             $request
+     * @param TranslatorInterface $trans
      *
      * @return RedirectResponse |Response
      */
     public function newAction(OrganizationManager $organizationManager, Request $request, TranslatorInterface $trans)
     {
-        $organization = new Organization();
+        $organization = $organizationManager->createOrganization();
         $form = $this->createForm(OrganizationType::class, $organization);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -117,10 +118,12 @@ class OrganizationController extends AbstractController
     {
         $deleteForm = $this->createDeleteForm($organization);
         $logs = $organizationManager->retrieveLogs($organization);
+        $addressLogs = $organizationManager->retrieveLogs($organization->getAddress());
 
         return $this->render('organization/show.html.twig', [
             'isDeletable' => $organizationManager->isDeletable($organization),
             'logs' => $logs,
+            'addressLogs' => $addressLogs,
             'information' => $organization,
             'organization' => $organization,
             'deletable' => $organizationManager->isDeletable($organization),

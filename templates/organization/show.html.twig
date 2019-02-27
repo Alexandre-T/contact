@@ -20,6 +20,29 @@
         <dt class="col-sm-4 text-truncate text-right">{{ 'form.organization.field.acronym-definition'| trans }}</dt>
         <dd class="col-sm-8">{{ organization.acronymDefinition }}</dd>
     </dl>
+    {% if organization.address is not empty %}
+        <hr/>
+        <dl class="row">
+            <dt class="col-sm-4 text-truncate text-right">{{ 'form.organization.field.address'| trans }}</dt>
+            <dd class="col-sm-8">
+                {% if organization.address.postOfficeBoxNumber is not empty -%}
+                    {{ organization.address.postOfficeBoxNumber }}<br/>
+                {%- endif %}
+                {% if organization.address.streetAddress is not empty -%}
+                    {{ organization.address.streetAddress }}<br/>
+                {%- endif %}
+                {% if organization.address.postalCode is not empty or organization.address.locality -%}
+                    {{ organization.address.postalCode }} {{ organization.address.locality }}<br/>
+                {%- endif %}
+                {% if organization.address.country is not empty -%}
+                    {{ organization.address.country.french }}
+                {%- endif %}
+            </dd>
+        </dl>
+    {% else %}
+        <p class="alert alert-info">Aucune adresse n’a été renseignée pour cette organisation.</p>
+    {% endif %}
+
 {% endblock content_settings %}
 
 {% block content_action %}{% include 'organization/_content-action.html.twig' %}{% endblock content_action %}

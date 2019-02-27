@@ -72,6 +72,8 @@ class PostalAddress implements EntityInterface, InformationInterface
      * @Assert\Length(max="255")
      *
      * @ORM\Column(type="string", length=255, nullable=true, name="pad_locality", options={"comment":"Locality"})
+     *
+     * @Gedmo\Versioned
      */
     private $locality;
 

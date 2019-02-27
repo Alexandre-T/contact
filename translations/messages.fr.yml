@@ -74,6 +74,11 @@ entity:
       password: 'Nouveau mot de passe'
       legal-name: 'Nouveau nom juridique'
       acronym-definition: 'Nouvelle définition'
+      streetAddress: 'Nouvelle rue'
+      postal-box-office-number: 'Nouveau complément'
+      postal-code: 'Nouveau code postal'
+      country: 'Nouveau pays'
+      locality: 'Nouvelle ville'
     date: 'Date'
     explanation: 'Cet onglet rassemble toutes les modifications qui ont eu lieu pour la fiche en cours.'
     new-value: 'Nouvelle(s) valeur(s)'
@@ -92,6 +97,8 @@ entity:
     deleted %name%: 'Cette organisation n’est plus référencée dans l’application.'
     updated %name%: 'Les modifications sur cette organisation ont été correctement enregistrées.'
     created %name%: 'Cette nouvelle organisation a été correctement enregistrée.'
+  addressLog:
+    title: 'Changements d’adresse'
 
 form:
   address:
@@ -143,6 +150,18 @@ form:
       label: 'Entrez le nom de l’organisation'
       legal-name: 'Entrez le nom juridique de l’organisation, pour une entreprise il s’agit du nom de la SA.'
 
+home:
+  card1:
+    description: 'L’application « Contact » recense tous vos contacts, leurs organisations pour faciliter la communication du Cerema.'
+    text: 'Contact'
+  card2:
+    quote: '« Ce qui est simple, marche ! »'
+    quoted: 'Alexandre'
+    description: 'Une application simple, sans fioriture, avec des aides à la recherche pour retrouver vos correspondants externes rapidement et les contacter par courrier, par mail, par portable ou sur leur fixe.'
+    text: 'Simple'
+  card3:
+    description: 'Fini les cartes de visite perdues, les contacts oubliés, les tableurs que tout le monde manipulent à sa guise.'
+    text: 'Tout sous la main'
 
 message:
   security:
@@ -209,3 +228,10 @@ title:
       show %name%: 'Fiche de l’utilisateur « %name% »'
       create: 'Création d’un nouvel utilisateur'
     register: 'Inscription'
+img:
+  business-card:
+    alt: 'Homme tendant une carte de visite'
+  contact:
+    alt: 'Homme cliquant sur un bouton pour envoyer un mail'
+  laptop:
+    alt: 'Femme prenant des notes dans une salle de réunion sur son portable'

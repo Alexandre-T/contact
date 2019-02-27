@@ -47,7 +47,7 @@ class OrganizationType extends AbstractType
                 'help' => 'form.organization.help.label',
                 'attr' => [
                     'autofocus' => true,
-                ]
+                ],
             ])
             ->add('legalName', null, [
                 'label' => 'form.organization.field.legal-name',
@@ -57,8 +57,8 @@ class OrganizationType extends AbstractType
                 'label' => 'form.organization.field.acronym-definition',
                 'help' => 'form.organization.help.acronym-definition',
             ])
-            ->add('address', PostalAddressType::class,[
-                'label' => 'form.organization.field.address'
+            ->add('address', PostalAddressType::class, [
+                'label' => 'form.organization.field.address',
             ])
         ;
     }

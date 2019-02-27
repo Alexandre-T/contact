@@ -29,16 +29,16 @@ class PostalAddressType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('streetAddress', null, [
                 'label' => 'form.address.field.street',
-                'help' => 'form.address.help.street'
+                'help' => 'form.address.help.street',
             ])
-            ->add('postOfficeBoxNumber', null,[
+            ->add('postOfficeBoxNumber', null, [
                 'label' => 'form.address.field.box',
                 'help' => 'form.address.help.box',
             ])

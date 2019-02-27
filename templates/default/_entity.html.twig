@@ -73,7 +73,6 @@
                                                 <td headers="logs-value" class="row{{ log.version }}">
                                                     {% block log %}
                                                         <dl class="row">
-                                                            {% dump(log.data) %}
                                                             {% if log.data.acronymDefinition is defined %}
                                                                 <dt class="col-sm-6 text-right">{{ 'entity.log.data.acronym-definition' | trans }}</dt>
                                                                 <dd class="col-sm-6">{{ log.data.acronymDefinition }}</dd>
@@ -100,6 +99,70 @@
                                                             {% endif %}
                                                         </dl>
                                                     {% endblock log %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            {% endif %}
+                            {% if addressLogs is defined and addressLogs | length > 0 %}
+                                {% dump(addressLogs) %}
+                                <div class="panel panel-default" id="default-logs">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">{{ 'entity.addressLog.title' | trans }}</h3>
+                                    </div>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" id="logs-version"
+                                                scope="col">{{ 'entity.log.version' | trans }}</th>
+                                            <th class="text-center" id="logs-action"
+                                                scope="col">{{ 'entity.log.action' | trans }}</th>
+                                            <th class="text-center" id="logs-date"
+                                                scope="col">{{ 'entity.log.date' | trans }}</th>
+                                            <th class="text-center" id="logs-user"
+                                                scope="col">{{ 'entity.log.user' | trans }}</th>
+                                            <th class="text-center" id="logs-value"
+                                                scope="col">{{ 'entity.log.new-value' | trans }}</th>
+                                        </tr>
+                                        </thead>
+                                        {% for log in addressLogs %}
+                                            <tr>
+                                                <td headers="logs-version"
+                                                    class="text-center col-sm-1 row{{ log.version }}">{{ log.version }}</td>
+                                                <td headers="logs-action"
+                                                    class="text-center col-sm-1 row{{ log.version }}">
+                                                    <span class="label label-default">{{ ('entity.log.actions.' ~ log.action) | trans }}</span>
+                                                </td>
+                                                <td headers="logs-date"
+                                                    class="text-center col-sm-2 row{{ log.version }}">{{ log.loggedAt | localizeddate('medium','medium') }}</td>
+                                                <td headers="logs-user"
+                                                    class="text-center col-sm-2 row{{ log.version }}">{{ log.username }}</td>
+                                                <td headers="logs-value" class="row{{ log.version }}">
+                                                    {% block addressLog %}
+                                                        <dl class="row">
+                                                            {% if log.data.streetAddress is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.streetAddress' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.streetAddress }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.postalBoxOfficeNumber is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.postal-box-office-number' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.postalBoxOfficeNumber }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.postalCode is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.postal-code' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.postalCode }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.locality is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.locality' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.locality }}</dd>
+                                                            {% endif %}
+                                                            {% if log.data.country is defined %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.country' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.country.id }}</dd>
+                                                            {% endif %}
+                                                        </dl>
+                                                    {% endblock addressLog %}
                                                 </td>
                                             </tr>
                                         {% endfor %}

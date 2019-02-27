@@ -15,10 +15,10 @@
 </head>
 {% block body %}
 <body>
-    {% include 'navbar.html.twig' %}
-    {% include 'flash.html.twig' %}
+    {% include '_navbar.html.twig' %}
+    {% include '_flash.html.twig' %}
     <div class="container mt-3">
-        {% block headline %}<h1>Contacts</h1>{% endblock headline %}
+        {% block headline %}{% endblock headline %}
         {% block content_breadcrumb %}{% endblock content_breadcrumb %}
         {% block container %}{% endblock container %}
     </div>
@@ -27,10 +27,6 @@
 {% endblock %}
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
-
-    <!-- Renders app.js & a webpack runtime.js file
-        <script src="/build/runtime.js"></script>
-        <script src="/build/app.js"></script> -->
 {% endblock %}
 </body>
 </html>
