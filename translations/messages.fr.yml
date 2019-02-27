@@ -86,8 +86,9 @@ entity:
     user: 'Auteur'
     version: 'Version'
   tab:
+    address-logs: 'Changements d’adresse'
     general: 'Généralités'
-    logs: 'Journal de bord'
+    logs: 'Historique des modifications'
     informations: 'Informations'
   user:
     created %name%: 'L’utilisateur « %name% » a été créé avec succès.'
