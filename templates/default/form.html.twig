@@ -1,7 +1,7 @@
 {% use 'bootstrap_4_horizontal_layout.html.twig' %}
 
 {% block form_row -%}
-    {%- if (label is defined and label == 'form.organization.field.address') -%}
+    {%- if (label is defined and 'field.address' in label) -%}
         {{ block('form_address') }}
     {%- else -%}
         {{ parent() }}
