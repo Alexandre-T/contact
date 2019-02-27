@@ -18,6 +18,8 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -75,7 +77,7 @@ class Organization implements EntityInterface, InformationInterface
      *
      * @var PostalAddress
      *
-     * @ORM\OneToOne(targetEntity="PostalAddress",cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="PostalAddress",cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(name="address_id", referencedColumnName="pad_id", onDelete="CASCADE", unique=true)
      */
     private $address;
@@ -83,7 +85,9 @@ class Organization implements EntityInterface, InformationInterface
     /**
      * Creation datetime.
      *
-     * @var DateTime
+     * @var dateTime
+     *
+     * FIXME verify the default value of nullable and remove unnecessary calls
      *
      * @ORM\Column(type="datetime", nullable=false, name="org_created", options={"comment":"Creation datetime"})
      * @Gedmo\Timestampable(on="create")
@@ -139,6 +143,35 @@ class Organization implements EntityInterface, InformationInterface
      * @Gedmo\Timestampable(on="update")
      */
     private $updated;
+
+    /**
+     * Alumni.
+     *
+     * (Anciens élèves)
+     *
+     * @var Person[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Person", mappedBy="alumnus")
+     */
+    private $alumni;
+
+    /**
+     * Members of this organization.
+     *
+     * @var Person[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Person", mappedBy="memberOf")
+     */
+    private $members;
+
+    /**
+     * Organization constructor.
+     */
+    public function __construct()
+    {
+        $this->alumni = new ArrayCollection();
+        $this->members = new ArrayCollection();
+    }
 
     /**
      * Identifier getter.
@@ -242,6 +275,100 @@ class Organization implements EntityInterface, InformationInterface
     public function setLegalName(?string $legalName): self
     {
         $this->legalName = $legalName;
+
+        return $this;
+    }
+
+    /**
+     * Alumni getter.
+     *
+     * @return Collection|Person[]
+     */
+    public function getAlumni(): Collection
+    {
+        return $this->alumni;
+    }
+
+    /**
+     * Add an alumnus.
+     *
+     * @param Person $alumnus
+     *
+     * @return Organization
+     */
+    public function addAlumnus(Person $alumnus): self
+    {
+        if (!$this->alumni->contains($alumnus)) {
+            $this->alumni[] = $alumnus;
+            $alumnus->setAlumnus($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove an alumnus.
+     *
+     * @param Person $alumnus
+     *
+     * @return Organization
+     */
+    public function removeAlumnus(Person $alumnus): self
+    {
+        if ($this->alumni->contains($alumnus)) {
+            $this->alumni->removeElement($alumnus);
+            // set the owning side to null (unless already changed)
+            if ($alumnus->getAlumnus() === $this) {
+                $alumnus->setAlumnus(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Members getter.
+     *
+     * @return Collection|Person[]
+     */
+    public function getMembers(): Collection
+    {
+        return $this->members;
+    }
+
+    /**
+     * Add an member of organization.
+     *
+     * @param Person $memberOf
+     *
+     * @return Organization
+     */
+    public function addMemberOf(Person $memberOf): self
+    {
+        if (!$this->members->contains($memberOf)) {
+            $this->members[] = $memberOf;
+            $memberOf->setMemberOf($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove an memberOf.
+     *
+     * @param Person $memberOf
+     *
+     * @return Organization
+     */
+    public function removeMemberOf(Person $memberOf): self
+    {
+        if ($this->members->contains($memberOf)) {
+            $this->members->removeElement($memberOf);
+            // set the owning side to null (unless already changed)
+            if ($memberOf->getMemberOf() === $this) {
+                $memberOf->setMemberOf(null);
+            }
+        }
 
         return $this;
     }
