@@ -87,7 +87,7 @@ class Organization implements EntityInterface, InformationInterface
      *
      * @var dateTime
      *
-     * FIXME verify the default value of nullable and remove unnecessary calls
+     * TODO verify the default value of nullable and remove unnecessary calls
      *
      * @ORM\Column(type="datetime", nullable=false, name="org_created", options={"comment":"Creation datetime"})
      * @Gedmo\Timestampable(on="create")

@@ -65,7 +65,7 @@ class Person implements EntityInterface, InformationInterface
      */
     private $id;
 
-    //TODO add this columns : Tel, Smartphone,
+    //TODO add these columns : Tel, Smartphone
     //TODO add as trait Facebook, Instagram, LinkedIn, Twitter
 
     /**
