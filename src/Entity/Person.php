@@ -108,7 +108,7 @@ class Person implements EntityInterface, InformationInterface
      *
      * @var DateTimeInterface
      *
-     * @ORM\Column(type="datetime", nullable=false, name="per_created", options={"comment":"Creation datetime"})
+     * @ORM\Column(type="datetime", name="per_created", options={"comment":"Creation datetime"})
      * @Gedmo\Timestampable(on="create")
      */
     private $created;
@@ -231,7 +231,7 @@ class Person implements EntityInterface, InformationInterface
      *
      * @var DateTimeInterface
      *
-     * @ORM\Column(type="datetime", nullable=false, name="org_updated", options={"comment":"Update datetime"})
+     * @ORM\Column(type="datetime", name="org_updated", options={"comment":"Update datetime"})
      *
      * @Gedmo\Timestampable(on="update")
      */

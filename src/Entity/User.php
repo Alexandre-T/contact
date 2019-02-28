@@ -72,7 +72,7 @@ class User implements EntityInterface, InformationInterface, LabelInterface, Use
      * @Assert\NotBlank()
      * @Assert\Length(max="32")
      *
-     * @ORM\Column(type="string", unique=true, length=32, nullable=false, name="usr_label", options={"unsigned":true})
+     * @ORM\Column(type="string", unique=true, length=32, name="usr_label", options={"unsigned":true})
      * @Gedmo\Versioned
      */
     private $label;
@@ -87,7 +87,7 @@ class User implements EntityInterface, InformationInterface, LabelInterface, Use
      * @Assert\NotNull()
      * @Assert\Email()
      *
-     * @ORM\Column(type="string", unique=true, length=255, nullable=false, name="usr_mail")
+     * @ORM\Column(type="string", unique=true, length=255, name="usr_mail")
      * @Gedmo\Versioned
      */
     private $mail;
@@ -107,7 +107,7 @@ class User implements EntityInterface, InformationInterface, LabelInterface, Use
      *
      * @var DateTime
      *
-     * @ORM\Column(type="datetime", nullable=false, name="usr_created", options={"comment":"Creation datetime"})
+     * @ORM\Column(type="datetime", name="usr_created", options={"comment":"Creation datetime"})
      * @Gedmo\Timestampable(on="create")
      */
     private $created;
@@ -127,7 +127,7 @@ class User implements EntityInterface, InformationInterface, LabelInterface, Use
      *
      * @var DateTime
      *
-     * @ORM\Column(type="datetime", nullable=false, name="usr_updated", options={"comment":"Update datetime"})
+     * @ORM\Column(type="datetime", name="usr_updated", options={"comment":"Update datetime"})
      * @Gedmo\Timestampable(on="update")
      */
     private $updated;

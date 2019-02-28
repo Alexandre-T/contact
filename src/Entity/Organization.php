@@ -87,9 +87,7 @@ class Organization implements EntityInterface, InformationInterface
      *
      * @var dateTime
      *
-     * TODO verify the default value of nullable and remove unnecessary calls
-     *
-     * @ORM\Column(type="datetime", nullable=false, name="org_created", options={"comment":"Creation datetime"})
+     * @ORM\Column(type="datetime", name="org_created", options={"comment":"Creation datetime"})
      * @Gedmo\Timestampable(on="create")
      */
     private $created;
@@ -138,7 +136,7 @@ class Organization implements EntityInterface, InformationInterface
      *
      * @var DateTime
      *
-     * @ORM\Column(type="datetime", nullable=false, name="org_updated", options={"comment":"Update datetime"})
+     * @ORM\Column(type="datetime", name="org_updated", options={"comment":"Update datetime"})
      *
      * @Gedmo\Timestampable(on="update")
      */
