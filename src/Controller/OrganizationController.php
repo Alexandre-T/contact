@@ -216,7 +216,7 @@ class OrganizationController extends AbstractController
             ->setMethod('DELETE')
             ->add('delete', SubmitType::class, [
                 'attr' => ['class' => 'btn-danger confirm-delete'],
-                //FIXME add icon
+                //TODO add icon
                 //'icon' => 'trash-o',
                 'label' => 'modal.entity.delete.yes',
             ])
