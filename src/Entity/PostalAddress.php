@@ -32,6 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     indexes={
  *          @ORM\Index(name="ndx_postal_code", columns={"pad_code"}),
  *          @ORM\Index(name="ndx_postal_country", columns={"country_id"}),
+ *          @ORM\Index(name="ndx_postal_creator", columns={"creator_id"}),
  *          @ORM\Index(name="ndx_postal_locality", columns={"pad_locality"}),
  *     }
  * )

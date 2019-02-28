@@ -19,7 +19,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use DateTime;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Serializable;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -101,36 +100,6 @@ class User implements EntityInterface, InformationInterface, LabelInterface, Use
      * @Gedmo\Versioned
      */
     private $password;
-
-    /**
-     * Creation datetime.
-     *
-     * @var DateTime
-     *
-     * @ORM\Column(type="datetime", name="usr_created", options={"comment":"Creation datetime"})
-     * @Gedmo\Timestampable(on="create")
-     */
-    private $created;
-
-    /**
-     * User creator.
-     *
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="User", fetch="EAGER")
-     * @ORM\JoinColumn(name="creator_id", referencedColumnName="usr_id")
-     */
-    private $creator;
-
-    /**
-     * Last update datetime.
-     *
-     * @var DateTime
-     *
-     * @ORM\Column(type="datetime", name="usr_updated", options={"comment":"Update datetime"})
-     * @Gedmo\Timestampable(on="update")
-     */
-    private $updated;
 
     /**
      * Roles of this user.

@@ -22,13 +22,40 @@ use DateTimeInterface;
 /**
  * Entity trait.
  * This trait implements Entity and information interfaces.
- *
- * @property DateTimeInterface created
- * @property DateTimeInterface updated
- * @property User creator
  */
 trait EntityTrait
 {
+    /**
+     * Creation datetime.
+     *
+     * @var DateTimeInterface
+     *
+     * @ORM\Column(type="datetime", name="ent_created", options={"comment":"Creation datetime"})
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $created;
+
+    /**
+     * Entity creator.
+     *
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", fetch="EAGER")
+     * @ORM\JoinColumn(name="creator_id", referencedColumnName="usr_id")
+     */
+    private $creator;
+
+    /**
+     * Last update datetime.
+     *
+     * @var DateTimeInterface
+     *
+     * @ORM\Column(type="datetime", name="ent_updated", options={"comment":"Update datetime"})
+     *
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updated;
+
     /**
      * Creation date time getter.
      *

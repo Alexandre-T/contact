@@ -17,7 +17,6 @@
 
 namespace App\Entity;
 
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -83,26 +82,6 @@ class Organization implements EntityInterface, InformationInterface
     private $address;
 
     /**
-     * Creation datetime.
-     *
-     * @var dateTime
-     *
-     * @ORM\Column(type="datetime", name="org_created", options={"comment":"Creation datetime"})
-     * @Gedmo\Timestampable(on="create")
-     */
-    private $created;
-
-    /**
-     * User creator.
-     *
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="User", fetch="EAGER")
-     * @ORM\JoinColumn(name="creator_id", referencedColumnName="usr_id")
-     */
-    private $creator;
-
-    /**
      * Organization label.
      *
      * @var string
@@ -130,17 +109,6 @@ class Organization implements EntityInterface, InformationInterface
      * @Gedmo\Versioned
      */
     private $legalName;
-
-    /**
-     * Last update datetime.
-     *
-     * @var DateTime
-     *
-     * @ORM\Column(type="datetime", name="org_updated", options={"comment":"Update datetime"})
-     *
-     * @Gedmo\Timestampable(on="update")
-     */
-    private $updated;
 
     /**
      * Alumni.

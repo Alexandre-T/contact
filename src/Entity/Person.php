@@ -17,7 +17,6 @@
 
 namespace App\Entity;
 
-use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -102,28 +101,6 @@ class Person implements EntityInterface, InformationInterface
      * @Gedmo\Versioned()
      */
     private $birthName;
-
-    /**
-     * Creation datetime.
-     *
-     * @var DateTimeInterface
-     *
-     * @ORM\Column(type="datetime", name="per_created", options={"comment":"Creation datetime"})
-     * @Gedmo\Timestampable(on="create")
-     */
-    private $created;
-
-    /**
-     * User creator.
-     *
-     * FIXME move these properties to Trait!
-     *
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="User", fetch="EAGER")
-     * @ORM\JoinColumn(name="creator_id", referencedColumnName="usr_id")
-     */
-    private $creator;
 
     /**
      * Email of person.
@@ -223,19 +200,6 @@ class Person implements EntityInterface, InformationInterface
      * @Gedmo\Versioned()
      */
     private $url;
-
-    /**
-     * Last update datetime.
-     *
-     * FIXME move this to entity trait too and accept name as ent_updated.
-     *
-     * @var DateTimeInterface
-     *
-     * @ORM\Column(type="datetime", name="org_updated", options={"comment":"Update datetime"})
-     *
-     * @Gedmo\Timestampable(on="update")
-     */
-    private $updated;
 
     /**
      * Return available genders.
