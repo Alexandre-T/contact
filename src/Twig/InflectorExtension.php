@@ -17,6 +17,7 @@
 
 namespace App\Twig;
 
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigTest;
@@ -29,6 +30,23 @@ use Twig\TwigTest;
 class InflectorExtension extends AbstractExtension
 {
     /**
+     * Translator.
+     *
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
+    /**
+     * Constructor sets the translator.
+     *
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
+    /**
      * List of filters.
      *
      * @return array
@@ -40,6 +58,7 @@ class InflectorExtension extends AbstractExtension
             // parameter: ['is_safe' => ['html']]
             // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
             new TwigFilter('camelize', [$this, 'camelizeFilter'], ['is_safe' => ['html']]),
+            new TwigFilter('emptyize', [$this, 'emptyizeFilter'], ['is_safe' => ['html']]),
             new TwigFilter('hyphenize', [$this, 'hyphenizeFilter'], ['is_safe' => ['html']]),
             new TwigFilter('titleize', [$this, 'titleizeFilter'], ['is_safe' => ['html']]),
             new TwigFilter('underscorize', [$this, 'underscorizeFilter'], ['is_safe' => ['html']]),
@@ -87,6 +106,18 @@ class InflectorExtension extends AbstractExtension
     public function camelizeFilter(?string $word): string
     {
         return str_replace(' ', '', ucwords(preg_replace('/[^A-Z^a-z^0-9]+/', ' ', $word)));
+    }
+
+    /**
+     * Returns word or not available text if empty.
+     *
+     * @param string|null $word Word
+     *
+     * @return string UpperCamelCasedWord
+     */
+    public function emptyizeFilter(?string $word): string
+    {
+        return empty($word) ? $this->translator->trans('empty') : $word;
     }
 
     /**

@@ -93,7 +93,7 @@ entity:
       member-of: 'Nouvelle organisation'
       nationality: 'Nouvelle nationalité'
       password: 'Nouveau mot de passe'
-      postal-box-office-number: 'Nouveau complément'
+      post-office-box-number: 'Nouveau complément'
       postal-code: 'Nouveau code postal'
       roles: 'Nouveaux privilèges'
       street-address: 'Nouvelle rue'
@@ -297,3 +297,4 @@ img:
     alt: 'Femme prenant des notes dans une salle de réunion sur son portable'
 
 none: 'Non renseigné'
+empty: '(Vide)'

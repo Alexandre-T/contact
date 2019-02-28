@@ -1,0 +1,27 @@
+<dl class="row">
+    {% for key, value in data %}
+        {% if value is array and value.id is defined %}
+            {% if value.id is not empty %}
+                <dt class="col-sm-6 text-right">{{ ('entity.log.data.' ~ key | hyphenize ) | trans }}</dt>
+                {# FIXME remplacer value #}
+                <dd class="col-sm-6">{{ value.id }}</dd>
+            {% endif %}
+        {% elseif key == 'password' %}
+            <dt class="col-sm-6 text-right">{{ 'entity.log.data.password' | trans }}</dt>
+            <dd class="col-sm-6">&bull;&bull;&bull;&bull;&bull;</dd>
+        {% elseif key == 'gender' and not(value is empty and creating) %}
+            <dt class="col-sm-6 text-right">{{ 'entity.log.data.gender' | trans }}</dt>
+            <dd class="col-sm-6">{{ log.data.gender |gender }}</dd>
+        {% elseif key == 'roles' %}
+            <dt class="col-sm-6 text-right">{{ 'entity.log.data.roles' | trans }}</dt>
+            <dd class="col-sm-6">{{ log.data.roles | roles }}</dd>
+        {#{% elseif key == 'alumnus' or key == 'memberOf' %}#}
+        {#{% elseif key == 'country' or key == 'nationality' %}#}
+        {% elseif not(value is empty and creating) %}
+            {# TODO add a crypt extension to display email #}
+            {# FIXME add an empty filter to display the not available data #}
+            <dt class="col-sm-6 text-right">{{ ('entity.log.data.' ~ key | hyphenize ) | trans }}</dt>
+            <dd class="col-sm-6">{{ value | emptyize }}</dd>
+        {% endif %}
+    {% endfor %}
+</dl>
