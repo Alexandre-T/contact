@@ -17,19 +17,22 @@
                     </li>
                     {% block content_tabs_header %}{% endblock content_tabs_header %}
                     <li class="nav-item">
-                        <a class="nav-link {{ logs is not defined ? 'disabled' }}" href="#logs" aria-controls="profile" role="tab" data-toggle="tab">
+                        <a class="nav-link {{ logs is not defined ? 'disabled' }}" href="#logs" aria-controls="profile"
+                           role="tab" data-toggle="tab">
                             <span class="fa fa-file-archive"></span>
                             {{ 'entity.tab.logs' | trans }}
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ addressLogs is not defined ? 'disabled' }}" href="#addressLogs" aria-controls="profile" role="tab" data-toggle="tab">
+                        <a class="nav-link {{ addressLogs is not defined ? 'disabled' }}" href="#addressLogs"
+                           aria-controls="profile" role="tab" data-toggle="tab">
                             <span class="fa fa-home"></span>
                             {{ 'entity.tab.address-logs' | trans }}
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ information is not defined ? 'disabled' }}" href="#informations" aria-controls="messages" role="tab" data-toggle="tab">
+                        <a class="nav-link {{ information is not defined ? 'disabled' }}" href="#informations"
+                           aria-controls="messages" role="tab" data-toggle="tab">
                             <span class="fa fa-clock"></span>
                             {{ 'entity.tab.informations' | trans }}
                         </a>
@@ -44,177 +47,139 @@
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="logs">
                         {% block content_logs %}
-                            {% if logs is defined and logs | length > 0 %}
-                                <div class="panel panel-default" id="default-logs">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">{{ 'entity.log.title' | trans }}</h3>
-                                    </div>
-                                    <table class="table">
-                                        <thead>
+                        {# TODO put this code in a sub template #}
+                        {% if logs is defined and logs | length > 0 %}
+                            <div class="panel panel-default" id="default-logs">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{{ 'entity.log.title' | trans }}</h3>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" id="logs-version"
+                                            scope="col">{{ 'entity.log.version' | trans }}</th>
+                                        <th class="text-center" id="logs-action"
+                                            scope="col">{{ 'entity.log.action' | trans }}</th>
+                                        <th class="text-center" id="logs-date"
+                                            scope="col">{{ 'entity.log.date' | trans }}</th>
+                                        <th class="text-center" id="logs-user"
+                                            scope="col">{{ 'entity.log.user' | trans }}</th>
+                                        <th class="text-center" id="logs-value"
+                                            scope="col">{{ 'entity.log.new-value' | trans }}</th>
+                                    </tr>
+                                    </thead>
+                                    {% for log in logs %}
                                         <tr>
-                                            <th class="text-center" id="logs-version"
-                                                scope="col">{{ 'entity.log.version' | trans }}</th>
-                                            <th class="text-center" id="logs-action"
-                                                scope="col">{{ 'entity.log.action' | trans }}</th>
-                                            <th class="text-center" id="logs-date"
-                                                scope="col">{{ 'entity.log.date' | trans }}</th>
-                                            <th class="text-center" id="logs-user"
-                                                scope="col">{{ 'entity.log.user' | trans }}</th>
-                                            <th class="text-center" id="logs-value"
-                                                scope="col">{{ 'entity.log.new-value' | trans }}</th>
-                                        </tr>
-                                        </thead>
-                                        {% for log in logs %}
-                                            <tr>
-                                                <td headers="logs-version"
-                                                    class="text-center col-sm-1 row{{ log.version }}">{{ log.version }}</td>
-                                                <td headers="logs-action"
-                                                    class="text-center col-sm-1 row{{ log.version }}">
-                                                    <span class="label label-default">{{ ('entity.log.actions.' ~ log.action) | trans }}</span>
-                                                </td>
-                                                <td headers="logs-date"
-                                                    class="text-center col-sm-2 row{{ log.version }}">{{ log.loggedAt | localizeddate('medium','medium') }}</td>
-                                                <td headers="logs-user"
-                                                    class="text-center col-sm-2 row{{ log.version }}">{{ log.username }}</td>
-                                                <td headers="logs-value" class="row{{ log.version }}">
-                                                    {% block log %}
-                                                        <dl class="row">
-                                                            {% dump(log) %}
-                                                            {% if log.data.acronymDefinition is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.acronym-definition' | trans }}</dt>
-                                                                {# FIXME add an empty filter to display the not available data #}
-                                                                <dd class="col-sm-6">{{ log.data.acronymDefinition }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.alumnus is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.alumnus' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.alumnus }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.birthName is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.birthName' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.birthName }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.email is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.mail' | trans }}</dt>
-                                                                {# TODO add a crypt extension to display email #}
-                                                                <dd class="col-sm-6">{{ log.data.email }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.familyName is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.family-name' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.familyName }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.gender is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.gender' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.gender |gender }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.givenName is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.givenName' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.givenName }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.jobTitle is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.job-title' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.jobTitle }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.label is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.label' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.label }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.legalName is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.legal-name' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.legalName }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.mail is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.mail' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.mail }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.memberOf is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.member-of' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.memberOf }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.password is defined %}
+                                            <td headers="logs-version"
+                                                class="text-center col-sm-1 row{{ log.version }}">{{ log.version }}</td>
+                                            <td headers="logs-action"
+                                                class="text-center col-sm-1 row{{ log.version }}">
+                                                <span class="label label-default">{{ ('entity.log.actions.' ~ log.action) | trans }}</span>
+                                            </td>
+                                            <td headers="logs-date"
+                                                class="text-center col-sm-2 row{{ log.version }}">{{ log.loggedAt | localizeddate('medium','medium') }}</td>
+                                            <td headers="logs-user"
+                                                class="text-center col-sm-2 row{{ log.version }}">{{ log.username }}</td>
+                                            <td headers="logs-value" class="row{{ log.version }}">
+                                                {% block log %}
+                                                    {#TODO put this code in a sub template. #}
+                                                    <dl class="row">
+                                                        {% for key, value in log.data %}
+                                                            {% if value is array and value.id is defined and value.id is not empty %}
+                                                                <dt class="col-sm-6 text-right">{{ ('entity.log.data.' ~ key | hyphenize ) | trans }}</dt>
+                                                                {# FIXME remplacer value #}
+                                                                <dd class="col-sm-6">{{ value.id }}</dd>
+                                                            {% elseif key == 'password' %}
                                                                 <dt class="col-sm-6 text-right">{{ 'entity.log.data.password' | trans }}</dt>
                                                                 <dd class="col-sm-6">&bull;&bull;&bull;&bull;&bull;</dd>
-                                                            {% endif %}
-                                                            {% if log.data.roles is defined %}
+                                                            {% elseif key == 'gender' %}
+                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.gender' | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ log.data.gender |gender }}</dd>
+                                                            {% elseif key == 'roles' %}
                                                                 <dt class="col-sm-6 text-right">{{ 'entity.log.data.roles' | trans }}</dt>
                                                                 <dd class="col-sm-6">{{ log.data.roles | roles }}</dd>
+                                                            {% elseif key == 'alumnus' or key == 'memberOf' %}
+                                                            {% elseif key == 'country' or key == 'nationality' %}
+                                                            {% else %}
+                                                                {# TODO add a crypt extension to display email #}
+                                                                {# FIXME add an empty filter to display the not available data #}
+                                                                <dt class="col-sm-6 text-right">{{ ('entity.log.data.' ~ key | hyphenize ) | trans }}</dt>
+                                                                <dd class="col-sm-6">{{ value }}</dd>
                                                             {% endif %}
-                                                            {% if log.data.url is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.url' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.url }}</dd>
-                                                            {% endif %}
-                                                        </dl>
-                                                    {% endblock log %}
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </table>
-                                </div>
-                            {% endif %}
+                                                        {% endfor %}
+                                                    </dl>
+                                                {% endblock log %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        {% endif %}
                     </div>
                     <div role="tabpanel" class="tab-pane" id="addressLogs">
-                            {% if addressLogs is defined and addressLogs | length > 0 %}
-                                <div class="panel panel-default" id="default-logs">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title">{{ 'entity.addressLog.title' | trans }}</h3>
-                                    </div>
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th class="text-center" id="logs-version"
-                                                scope="col">{{ 'entity.log.version' | trans }}</th>
-                                            <th class="text-center" id="logs-action"
-                                                scope="col">{{ 'entity.log.action' | trans }}</th>
-                                            <th class="text-center" id="logs-date"
-                                                scope="col">{{ 'entity.log.date' | trans }}</th>
-                                            <th class="text-center" id="logs-user"
-                                                scope="col">{{ 'entity.log.user' | trans }}</th>
-                                            <th class="text-center" id="logs-value"
-                                                scope="col">{{ 'entity.log.new-value' | trans }}</th>
-                                        </tr>
-                                        </thead>
-                                        {% for log in addressLogs %}
-                                            <tr>
-                                                <td headers="logs-version"
-                                                    class="text-center col-sm-1 row{{ log.version }}">{{ log.version }}</td>
-                                                <td headers="logs-action"
-                                                    class="text-center col-sm-1 row{{ log.version }}">
-                                                    <span class="label label-default">{{ ('entity.log.actions.' ~ log.action) | trans }}</span>
-                                                </td>
-                                                <td headers="logs-date"
-                                                    class="text-center col-sm-2 row{{ log.version }}">{{ log.loggedAt | localizeddate('medium','medium') }}</td>
-                                                <td headers="logs-user"
-                                                    class="text-center col-sm-2 row{{ log.version }}">{{ log.username }}</td>
-                                                <td headers="logs-value" class="row{{ log.version }}">
-                                                    {% block addressLog %}
-                                                        <dl class="row">
-                                                            {% if log.data.streetAddress is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.streetAddress' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.streetAddress }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.postalBoxOfficeNumber is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.postal-box-office-number' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.postalBoxOfficeNumber }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.postalCode is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.postal-code' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.postalCode }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.locality is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.locality' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.locality }}</dd>
-                                                            {% endif %}
-                                                            {% if log.data.country is defined %}
-                                                                <dt class="col-sm-6 text-right">{{ 'entity.log.data.country' | trans }}</dt>
-                                                                <dd class="col-sm-6">{{ log.data.country.id }}</dd>
-                                                            {% endif %}
-                                                        </dl>
-                                                    {% endblock addressLog %}
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </table>
+                        {% if addressLogs is defined and addressLogs | length > 0 %}
+                            <div class="panel panel-default" id="default-logs">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{{ 'entity.addressLog.title' | trans }}</h3>
                                 </div>
-                            {% endif %}
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" id="logs-version"
+                                            scope="col">{{ 'entity.log.version' | trans }}</th>
+                                        <th class="text-center" id="logs-action"
+                                            scope="col">{{ 'entity.log.action' | trans }}</th>
+                                        <th class="text-center" id="logs-date"
+                                            scope="col">{{ 'entity.log.date' | trans }}</th>
+                                        <th class="text-center" id="logs-user"
+                                            scope="col">{{ 'entity.log.user' | trans }}</th>
+                                        <th class="text-center" id="logs-value"
+                                            scope="col">{{ 'entity.log.new-value' | trans }}</th>
+                                    </tr>
+                                    </thead>
+                                    {% for log in addressLogs %}
+                                        <tr>
+                                            <td headers="logs-version"
+                                                class="text-center col-sm-1 row{{ log.version }}">{{ log.version }}</td>
+                                            <td headers="logs-action"
+                                                class="text-center col-sm-1 row{{ log.version }}">
+                                                <span class="label label-default">{{ ('entity.log.actions.' ~ log.action) | trans }}</span>
+                                            </td>
+                                            <td headers="logs-date"
+                                                class="text-center col-sm-2 row{{ log.version }}">{{ log.loggedAt | localizeddate('medium','medium') }}</td>
+                                            <td headers="logs-user"
+                                                class="text-center col-sm-2 row{{ log.version }}">{{ log.username }}</td>
+                                            <td headers="logs-value" class="row{{ log.version }}">
+                                                {% block addressLog %}
+                                                    <dl class="row">
+                                                        {% if log.data.streetAddress is defined %}
+                                                            <dt class="col-sm-6 text-right">{{ 'entity.log.data.streetAddress' | trans }}</dt>
+                                                            <dd class="col-sm-6">{{ log.data.streetAddress }}</dd>
+                                                        {% endif %}
+                                                        {% if log.data.postalBoxOfficeNumber is defined %}
+                                                            <dt class="col-sm-6 text-right">{{ 'entity.log.data.postal-box-office-number' | trans }}</dt>
+                                                            <dd class="col-sm-6">{{ log.data.postalBoxOfficeNumber }}</dd>
+                                                        {% endif %}
+                                                        {% if log.data.postalCode is defined %}
+                                                            <dt class="col-sm-6 text-right">{{ 'entity.log.data.postal-code' | trans }}</dt>
+                                                            <dd class="col-sm-6">{{ log.data.postalCode }}</dd>
+                                                        {% endif %}
+                                                        {% if log.data.locality is defined %}
+                                                            <dt class="col-sm-6 text-right">{{ 'entity.log.data.locality' | trans }}</dt>
+                                                            <dd class="col-sm-6">{{ log.data.locality }}</dd>
+                                                        {% endif %}
+                                                        {% if log.data.country is defined %}
+                                                            <dt class="col-sm-6 text-right">{{ 'entity.log.data.country' | trans }}</dt>
+                                                            <dd class="col-sm-6">{{ log.data.country.id }}</dd>
+                                                        {% endif %}
+                                                    </dl>
+                                                {% endblock addressLog %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        {% endif %}
                         {% endblock content_logs %}
                     </div>
                     <div role="tabpanel" class="tab-pane" id="informations">
