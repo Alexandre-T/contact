@@ -46,9 +46,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @Gedmo\Loggable
  */
-class Person implements EntityInterface, InformationInterface
+class Person implements EntityInterface, InformationInterface, SocialInterface
 {
     use EntityTrait;
+    use SocialTrait;
 
     /**
      * Gender constants.

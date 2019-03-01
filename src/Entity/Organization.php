@@ -45,8 +45,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @UniqueEntity("label", message="error.organization.label.unique")
  */
-class Organization implements EntityInterface, InformationInterface
+class Organization implements EntityInterface, InformationInterface, SocialInterface
 {
+    use SocialTrait;
     use EntityTrait;
 
     /**
