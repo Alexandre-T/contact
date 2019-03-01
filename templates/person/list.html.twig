@@ -17,7 +17,7 @@
         <tr>
             <td headers="person-logo"><span class="fa fa-building"></span></td>
             <th id="person-label">
-                {{ knp_pagination_sortable(pagination, 'form.person.field.family-name' | trans, 'family')}}
+                {{ knp_pagination_sortable(pagination, 'form.person.field.label' | trans, 'label')}}
                 <span class="{{ faSort(pagination.isSorted('label'), direction, 'alpha') }}"></span>
             </th>
             <th id="person-legal">
@@ -33,7 +33,7 @@
                 {# TODO add a logo #}
                 <td headers="person-logo"><span class="fa fa-building fa-fw"></span></td>
                 <td headers="person-label">{{ person.label }}</td>
-                <td headers="person-legal">{{ person.legalName }}</td>
+                <td headers="person-legal">{{ person.jobTitle }}</td>
                 <td headers="user-actions">
                     <div class="btn-group-xs btn-group">
                         <a class="btn btn-default" title="{{ 'action.person.show.title' | trans }}"

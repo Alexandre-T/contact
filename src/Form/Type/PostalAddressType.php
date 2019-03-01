@@ -17,11 +17,9 @@
 
 namespace App\Form\Type;
 
-use App\Entity\Country;
 use App\Entity\PostalAddress;
-use App\Repository\CountryRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -50,14 +48,8 @@ class PostalAddressType extends AbstractType
                 'label' => 'form.address.field.locality',
                 'help' => 'form.address.help.locality',
             ])
-            //FIXME replace with a CountryType
-            ->add('country', EntityType::class, [
-                'class' => Country::class,
-                'query_builder' => function (CountryRepository $cr) {
-                    return $cr->createQueryBuilder('c')
-                        ->orderBy('c.french', 'ASC');
-                },
-                'choice_label' => 'french',
+            ->add('country', CountryType::class, [
+                'preferred_choices' => ['FR'],
                 'label' => 'form.address.field.country',
                 'help' => 'form.address.help.country',
             ])

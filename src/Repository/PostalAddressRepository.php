@@ -17,7 +17,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Country;
 use App\Entity\PostalAddress;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -43,25 +42,6 @@ class PostalAddressRepository extends ServiceEntityRepository
     }
 
     /**
-     * Find by country code.
-     *
-     * @param string $value
-     *
-     * @return PostalAddress[] Returns an array of PostalAddress objects
-     */
-    public function findByCountryCode(string $value)
-    {
-        return $this->createQueryBuilder('p')
-            ->innerJoin('p.country', 'country')
-            ->andWhere('country.alpha2 = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-    /**
      * Find by french departments.
      *
      * @param int $department
@@ -74,10 +54,9 @@ class PostalAddressRepository extends ServiceEntityRepository
         $sDpt = sprintf('%02d', $department).'%';
         $qb = $this->createQueryBuilder('p');
 
-        return $qb->innerJoin('p.country', 'country')
-            ->andWhere('country.alpha2 = :country')
+        return $qb->andWhere('p.country = :country')
             ->andWhere($qb->expr()->like('p.postalCode', ':department'))
-            ->setParameter('country', Country::FRANCE)
+            ->setParameter('country', 'FR')
             ->setParameter('department', $sDpt)
             ->orderBy('p.locality', 'ASC')
             ->getQuery()

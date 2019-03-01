@@ -17,7 +17,6 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\Country;
 use App\Entity\Organization;
 use App\Entity\Person;
 use App\Entity\PostalAddress;
@@ -122,7 +121,7 @@ class PersonTest extends TestCase
      */
     public function testGetNationality()
     {
-        $expected = $actual = new Country();
+        $expected = $actual = 'FR';
 
         self::assertEquals($this->person, $this->person->setNationality($actual));
         self::assertEquals($expected, $this->person->getNationality());

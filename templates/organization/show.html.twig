@@ -34,13 +34,9 @@
                 {% if organization.address.postalCode is not empty or organization.address.locality -%}
                     {{ organization.address.postalCode }} {{ organization.address.locality }}<br/>
                 {%- endif %}
-                {% if organization.address.country is not empty -%}
-                    {{ organization.address.country.french }}
-                {%- endif %}
+                {{ organization.address.country | country }}
             </dd>
         </dl>
-    {% else %}
-        <p class="alert alert-info">Aucune adresse n’a été renseignée pour cette organisation.</p>
     {% endif %}
 
 {% endblock content_settings %}

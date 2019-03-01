@@ -17,12 +17,10 @@
 
 namespace App\Manager;
 
-use App\Entity\Country;
 use App\Entity\EntityInterface;
 use App\Entity\InformationInterface;
 use App\Entity\Organization;
 use App\Entity\PostalAddress;
-use App\Repository\CountryRepository;
 use App\Repository\OrganizationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
@@ -74,13 +72,6 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
     private $logRepository;
 
     /**
-     * Country repository.
-     *
-     * @var CountryRepository
-     */
-    private $countryRepository;
-
-    /**
      * OrganizationManager constructor.
      *
      * @param EntityManagerInterface $entityManager
@@ -91,7 +82,6 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
         $this->entityManager = $entityManager;
         $this->paginator = $paginator;
         $this->repository = $this->entityManager->getRepository(Organization::class);
-        $this->countryRepository = $this->entityManager->getRepository(Country::class);
         $this->logRepository = $this->entityManager->getRepository(LogEntry::class);
     }
 
@@ -151,19 +141,14 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
 
     /**
      * Create a new organization.
-     *
-     * @param string $code
+     * FIXME Transform PostalAddress as embedded.
      *
      * @return Organization
      */
-    public function createOrganization($code = 'FR'): Organization
+    public function createOrganization(): Organization
     {
         $organization = new Organization();
         $postalAddress = new PostalAddress();
-        $france = $this->countryRepository->findOneByCode($code);
-        if ($france) {
-            $postalAddress->setCountry($france);
-        }
         $organization->setAddress($postalAddress);
 
         return $organization;

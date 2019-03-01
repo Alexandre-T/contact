@@ -17,6 +17,7 @@
 
 namespace App\Twig;
 
+use Symfony\Component\Intl\Intl;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -58,6 +59,7 @@ class InflectorExtension extends AbstractExtension
             // parameter: ['is_safe' => ['html']]
             // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
             new TwigFilter('camelize', [$this, 'camelizeFilter'], ['is_safe' => ['html']]),
+            new TwigFilter('country', [$this, 'countryFilter']),
             new TwigFilter('emptyize', [$this, 'emptyizeFilter'], ['is_safe' => ['html']]),
             new TwigFilter('hyphenize', [$this, 'hyphenizeFilter'], ['is_safe' => ['html']]),
             new TwigFilter('titleize', [$this, 'titleizeFilter'], ['is_safe' => ['html']]),
@@ -106,6 +108,18 @@ class InflectorExtension extends AbstractExtension
     public function camelizeFilter(?string $word): string
     {
         return str_replace(' ', '', ucwords(preg_replace('/[^A-Z^a-z^0-9]+/', ' ', $word)));
+    }
+
+    /**
+     * Country filter convert country alpha code to country name under locale language.
+     *
+     * @param string|null $country
+     *
+     * @return string
+     */
+    public function countryFilter(?string $country): string
+    {
+        return Intl::getRegionBundle()->getCountryName($country);
     }
 
     /**

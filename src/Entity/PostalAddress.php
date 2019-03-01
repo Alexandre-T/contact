@@ -31,7 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     options={"comment":"Postal adresses table","charset":"utf8mb4","collate":"utf8mb4_unicode_ci"},
  *     indexes={
  *          @ORM\Index(name="ndx_postal_code", columns={"pad_code"}),
- *          @ORM\Index(name="ndx_postal_country", columns={"country_id"}),
+ *          @ORM\Index(name="ndx_postal_country", columns={"pad_country"}),
  *          @ORM\Index(name="ndx_postal_creator", columns={"creator_id"}),
  *          @ORM\Index(name="ndx_postal_locality", columns={"pad_locality"}),
  *     }
@@ -56,12 +56,11 @@ class PostalAddress implements EntityInterface, InformationInterface
     /**
      * Country.
      *
-     * @var Country
+     * @var string
      *
      * @Assert\NotBlank()
      *
-     * @ORM\ManyToOne(targetEntity="Country",fetch="EAGER")
-     * @ORM\JoinColumn(name="country_id", referencedColumnName="cou_id")
+     * @ORM\Column(type="string", length=2, name="pad_country", options={"comment":"Postal address country alpha2 code"})
      *
      * @Gedmo\Versioned
      */
@@ -124,9 +123,9 @@ class PostalAddress implements EntityInterface, InformationInterface
     /**
      * Country getter.
      *
-     * @return Country|null
+     * @return string|null
      */
-    public function getCountry(): ?Country
+    public function getCountry(): ?string
     {
         return $this->country;
     }
@@ -134,11 +133,11 @@ class PostalAddress implements EntityInterface, InformationInterface
     /**
      * Country fluent setter.
      *
-     * @param Country $country
+     * @param string $country
      *
      * @return PostalAddress
      */
-    public function setCountry(Country $country): self
+    public function setCountry(string $country): self
     {
         $this->country = $country;
 

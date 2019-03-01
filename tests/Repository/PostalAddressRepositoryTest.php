@@ -17,7 +17,6 @@
 
 namespace App\Tests;
 
-use App\Entity\Country;
 use App\Entity\PostalAddress;
 use App\Repository\PostalAddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -56,18 +55,6 @@ class PostalAddressRepositoryTest extends KernelTestCase
             ->getManager();
 
         $this->postalAddressRepository = $this->entityManager->getRepository(PostalAddress::class);
-    }
-
-    /**
-     * Test the findByCountryCode method.
-     */
-    public function testFindByCountryCode()
-    {
-        $expected = 4;
-
-        $postalAddresses = $this->postalAddressRepository->findByCountryCode(Country::FRANCE);
-        self::assertNotEmpty($postalAddresses);
-        self::assertCount($expected, $postalAddresses);
     }
 
     /**

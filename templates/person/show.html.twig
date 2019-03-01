@@ -42,7 +42,7 @@
         <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.gender'| trans }}</dt>
         <dd class="col-sm-8">{{ person.gender | gender }}</dd>
         <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.nationality'| trans }}</dt>
-        <dd class="col-sm-8">{{ person.nationality.french }}</dd>
+        <dd class="col-sm-8">{{ person.nationality | country }}</dd>
         <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.url'| trans }}</dt>
         <dd class="col-sm-8">{{ person.url }}</dd>
     </dl>
@@ -60,13 +60,9 @@
                 {% if person.address.postalCode is not empty or person.address.locality -%}
                     {{ person.address.postalCode }} {{ person.address.locality }}<br/>
                 {%- endif %}
-                {% if person.address.country is not empty -%}
-                    {{ person.address.country.french }}
-                {%- endif %}
+                {{ person.address.country | country }}
             </dd>
         </dl>
-    {% else %}
-        <p class="alert alert-info">Aucune adresse n’a été renseignée pour ce contact.</p>
     {% endif %}
 
 {% endblock content_settings %}

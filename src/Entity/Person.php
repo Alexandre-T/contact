@@ -33,7 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     options={"comment":"Contact table", "charset":"utf8mb4","collate":"utf8mb4_unicode_ci"},
  *     indexes={
  *          @ORM\Index(name="ndx_person_alumni", columns={"school_id"}),
- *          @ORM\Index(name="ndx_person_birthCountry", columns={"birthCountry_id"}),
+ *          @ORM\Index(name="ndx_person_birthCountry", columns={"per_nationality"}),
  *          @ORM\Index(name="ndx_person_birthName", columns={"per_birthName", "per_givenName"}),
  *          @ORM\Index(name="ndx_person_creator", columns={"creator_id"}),
  *          @ORM\Index(name="ndx_person_familyName", columns={"per_familyName", "per_givenName"}),
@@ -181,10 +181,9 @@ class Person implements EntityInterface, InformationInterface
     /**
      * National country.
      *
-     * @var Country
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Country")
-     * @ORM\JoinColumn(name="birthCountry_id", referencedColumnName="cou_id", nullable=false)
+     * @ORM\Column(type="string", length=2, name="per_nationality", nullable=true, options={"comment":"Nationality alpha2 code"})
      *
      * @Gedmo\Versioned()
      */
@@ -350,9 +349,9 @@ class Person implements EntityInterface, InformationInterface
     /**
      * Nationality getter.
      *
-     * @return Country|null
+     * @return string|null
      */
-    public function getNationality(): ?Country
+    public function getNationality(): ?string
     {
         return $this->nationality;
     }
@@ -360,11 +359,11 @@ class Person implements EntityInterface, InformationInterface
     /**
      * Nationality fluent setter.
      *
-     * @param Country|null $nationality
+     * @param string|null $nationality
      *
      * @return Person
      */
-    public function setNationality(?Country $nationality): self
+    public function setNationality(?string $nationality): self
     {
         $this->nationality = $nationality;
 

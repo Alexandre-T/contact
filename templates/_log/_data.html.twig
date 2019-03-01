@@ -9,6 +9,12 @@
         {% elseif key == 'password' %}
             <dt class="col-sm-6 text-right">{{ 'entity.log.data.password' | trans }}</dt>
             <dd class="col-sm-6">&bull;&bull;&bull;&bull;&bull;</dd>
+        {% elseif key == 'country' %}
+            <dt class="col-sm-6 text-right">{{ 'entity.log.data.country' | trans }}</dt>
+            <dd class="col-sm-6">{{ log.data.country | country }}</dd>
+        {% elseif key == 'nationality' %}
+            <dt class="col-sm-6 text-right">{{ 'entity.log.data.nationality' | trans }}</dt>
+            <dd class="col-sm-6">{{ log.data.nationality | country }}</dd>
         {% elseif key == 'gender' and not(value is empty and creating) %}
             <dt class="col-sm-6 text-right">{{ 'entity.log.data.gender' | trans }}</dt>
             <dd class="col-sm-6">{{ log.data.gender |gender }}</dd>

@@ -17,7 +17,6 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\Country;
 use App\Entity\PostalAddress;
 use PHPUnit\Framework\TestCase;
 
@@ -91,7 +90,7 @@ class PostalAddressTest extends TestCase
      */
     public function testGetCountry()
     {
-        $expected = $actual = new Country();
+        $expected = $actual = 'EN';
 
         self::assertEquals($this->postalAddress, $this->postalAddress->setCountry($actual));
         self::assertEquals($expected, $this->postalAddress->getCountry());

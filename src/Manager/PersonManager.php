@@ -17,12 +17,10 @@
 
 namespace App\Manager;
 
-use App\Entity\Country;
 use App\Entity\EntityInterface;
 use App\Entity\InformationInterface;
 use App\Entity\Person;
 use App\Entity\PostalAddress;
-use App\Repository\CountryRepository;
 use App\Repository\PersonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
@@ -74,13 +72,6 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
     private $logRepository;
 
     /**
-     * Country repository.
-     *
-     * @var CountryRepository
-     */
-    private $countryRepository;
-
-    /**
      * PersonManager constructor.
      *
      * @param EntityManagerInterface $entityManager
@@ -91,7 +82,6 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
         $this->entityManager = $entityManager;
         $this->paginator = $paginator;
         $this->repository = $this->entityManager->getRepository(Person::class);
-        $this->countryRepository = $this->entityManager->getRepository(Country::class);
         $this->logRepository = $this->entityManager->getRepository(LogEntry::class);
     }
 
@@ -154,15 +144,10 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
      *
      * @return Person
      */
-    public function createPerson($code = 'FR'): Person
+    public function createPerson(): Person
     {
         $person = new Person();
         $postalAddress = new PostalAddress();
-        $france = $this->countryRepository->findOneByCode($code);
-        if ($france) {
-            $postalAddress->setCountry($france);
-            $person->setNationality($france);
-        }
         $person->setAddress($postalAddress);
 
         return $person;

@@ -17,14 +17,13 @@
 
 namespace App\Form\Type;
 
-use App\Entity\Country;
 use App\Entity\Organization;
 use App\Entity\Person;
-use App\Repository\CountryRepository;
 use App\Repository\OrganizationRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -123,14 +122,8 @@ class PersonType extends AbstractType
                 'help' => 'form.person.help.member-of',
                 'required' => false,
             ])
-            //FIXME Complete it with an CountryType
-            ->add('nationality', EntityType::class, [
-                'class' => Country::class,
-                'query_builder' => function (CountryRepository $cr) {
-                    return $cr->createQueryBuilder('c')
-                        ->orderBy('c.french', 'ASC');
-                },
-                'choice_label' => 'french',
+            ->add('nationality', CountryType::class, [
+                'preferred_choices' => ['FR'],
                 'label' => 'form.person.field.nationality',
                 'help' => 'form.person.help.nationality',
                 'required' => false,
