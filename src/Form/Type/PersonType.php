@@ -80,8 +80,16 @@ class PersonType extends AbstractType
             ->add('gender', ChoiceType::class, [
                 'label' => 'form.person.field.gender',
                 'help' => 'form.person.help.gender',
-                //FIXME complete it!
+                'choices' => [
+                    //'gender.unknown' => null,
+                    'gender.female' => Person::FEMALE,
+                    'gender.male' => Person::MALE,
+                    'gender.other' => Person::OTHER,
+                ],
                 'required' => false,
+                'expanded' => true,
+                'multiple' => false,
+                'attr' => ['class' => 'form-check-inline p-0 pt-2'],
             ])
             ->add('url', UrlType::class, [
                 'label' => 'form.person.field.url',
