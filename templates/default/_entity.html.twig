@@ -47,7 +47,6 @@
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="logs">
                         {% block content_logs %}
-                        {# TODO put this code in a sub template #}
                         {% if logs is defined and logs | length > 0 %}
                             <h3>{{ 'entity.log.title' | trans }}</h3>
                             {% include '_log/_table.html.twig' with {'logs': logs} %}
