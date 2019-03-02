@@ -52,6 +52,7 @@ class OrganizationFixtures extends Fixture implements DependentFixtureInterface
                     ->setLegalName("Legal name $index")
                     ->setAcronymDefinition("Definition $index")
                     ->setCreator($organiser);
+                $this->addReference("organization_$index", $organizations[$index]);
                 $manager->persist($organizations[$index]);
             }
         }
