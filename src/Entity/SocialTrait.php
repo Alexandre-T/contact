@@ -92,6 +92,22 @@ trait SocialTrait
     private $youtube;
 
     /**
+     * Has this entity at least one social network?
+     *
+     * @return bool
+     */
+    public function hasSocialNetwork(): bool
+    {
+        return !(
+            empty($this->facebook) &&
+            empty($this->instagram) &&
+            empty($this->linkedIn) &&
+            empty($this->twitter) &&
+            empty($this->youtube)
+        );
+    }
+
+    /**
      * Facebook getter.
      *
      * @return string|null

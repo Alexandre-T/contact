@@ -23,6 +23,13 @@ namespace App\Entity;
 interface SocialInterface
 {
     /**
+     * Has this entity at least one social network?
+     *
+     * @return bool
+     */
+    public function hasSocialNetwork(): bool;
+
+    /**
      * Facebook getter.
      *
      * @return string|null

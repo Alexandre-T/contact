@@ -20,8 +20,10 @@ namespace App\Manager;
 use App\Entity\EntityInterface;
 use App\Entity\InformationInterface;
 use App\Entity\Organization;
+use App\Entity\Person;
 use App\Entity\PostalAddress;
 use App\Repository\OrganizationRepository;
+use App\Repository\PersonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Loggable\Entity\LogEntry;
@@ -72,6 +74,13 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
     private $logRepository;
 
     /**
+     * Person repository.
+     *
+     * @var PersonRepository
+     */
+    private $personRepository;
+
+    /**
      * OrganizationManager constructor.
      *
      * @param EntityManagerInterface $entityManager
@@ -82,6 +91,7 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
         $this->entityManager = $entityManager;
         $this->paginator = $paginator;
         $this->repository = $this->entityManager->getRepository(Organization::class);
+        $this->personRepository = $this->entityManager->getRepository(Person::class);
         $this->logRepository = $this->entityManager->getRepository(LogEntry::class);
     }
 
@@ -123,8 +133,8 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
     public function isDeletable(EntityInterface $entity): bool
     {
         return
-            0 === $this->repository->count(['members' => $entity]) &&
-            0 === $this->repository->count(['alumni' => $entity]);
+            0 === $this->personRepository->count(['alumnus' => $entity]) &&
+            0 === $this->personRepository->count(['memberOf' => $entity]);
     }
 
     /**
@@ -136,6 +146,10 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
      */
     public function retrieveLogs($entity): array
     {
+        if (is_null($entity)) {
+            return [];
+        }
+
         return $this->logRepository->getLogEntries($entity);
     }
 
