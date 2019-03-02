@@ -18,7 +18,7 @@
 namespace App\Controller;
 
 use App\Entity\Person;
-use App\Form\Type\PersonType;
+use App\Form\PersonType;
 use App\Manager\PersonManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

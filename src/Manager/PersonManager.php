@@ -140,8 +140,6 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
     /**
      * Create a new person.
      *
-     * @param string $code
-     *
      * @return Person
      */
     public function createPerson(): Person

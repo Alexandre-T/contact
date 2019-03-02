@@ -15,7 +15,7 @@
  * @see       http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt
  */
 
-namespace App\Form\Type;
+namespace App\Form;
 
 use App\Entity\Organization;
 use App\Entity\Person;

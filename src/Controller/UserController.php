@@ -17,7 +17,7 @@
 
 namespace App\Controller;
 
-use App\Form\Type\UserType;
+use App\Form\UserType;
 use App\Entity\User;
 use App\Manager\UserManager;
 use Symfony\Component\Form\FormInterface;
@@ -81,8 +81,9 @@ class UserController extends AbstractController
      *
      * @Route("/new", name="administration_user_new", methods={"get","post"})
      *
-     * @param UserManager $userManager
-     * @param Request     $request
+     * @param UserManager         $userManager
+     * @param Request             $request
+     * @param TranslatorInterface $trans
      *
      * @return RedirectResponse |Response
      */

@@ -45,8 +45,8 @@ class UserFixtures extends Fixture
                 ->setLabel('Administrator')
                 ->setMail('administrator@example.org')
                 ->setPlainPassword('administrator')
-                ->setCreator($userAdministrator)
-                ->setRoles($roleAdmin);
+                ->setRoles($roleAdmin)
+                ->setCreator($userAdministrator);
 
             //Reader
             $userReader = new User();
@@ -54,24 +54,24 @@ class UserFixtures extends Fixture
                 ->setLabel('Reader')
                 ->setMail('reader@example.org')
                 ->setPlainPassword('reader')
-                ->setCreator($userAdministrator)
-                ->setRoles($roleReader);
+                ->setRoles($roleReader)
+                ->setCreator($userAdministrator);
 
             //ORGANISER
             $userOrganiser = new User();
             $userOrganiser->setLabel('Organiser')
                 ->setMail('organiser@example.org')
                 ->setPlainPassword('organiser')
-                ->setCreator($userAdministrator)
-                ->setRoles($roleOrganiser);
+                ->setRoles($roleOrganiser)
+                ->setCreator($userAdministrator);
 
             //User
             $userUser = new User();
             $userUser->setLabel('User')
                 ->setMail('user@example.org')
                 ->setPlainPassword('user')
-                ->setCreator($userAdministrator)
-                ->setRoles($roleUser);
+                ->setRoles($roleUser)
+                ->setCreator($userAdministrator);
 
             //We add 30 users.
             $user = [];
@@ -80,8 +80,8 @@ class UserFixtures extends Fixture
                 $user[$index]->setLabel("User $index")
                     ->setMail("user.$index@example.org")
                     ->setPlainPassword('$index')
-                    ->setCreator($userAdministrator)
-                    ->setRoles($roleUser);
+                    ->setRoles($roleUser)
+                    ->setCreator($userAdministrator);
                 $manager->persist($user[$index]);
             }
 

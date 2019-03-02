@@ -11,41 +11,48 @@
     </h1>
 {% endblock headline %}
 
+{% set col = organization.socialNetwork ? 8 : 12 %}
+
 {% block content_settings %}
-    <dl class="row">
-        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.label'| trans }}</dt>
-        <dd class="col-sm-8 ">{{ person.label }}</dd>
-        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.job-title'| trans }}</dt>
-        <dd class="col-sm-8">{{ person.jobTitle }}</dd>
-        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.member-of'| trans }}</dt>
-        <dd class="col-sm-8">
-            {% if person.memberOf is empty -%}
-                <small>{{ 'none' | trans }}</small>
-            {%- else -%}
-            <a href="{{ path('organization_show', {id: person.memberOf.id}) }}" title="link.organization.show.title">
-                {{ person.memberOf.label }}
-            </a>
-            {%- endif %}
-        </dd>
-        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.alumnus'| trans }}</dt>
-        <dd class="col-sm-8">
-            {% if person.alumnus is empty -%}
-                <small>{{ 'none' | trans }}</small>
-            {%- else -%}
-                <a href="{{ path('organization_show', {id: person.alumnus.id}) }}" title="link.organization.show.title">
-                    {{ person.alumnus.label }}
-                </a>
-            {%- endif %}
-        </dd>
-        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.email'| trans }}</dt>
-        <dd class="col-sm-8">{{ person.email }}</dd>
-        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.gender'| trans }}</dt>
-        <dd class="col-sm-8">{{ person.gender | gender }}</dd>
-        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.nationality'| trans }}</dt>
-        <dd class="col-sm-8">{{ person.nationality | country }}</dd>
-        <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.url'| trans }}</dt>
-        <dd class="col-sm-8">{{ person.url }}</dd>
-    </dl>
+    <div class="row">
+        <div class="col-sm{{ col }}">
+            <dl class="row">
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.label'| trans }}</dt>
+                <dd class="col-sm-8 ">{{ person.label }}</dd>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.job-title'| trans }}</dt>
+                <dd class="col-sm-8">{{ person.jobTitle }}</dd>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.member-of'| trans }}</dt>
+                <dd class="col-sm-8">
+                    {% if person.memberOf is empty -%}
+                        <small>{{ 'none' | trans }}</small>
+                    {%- else -%}
+                        <a href="{{ path('organization_show', {id: person.memberOf.id}) }}" title="link.organization.show.title">
+                            {{ person.memberOf.label }}
+                        </a>
+                    {%- endif %}
+                </dd>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.alumnus'| trans }}</dt>
+                <dd class="col-sm-8">
+                    {% if person.alumnus is empty -%}
+                        <small>{{ 'none' | trans }}</small>
+                    {%- else -%}
+                        <a href="{{ path('organization_show', {id: person.alumnus.id}) }}" title="link.organization.show.title">
+                            {{ person.alumnus.label }}
+                        </a>
+                    {%- endif %}
+                </dd>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.email'| trans }}</dt>
+                <dd class="col-sm-8">{{ person.email }}</dd>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.gender'| trans }}</dt>
+                <dd class="col-sm-8">{{ person.gender | gender }}</dd>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.nationality'| trans }}</dt>
+                <dd class="col-sm-8">{{ person.nationality | country }}</dd>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.url'| trans }}</dt>
+                <dd class="col-sm-8">{{ person.url }}</dd>
+            </dl>
+        </div>
+        {% include 'default/_social.html.twig' with {'entity': person} %}
+    </div>
     {% if person.address is not empty %}
         <hr/>
         <dl class="row">

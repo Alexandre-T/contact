@@ -36,7 +36,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * LoginFormAuthenticator class.
@@ -165,7 +165,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         //Magic !!!!
         $form->handleRequest($request);
 
-        //Store the identifiant to push it in the login form when credential errors occured..
+        //Store the identifier to push it in the login form when credential errors occurred..
         $data = $form->getData();
         $request->getSession()->set(
             Security::LAST_USERNAME,

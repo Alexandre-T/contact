@@ -1,0 +1,24 @@
+<div class="col-sm-4">
+    <dl class="row">
+        {% if entity.facebook is not empty %}
+            <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-facebook"></span></dt>
+            <dd class="col-sm-8 ">{{ entity.facebook }}</dd>
+        {% endif %}
+        {% if entity.instagram is not empty %}
+            <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-instagram"></span></dt>
+            <dd class="col-sm-8 ">{{ entity.instagram }}</dd>
+        {% endif %}
+        {% if entity.linkedIn is not empty %}
+            <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-linkedin"></span></dt>
+            <dd class="col-sm-8 ">{{ entity.linkedIn }}</dd>
+        {% endif %}
+        {% if entity.twitter is not empty %}
+            <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-twitter"></span></dt>
+            <dd class="col-sm-8 ">{{ entity.twitter }}</dd>
+        {% endif %}
+        {% if entity.youtube is not empty %}
+            <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-youtube"></span></dt>
+            <dd class="col-sm-8 ">{{ entity.youtube }}</dd>
+        {% endif %}
+    </dl>
+</div>

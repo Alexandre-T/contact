@@ -11,9 +11,11 @@
     </h1>
 {% endblock headline %}
 
+{% set col = organization.socialNetwork ? 8 : 12 %}
+
 {% block content_settings %}
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-{{ col }}">
             <dl class="row">
                 <dt class="col-sm-4 text-truncate text-right">{{ 'form.organization.field.label'| trans }}</dt>
                 <dd class="col-sm-8 ">{{ organization.label }}</dd>
@@ -23,30 +25,7 @@
                 <dd class="col-sm-8">{{ organization.acronymDefinition }}</dd>
             </dl>
         </div>
-        <div class="col-sm-4">
-            <dl class="row">
-                {% if organization.facebook is not empty %}
-                    <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-facebook"></span></dt>
-                    <dd class="col-sm-8 ">{{ organization.facebook }}</dd>
-                {% endif %}
-                {% if organization.instagram is not empty %}
-                    <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-instagram"></span></dt>
-                    <dd class="col-sm-8 ">{{ organization.instagram }}</dd>
-                {% endif %}
-                {% if organization.linkedIn is not empty %}
-                    <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-linkedin"></span></dt>
-                    <dd class="col-sm-8 ">{{ organization.linkedIn }}</dd>
-                {% endif %}
-                {% if organization.twitter is not empty %}
-                    <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-twitter"></span></dt>
-                    <dd class="col-sm-8 ">{{ organization.twitter }}</dd>
-                {% endif %}
-                {% if organization.youtube is not empty %}
-                    <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-youtube"></span></dt>
-                    <dd class="col-sm-8 ">{{ organization.youtube }}</dd>
-                {% endif %}
-            </dl>
-        </div>
+        {% include 'default/_social.html.twig' with {'entity': organization} %}
     </div>
     {% if organization.address is not empty %}
         <hr/>

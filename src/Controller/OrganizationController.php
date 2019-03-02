@@ -18,7 +18,7 @@
 namespace App\Controller;
 
 use App\Entity\Organization;
-use App\Form\Type\OrganizationType;
+use App\Form\OrganizationType;
 use App\Manager\OrganizationManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
