@@ -170,7 +170,7 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
      *
      * @var Organization
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Organization", inversedBy="members")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Organization", inversedBy="members", fetch="EAGER")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="org_id")
      *
      * @Gedmo\Versioned()

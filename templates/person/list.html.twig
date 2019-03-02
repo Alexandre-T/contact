@@ -24,6 +24,9 @@
                 {{ knp_pagination_sortable(pagination, 'form.field.job-title' | trans, 'job-title')}}
                 <span class="{{ faSort(pagination.isSorted('legal'), direction, 'alpha') }}"></span>
             </th>
+            <th id="organization">
+                Organization
+            </th>
             <th id="user-actions">Actions</th>
         </tr>
         </thead>
@@ -33,6 +36,11 @@
                 <td headers="person-logo"><span class="fas fa-address-card fa-fw"></span></td>
                 <td headers="person-label">{{ person.label }}</td>
                 <td headers="person-legal">{{ person.jobTitle }}</td>
+                {% if person.memberOf %}
+                    <td headers="person-legal">{{ person.memberOf.label }}</td>
+                {% else %}
+                    <td headers="person-legal"></td>
+                {% endif %}
                 <td headers="user-actions">
                     <div class="btn-group-xs btn-group">
                         <a class="btn btn-default" title="{{ 'action.person.show.title' | trans }}"
