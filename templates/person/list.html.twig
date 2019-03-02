@@ -37,7 +37,12 @@
                 <td headers="person-label">{{ person.label }}</td>
                 <td headers="person-legal">{{ person.jobTitle }}</td>
                 {% if person.memberOf %}
-                    <td headers="person-legal">{{ person.memberOf.label }}</td>
+                    <td headers="person-legal">
+                        <a href="{{ path('organization_show', {id: person.memberOf.id}) }}"
+                           title="{{ 'link.organization.show.title' | trans }}">
+                            {{ person.memberOf.label }}
+                        </a>
+                    </td>
                 {% else %}
                     <td headers="person-legal"></td>
                 {% endif %}

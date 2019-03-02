@@ -24,7 +24,7 @@
                 <small>{{ 'none' | trans }}</small>
             {%- else -%}
                 <a href="{{ path('organization_show', {id: person.memberOf.id}) }}"
-                   title="link.organization.show.title">
+                   title="{{ 'link.organization.show.title' | trans }}">
                     {{ person.memberOf.label }}
                 </a>
             {%- endif %}
@@ -35,7 +35,7 @@
                 <small>{{ 'none' | trans }}</small>
             {%- else -%}
                 <a href="{{ path('organization_show', {id: person.alumnus.id}) }}"
-                   title="link.organization.show.title">
+                   title="{{ 'link.organization.show.title' | trans }}">
                     {{ person.alumnus.label }}
                 </a>
             {%- endif %}

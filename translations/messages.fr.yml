@@ -299,3 +299,7 @@ img:
 none: 'Non renseigné'
 None: 'Non renseigné'
 empty: '(Vide)'
+link:
+  organization:
+    show:
+      title: 'Consulter la fiche de cette organisation'
