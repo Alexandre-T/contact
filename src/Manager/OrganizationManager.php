@@ -155,7 +155,6 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
 
     /**
      * Create a new organization.
-     * FIXME Transform PostalAddress as embedded.
      *
      * @return Organization
      */
