@@ -26,7 +26,7 @@ use Twig\TwigTest;
 /**
  * Inflector twig extension.
  *
- * FIXME realize tests.
+ * TODO realize tests.
  */
 class InflectorExtension extends AbstractExtension
 {
