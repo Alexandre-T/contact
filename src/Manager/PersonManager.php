@@ -134,6 +134,10 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
      */
     public function retrieveLogs($entity): array
     {
+        if (empty($entity)) {
+            return [];
+        }
+
         return $this->logRepository->getLogEntries($entity);
     }
 

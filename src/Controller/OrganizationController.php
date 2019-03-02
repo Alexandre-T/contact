@@ -52,7 +52,7 @@ class OrganizationController extends AbstractController
     {
         //Query parameters check
         //FIXME add a test which throw a 403 error if field is not valid to avoid DQL error.
-        $field = 'label' == $request->query->getAlpha('sort') ? 'legalName' : 'label';
+        $field = 'label' == $request->query->getAlpha('sort') ? 'legal' : 'label';
         $sort = 'desc' == $request->query->getAlpha('direction') ? 'desc' : 'asc';
 
         $pagination = $organizationManager->paginate(
