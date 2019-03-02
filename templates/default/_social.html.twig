@@ -1,8 +1,7 @@
 <div class="col-sm-4">
     <dl class="row">
         {% if entity.facebook is not empty %}
-            <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-facebook"></span></dt>
-            <dd class="col-sm-8 ">{{ entity.facebook }}</dd>
+            <a href="{{ entity.facebook }}" title=""><span class="fa fa-facebook-square"></span></a>
         {% endif %}
         {% if entity.instagram is not empty %}
             <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-instagram"></span></dt>

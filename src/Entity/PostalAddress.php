@@ -58,9 +58,9 @@ class PostalAddress implements EntityInterface, InformationInterface
      *
      * @var string
      *
-     * @Assert\NotBlank()
+     * @Assert\Length(max="2", maxMessage="form.error.country")
      *
-     * @ORM\Column(type="string", length=2, name="pad_country", options={"comment":"Postal address country alpha2 code"})
+     * @ORM\Column(type="string", nullable=true, length=2, name="pad_country", options={"comment":"Postal address country alpha2 code"})
      *
      * @Gedmo\Versioned
      */
@@ -239,4 +239,18 @@ class PostalAddress implements EntityInterface, InformationInterface
 
         return $this;
     }
-}
+
+    /**
+     * Are all field empty?
+     *
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return
+            empty($this->country) &&
+            empty($this->locality) &&
+            empty($this->postOfficeBoxNumber) &&
+            empty($this->postalCode) &&
+            empty($this->streetAddress);
+    }}

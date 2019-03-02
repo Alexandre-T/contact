@@ -119,6 +119,10 @@ class InflectorExtension extends AbstractExtension
      */
     public function countryFilter(?string $country): string
     {
+        if (empty($country)) {
+            return '';
+        }
+
         return Intl::getRegionBundle()->getCountryName($country);
     }
 

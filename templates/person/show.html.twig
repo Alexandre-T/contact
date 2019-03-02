@@ -11,17 +11,17 @@
     </h1>
 {% endblock headline %}
 
-{% set col = organization.socialNetwork ? 8 : 12 %}
+{% set col = person.socialNetwork ? 8 : 12 %}
 
 {% block content_settings %}
     <div class="row">
-        <div class="col-sm{{ col }}">
+        <div class="col-sm-{{ col }}">
             <dl class="row">
-                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.label'| trans }}</dt>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.label'| trans }}</dt>
                 <dd class="col-sm-8 ">{{ person.label }}</dd>
-                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.job-title'| trans }}</dt>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.job-title'| trans }}</dt>
                 <dd class="col-sm-8">{{ person.jobTitle }}</dd>
-                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.member-of'| trans }}</dt>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.member-of'| trans }}</dt>
                 <dd class="col-sm-8">
                     {% if person.memberOf is empty -%}
                         <small>{{ 'none' | trans }}</small>
@@ -31,7 +31,7 @@
                         </a>
                     {%- endif %}
                 </dd>
-                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.alumnus'| trans }}</dt>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.alumnus'| trans }}</dt>
                 <dd class="col-sm-8">
                     {% if person.alumnus is empty -%}
                         <small>{{ 'none' | trans }}</small>
@@ -41,22 +41,22 @@
                         </a>
                     {%- endif %}
                 </dd>
-                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.email'| trans }}</dt>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.email'| trans }}</dt>
                 <dd class="col-sm-8">{{ person.email }}</dd>
-                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.gender'| trans }}</dt>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.gender'| trans }}</dt>
                 <dd class="col-sm-8">{{ person.gender | gender }}</dd>
-                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.nationality'| trans }}</dt>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.nationality'| trans }}</dt>
                 <dd class="col-sm-8">{{ person.nationality | country }}</dd>
-                <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.url'| trans }}</dt>
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.url'| trans }}</dt>
                 <dd class="col-sm-8">{{ person.url }}</dd>
             </dl>
         </div>
         {% include 'default/_social.html.twig' with {'entity': person} %}
     </div>
-    {% if person.address is not empty %}
+    {% if not person.address.empty %}
         <hr/>
         <dl class="row">
-            <dt class="col-sm-4 text-truncate text-right">{{ 'form.person.field.address'| trans }}</dt>
+            <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.address'| trans }}</dt>
             <dd class="col-sm-8">
                 {% if person.address.postOfficeBoxNumber is not empty -%}
                     {{ person.address.postOfficeBoxNumber }}<br/>

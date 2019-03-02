@@ -17,7 +17,6 @@ Window.prototype.$ = $;
 require('bootstrap');
 require('animate.css');
 // the fort awesome module
-require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
 
 // or you can include specific pieces
