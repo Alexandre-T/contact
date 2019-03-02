@@ -253,4 +253,5 @@ class PostalAddress implements EntityInterface, InformationInterface
             empty($this->postOfficeBoxNumber) &&
             empty($this->postalCode) &&
             empty($this->streetAddress);
-    }}
+    }
+}
