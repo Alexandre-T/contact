@@ -18,15 +18,17 @@
 namespace App\Form;
 
 use App\Entity\Organization;
+use App\Form\Type\AcronymDefinitionType;
+use App\Form\Type\LabelType;
+use App\Form\Type\LegalNameType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Organization form class.
  */
-class OrganizationType extends AbstractType
+class OrganizationForm extends AbstractType
 {
     /**
      * Builds the form.
@@ -42,22 +44,10 @@ class OrganizationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('label', TextType::class, [
-                'label' => 'form.organization.field.label',
-                'help' => 'form.organization.help.label',
-                'attr' => [
-                    'autofocus' => true,
-                ],
-            ])
-            ->add('legalName', null, [
-                'label' => 'form.organization.field.legal-name',
-                'help' => 'form.organization.help.legal-name',
-            ])
-            ->add('acronymDefinition', null, [
-                'label' => 'form.organization.field.acronym-definition',
-                'help' => 'form.organization.help.acronym-definition',
-            ])
-            ->add('address', PostalAddressType::class, [
+            ->add('label', LabelType::class)
+            ->add('legalName', LegalNameType::class)
+            ->add('acronymDefinition', AcronymDefinitionType::class)
+            ->add('address', PostalAddressForm::class, [
                 'label' => 'form.organization.field.address',
             ])
         ;

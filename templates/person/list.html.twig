@@ -17,11 +17,11 @@
         <tr>
             <td headers="person-logo"><span class="fa fa-building"></span></td>
             <th id="person-label">
-                {{ knp_pagination_sortable(pagination, 'form.person.field.label' | trans, 'label')}}
+                {{ knp_pagination_sortable(pagination, 'form.field.label' | trans, 'label')}}
                 <span class="{{ faSort(pagination.isSorted('label'), direction, 'alpha') }}"></span>
             </th>
             <th id="person-legal">
-                {{ knp_pagination_sortable(pagination, 'form.person.field.job-title' | trans, 'job-title')}}
+                {{ knp_pagination_sortable(pagination, 'form.field.job-title' | trans, 'job-title')}}
                 <span class="{{ faSort(pagination.isSorted('legal'), direction, 'alpha') }}"></span>
             </th>
             <th id="user-actions">Actions</th>

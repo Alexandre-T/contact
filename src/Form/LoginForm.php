@@ -18,8 +18,8 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -48,7 +48,7 @@ class LoginForm extends AbstractType
     {
         // @see https://knpuniversity.com/screencast/symfony-security/rendering-login-form
         $builder
-            ->add('mail', TextType::class, [
+            ->add('mail', EmailType::class, [
                 'label' => 'form.login.field.mail',
                 'help' => 'form.login.help.mail',
                 'required' => true,

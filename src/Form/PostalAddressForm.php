@@ -18,12 +18,12 @@
 namespace App\Form;
 
 use App\Entity\PostalAddress;
+use App\Form\Type\CountryType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PostalAddressType extends AbstractType
+class PostalAddressForm extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -49,7 +49,6 @@ class PostalAddressType extends AbstractType
                 'help' => 'form.address.help.locality',
             ])
             ->add('country', CountryType::class, [
-                'preferred_choices' => ['FR'],
                 'label' => 'form.address.field.country',
                 'help' => 'form.address.help.country',
             ])

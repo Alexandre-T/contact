@@ -138,6 +138,35 @@ form:
       country: 'Choisissez le pays parmi cette liste'
       locality: 'Entrez la ville'
       street: 'Entrez l’adresse'
+  field:
+    acronym-definition: 'Nom complet'
+    address: 'Adresse'
+    alumnus: 'Ancien élève de'
+    birth-name: 'Nom de naissance'
+    email: 'Adresse email'
+    family-name: 'Nom de famille'
+    gender: 'Genre'
+    given-name: 'Prénom'
+    job-title: 'Profession'
+    label: 'Nom'
+    legal-name: 'Nom juridique'
+    member-of: 'Membre de'
+    nationality: 'Nationalité'
+    url: 'Site web'
+  help:
+    acronym-definition: 'Entrez la signification de l’acronyme de l’organisation.'
+    alumnus: 'Choisissez l’école de ce contact pour faire des recherches sur les anciens élèves d’une école'
+    birth-name: 'Entrez le nom de famille de naissance de ce contact'
+    email: 'Entrez l’adresse email de ce contact'
+    family-name: 'Entrez son nom de famille'
+    gender: 'Sélectionnez son genre'
+    given-name: 'Entrez son prénom'
+    job-title: 'Entrez sa profession'
+    label: 'Entrez le nom de l’organisation'
+    legal-name: 'Entrez le nom juridique de l’organisation, pour une entreprise il s’agit du nom de la SA.'
+    member-of: 'Entrez l’organisation à laquelle ce contact est principalement rattaché'
+    nationality: 'Sélectionnez le pays dans la liste.'
+    url: 'Entrez le site web de ce contact'
   login:
     field:
       mail: 'Adresse email'
@@ -163,42 +192,6 @@ form:
       username: 'Entrez le prénom et le nom de l’utilisateur'
       mail: 'Entrez l’adresse email de l’utilisateur'
       roles: 'Sélectionnez le rôle de l’utilisateur'
-  organization:
-    field:
-      acronym-definition: 'Nom complet'
-      address: 'Adresse'
-      label: 'Nom'
-      legal-name: 'Nom juridique'
-    help:
-      acronym-definition: 'Entrez la signification de l’acronyme de l’organisation.'
-      label: 'Entrez le nom de l’organisation'
-      legal-name: 'Entrez le nom juridique de l’organisation, pour une entreprise il s’agit du nom de la SA.'
-  person:
-    field:
-      address: 'Adresse'
-      alumnus: 'Ancien élève de'
-      birth-name: 'Nom de naissance'
-      email: 'Adresse email'
-      family-name: 'Nom de famille'
-      gender: 'Genre'
-      given-name: 'Prénom'
-      job-title: 'Profession'
-      label: 'Nom'
-      member-of: 'Membre de'
-      nationality: 'Nationalité'
-      url: 'Site web'
-    help:
-      alumnus: 'Choisissez l’école de ce contact pour faire des recherches sur les anciens élèves d’une école'
-      birth-name: 'Entrez le nom de famille de naissance de ce contact'
-      email: 'Entrez l’adresse email de ce contact'
-      family-name: 'Entrez son nom de famille'
-      gender: 'Sélectionnez son genre'
-      given-name: 'Entrez son prénom'
-      job-title: 'Entrez sa profession'
-      member-of: 'Entrez l’organisation à laquelle ce contact est principalement rattaché'
-      nationality: 'Sélectionnez le pays dans la liste.'
-      url: 'Entrez le site web de ce contact'
-
 home:
   card1:
     description: 'L’application « Contact » recense tous vos contacts, leurs organisations pour faciliter la communication du Cerema.'

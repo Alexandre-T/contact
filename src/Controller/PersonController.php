@@ -18,7 +18,7 @@
 namespace App\Controller;
 
 use App\Entity\Person;
-use App\Form\PersonType;
+use App\Form\PersonForm;
 use App\Manager\PersonManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -83,7 +83,7 @@ class PersonController extends AbstractController
     public function newAction(PersonManager $personManager, Request $request, TranslatorInterface $trans)
     {
         $person = $personManager->createPerson();
-        $form = $this->createForm(PersonType::class, $person);
+        $form = $this->createForm(PersonForm::class, $person);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $personManager->save($person, $this->getUser());
@@ -150,7 +150,7 @@ class PersonController extends AbstractController
     public function editAction(Person $person, Request $request, PersonManager $personManager, TranslatorInterface $trans)
     {
         $deleteForm = $this->createDeleteForm($person);
-        $editForm = $this->createForm(PersonType::class, $person);
+        $editForm = $this->createForm(PersonForm::class, $person);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $personManager->save($person, $this->getUser());

@@ -30,7 +30,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author  Alexandre Tranchant <alexandre.tranchant@gmail.com>
  * @license CeCILL-B V1
  */
-class UserType extends AbstractType
+class UserForm extends AbstractType
 {
     /**
      * Builds the form.

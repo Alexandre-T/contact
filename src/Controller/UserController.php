@@ -17,7 +17,7 @@
 
 namespace App\Controller;
 
-use App\Form\UserType;
+use App\Form\UserForm;
 use App\Entity\User;
 use App\Manager\UserManager;
 use Symfony\Component\Form\FormInterface;
@@ -90,7 +90,7 @@ class UserController extends AbstractController
     public function newAction(UserManager $userManager, Request $request, TranslatorInterface $trans)
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserForm::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $userManager->save($user, $this->getUser());
@@ -148,7 +148,7 @@ class UserController extends AbstractController
     public function editAction(User $user, Request $request, UserManager $userManager, TranslatorInterface $trans)
     {
         $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm(UserType::class, $user);
+        $editForm = $this->createForm(UserForm::class, $user);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $userManager->save($user, $this->getUser());

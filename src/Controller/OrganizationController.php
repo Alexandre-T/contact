@@ -18,7 +18,7 @@
 namespace App\Controller;
 
 use App\Entity\Organization;
-use App\Form\OrganizationType;
+use App\Form\OrganizationForm;
 use App\Manager\OrganizationManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -81,7 +81,7 @@ class OrganizationController extends AbstractController
     public function newAction(OrganizationManager $organizationManager, Request $request, TranslatorInterface $trans)
     {
         $organization = $organizationManager->createOrganization();
-        $form = $this->createForm(OrganizationType::class, $organization);
+        $form = $this->createForm(OrganizationForm::class, $organization);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $organizationManager->save($organization, $this->getUser());
@@ -146,7 +146,7 @@ class OrganizationController extends AbstractController
     public function editAction(Organization $organization, Request $request, OrganizationManager $organizationManager, TranslatorInterface $trans)
     {
         $deleteForm = $this->createDeleteForm($organization);
-        $editForm = $this->createForm(OrganizationType::class, $organization);
+        $editForm = $this->createForm(OrganizationForm::class, $organization);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $organizationManager->save($organization, $this->getUser());
