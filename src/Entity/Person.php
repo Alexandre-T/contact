@@ -66,8 +66,6 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
     private $id;
 
     //FIXME add these columns : Tel, Smartphone
-    //FIXME add as trait Facebook, Instagram, LinkedIn, Twitter
-
     /**
      * Postal address.
      *
