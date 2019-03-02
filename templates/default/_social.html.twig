@@ -1,23 +1,19 @@
-<div class="col-sm-4">
-    <dl class="row">
+<div class="float-right border-left pl-3">
+    <ul class="list-unstyled">
         {% if entity.facebook is not empty %}
-            <a href="{{ entity.facebook }}" title=""><span class="fa fa-facebook-square"></span></a>
+            <li><a href="{{ entity.facebook }}" title=""><span class="fab fa-facebook-square fa-2x"></span></a></li>
         {% endif %}
         {% if entity.instagram is not empty %}
-            <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-instagram"></span></dt>
-            <dd class="col-sm-8 ">{{ entity.instagram }}</dd>
+            <li><a href="{{ entity.instagram }}" title=""><span class="fab fa-instagram fa-2x"></span></a></li>
         {% endif %}
         {% if entity.linkedIn is not empty %}
-            <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-linkedin"></span></dt>
-            <dd class="col-sm-8 ">{{ entity.linkedIn }}</dd>
+            <li><a href="{{ entity.linkedIn }}" title=""><span class="fab fa-linkedin fa-2x"></span></a></li>
         {% endif %}
         {% if entity.twitter is not empty %}
-            <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-twitter"></span></dt>
-            <dd class="col-sm-8 ">{{ entity.twitter }}</dd>
+            <li><a href="{{ entity.twitter }}" title=""><span class="fab fa-twitter-square fa-2x"></span></a></li>
         {% endif %}
         {% if entity.youtube is not empty %}
-            <dt class="col-sm-4 text-truncate text-right"><span class="fa fa-youtube"></span></dt>
-            <dd class="col-sm-8 ">{{ entity.youtube }}</dd>
+            <li><a href="{{ entity.youtube }}" title=""><span class="fab fa-youtube-square fa-2x"></span></a></li>
         {% endif %}
-    </dl>
+    </ul>
 </div>

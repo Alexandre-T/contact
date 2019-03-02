@@ -11,26 +11,19 @@
     </h1>
 {% endblock headline %}
 
-{% set col = organization.socialNetwork ? 8 : 12 %}
-
 {% block content_settings %}
-    <div class="row">
-        <div class="col-sm-{{ col }}">
-            <dl class="row">
-                <dt class="col-sm-4 text-truncate text-right">{{ 'form.organization.field.label'| trans }}</dt>
-                <dd class="col-sm-8 ">{{ organization.label }}</dd>
-                <dt class="col-sm-4 text-truncate text-right">{{ 'form.organization.field.legal-name'| trans }}</dt>
-                <dd class="col-sm-8">{{ organization.legalName }}</dd>
-                <dt class="col-sm-4 text-truncate text-right">{{ 'form.organization.field.acronym-definition'| trans }}</dt>
-                <dd class="col-sm-8">{{ organization.acronymDefinition }}</dd>
-            </dl>
-        </div>
-        {% include 'default/_social.html.twig' with {'entity': organization} %}
-    </div>
-    {% if organization.address is not empty %}
-        <hr/>
+    {% include 'default/_social.html.twig' with {'entity': organization} %}
+    <dl class="row">
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.label'| trans }}</dt>
+        <dd class="col-sm-8 ">{{ organization.label }}</dd>
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.legal-name'| trans }}</dt>
+        <dd class="col-sm-8">{{ organization.legalName }}</dd>
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.acronym-definition'| trans }}</dt>
+        <dd class="col-sm-8">{{ organization.acronymDefinition }}</dd>
+    </dl>
+    {% if organization.address and not organization.address.empty %}
         <dl class="row">
-            <dt class="col-sm-4 text-truncate text-right">{{ 'form.organization.field.address'| trans }}</dt>
+            <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.address'| trans }}</dt>
             <dd class="col-sm-8">
                 {% if organization.address.postOfficeBoxNumber is not empty -%}
                     {{ organization.address.postOfficeBoxNumber }}<br/>
