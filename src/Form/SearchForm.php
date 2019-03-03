@@ -44,11 +44,17 @@ class SearchForm extends AbstractType
     {
         $builder
             //FIXME replace with a searchType
-            ->add('search', TextType::class)
-            ->add('category', CategoryType::class, [
+            ->add('search', TextType::class, [
+                'label' => 'form.field.search',
                 'required' => false,
             ])
-            ->add('submit', SubmitType::class)
+            ->add('category', CategoryType::class, [
+                'help' => null,
+                'required' => false,
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'form.submit.search',
+            ])
             ->setMethod('get')
             //TODO add Department Type
             //TODO add Region Type

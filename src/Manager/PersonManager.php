@@ -171,7 +171,7 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
 
         if (!empty($search['search'])) {
             $data = "%{$search['search']}%";
-            $qb->orWhere($qb->expr()->like('p.birthName', ':search'))
+            $qb->andWhere($qb->expr()->like('p.birthName', ':search'))
                 ->orWhere($qb->expr()->like('p.email', ':search'))
                 ->orWhere($qb->expr()->like('p.facebook', ':search'))
                 ->orWhere($qb->expr()->like('p.familyName', ':search'))
@@ -182,10 +182,15 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
                 ->orWhere($qb->expr()->like('p.twitter', ':search'))
                 ->orWhere($qb->expr()->like('p.url', ':search'))
                 ->orWhere($qb->expr()->like('p.youtube', ':search'))
-                ->setParameter('search', $data);
+            ->setParameter('search', $data);
         }
 
         //TODO Add filter when rubric and dpt and region are not empty
+        if (!empty($search['category'])) {
+            $qb->innerJoin('p.category', 'c')
+                ->andWhere('c.id = :id')
+                ->setParameter('id', $search['category']);
+        }
 
         $qb->getQuery();
 

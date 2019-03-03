@@ -160,6 +160,7 @@ form:
     legal-name: 'Nom juridique'
     member-of: 'Membre de'
     nationality: 'Nationalité'
+    search: 'Recherche'
     smartphone: 'Mobile'
     tel: 'Fixe'
     url: 'Site web'
@@ -185,6 +186,8 @@ form:
     help:
       mail: 'Entrez votre adresse email'
       password: 'Entrez votre mot de passe'
+  submit:
+    search: 'Recherche'
   user:
     field:
       username: 'Nom de l’utilisateur'
@@ -292,7 +295,7 @@ title:
     list: 'Liste des contacts'
     show %name%: 'Fiche du contact « %name% »'
   search:
-    index: 'Recherche'
+    index: 'Rechercher'
     result: 'Résultats de votre recherche...'
 img:
   business-card:
