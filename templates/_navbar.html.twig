@@ -30,7 +30,7 @@
             {% if is_granted('ROLE_READER') %}
             <form class="form-inline" action="{{ path('search') }}" method="get">
                 <div class="input-group mr-sm-1">
-                    <input type="text" class="form-control" name="search" placeholder="Recherche&hellip;">
+                    <input type="text" class="form-control" name="search_form[search]" placeholder="Recherche&hellip;">
                     <div class="input-group-append">
                         <button class="btn btn-secondary my-0" type="submit"><span class="fa fa-search"></span></button>
                     </div>
