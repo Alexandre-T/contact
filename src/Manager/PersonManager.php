@@ -26,6 +26,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Loggable\Entity\LogEntry;
 use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
@@ -153,6 +154,42 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
         $person->setAddress($postalAddress);
 
         return $person;
+    }
+
+    /**
+     * Get pagination for a class.
+     *
+     * @param string $search
+     * @param int    $page
+     * @param int    $limit
+     *
+     * @return PaginationInterface
+     */
+    public function search(string $search, int $page = 1, int $limit = self::LIMIT): PaginationInterface
+    {
+        $search = "%$search%";
+
+        $qb = $this->repository->createQueryBuilder('p');
+
+        $qb->orWhere($qb->expr()->like('p.birthName', ':search'))
+                ->orWhere($qb->expr()->like('p.email', ':search'))
+                ->orWhere($qb->expr()->like('p.facebook', ':search'))
+                ->orWhere($qb->expr()->like('p.familyName', ':search'))
+                ->orWhere($qb->expr()->like('p.givenName', ':search'))
+                ->orWhere($qb->expr()->like('p.instagram', ':search'))
+                ->orWhere($qb->expr()->like('p.jobTitle', ':search'))
+                ->orWhere($qb->expr()->like('p.linkedIn', ':search'))
+                ->orWhere($qb->expr()->like('p.twitter', ':search'))
+                ->orWhere($qb->expr()->like('p.url', ':search'))
+                ->orWhere($qb->expr()->like('p.youtube', ':search'))
+                ->setParameter('search', $search)
+                ->getQuery();
+
+        $pagination = $this->paginator->paginate($qb, $page, $limit);
+        dump($this->paginator);
+        dump($pagination);
+
+        return $pagination;
     }
 
     /**

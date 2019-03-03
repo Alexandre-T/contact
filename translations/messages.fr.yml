@@ -159,6 +159,8 @@ form:
     legal-name: 'Nom juridique'
     member-of: 'Membre de'
     nationality: 'Nationalité'
+    smartphone: 'Mobile'
+    tel: 'Fixe'
     url: 'Site web'
   help:
     acronym-definition: 'Entrez la signification de l’acronyme de l’organisation.'
@@ -288,6 +290,9 @@ title:
     edit %name%: 'Modification du contact « %name% »'
     list: 'Liste des contacts'
     show %name%: 'Fiche du contact « %name% »'
+  search:
+    index: 'Recherche'
+    result: 'Résultats de votre recherche...'
 img:
   business-card:
     alt: 'Homme tendant une carte de visite'
@@ -303,3 +308,11 @@ link:
   organization:
     show:
       title: 'Consulter la fiche de cette organisation'
+search:
+  tab:
+    person %count%: 'Contacts (%count%)'
+    organization %count%: 'Organisations (%count%)'
+  person:
+    empty: 'Aucun contact ne correspond à votre recherche.'
+  organization:
+    empty: 'Aucun contact ne correspond à votre recherche'

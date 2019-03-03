@@ -27,14 +27,13 @@
                 </a>
                 {% endif %}
             </div>
-            <form class="form-inline">
+            <form class="form-inline" action="{{ path('search') }}" method="get">
                 <div class="input-group mr-sm-1">
-                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Recherche">
+                    <input type="text" class="form-control" name="search" placeholder="Recherche&hellip;">
                     <div class="input-group-append">
                         <button class="btn btn-secondary my-0" type="submit"><span class="fa fa-search"></span></button>
                     </div>
                 </div>
-
             </form>
             <div class="navbar-nav ml-auto">
                 {% if is_granted('ROLE_MANAGE_USER') %}
