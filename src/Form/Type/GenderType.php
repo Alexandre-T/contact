@@ -48,7 +48,7 @@ class GenderType extends AbstractType
             'required' => false,
             'expanded' => true,
             'multiple' => false,
-            'attr' => ['class' => 'form-check-inline p-0 pt-2'],
+            'attr' => ['class' => 'form-check-inline p-0 pt-2 m-0'],
         ]);
     }
 

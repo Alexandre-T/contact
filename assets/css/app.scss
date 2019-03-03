@@ -17,3 +17,7 @@ label.required:after{
 .font-small{
   font-size: x-small;
 }
+.form-check-inline .form-check:first-child {
+  margin-left: 0;
+  padding-left: 0;
+}
