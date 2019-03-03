@@ -76,7 +76,7 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
      * PersonManager constructor.
      *
      * @param EntityManagerInterface $entityManager
-     * @param PaginatorInterface     $paginator
+     * @param PaginatorInterface $paginator
      */
     public function __construct(EntityManagerInterface $entityManager, PaginatorInterface $paginator)
     {
@@ -101,7 +101,7 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
      */
     public function getDefaultSortField(): string
     {
-        return self::ALIAS.'.familyName';
+        return self::ALIAS . '.familyName';
     }
 
     /**
@@ -160,8 +160,8 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
      * Get pagination for a class.
      *
      * @param array $search
-     * @param int   $page
-     * @param int   $limit
+     * @param int $page
+     * @param int $limit
      *
      * @return PaginationInterface
      */
@@ -182,10 +182,10 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
                 ->orWhere($qb->expr()->like('p.twitter', ':search'))
                 ->orWhere($qb->expr()->like('p.url', ':search'))
                 ->orWhere($qb->expr()->like('p.youtube', ':search'))
-            ->setParameter('search', $data);
+                ->setParameter('search', $data);
         }
 
-        //TODO Add filter when rubric and dpt and region are not empty
+        //TODO Add filter when region are not empty
         if (!empty($search['category'])) {
             $qb->innerJoin('p.category', 'c')
                 ->andWhere('c.id = :id')
@@ -193,15 +193,24 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
         }
 
         if (!empty($search['department'])) {
-            /*$qb->leftJoin('p.address', 'a')
-                ->andWhere($qb->expr()->like('a.postalCode', ':department'))
-                ->andWhere('a.country = :france');*/
-            $qb->leftJoin('p.memberOf', 'm')
+            $qb->leftJoin('p.address', 'a')
+                ->leftJoin('p.memberOf', 'm')
                 ->leftJoin('m.address', 'ao')
-                ->orWhere($qb->expr()->like('ao.postalCode', ':department'))
-                ->andWhere('ao.country = :france')
-                ->setParameter('department', $search['department'].'%')
-                ->setParameter('france', 'FR');
+                ->andWhere(
+                    $qb->expr()->orX(
+                        $qb->expr()->andX(
+                            $qb->expr()->like('a.postalCode', ':department'),
+                            $qb->expr()->eq('a.country', ':france')
+                        ),
+                        $qb->expr()->andX(
+                            $qb->expr()->like('ao.postalCode', ':department'),
+                            $qb->expr()->eq('ao.country', ':france')
+                        )
+                    )
+                )
+                ->setParameter('department', $search['department'] . '%')
+                ->setParameter('france', 'FR')
+            ;
         }
 
         $qb->getQuery();
