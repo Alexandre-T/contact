@@ -16,6 +16,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Organization;
+use App\Entity\PostalAddress;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -43,14 +44,18 @@ class OrganizationFixtures extends Fixture implements DependentFixtureInterface
             $organization->setLabel('Test-1');
             $manager->persist($organization);
 
-            //We add 30 organizations.
+            //We add 39 organizations.
             /** @var Organization[] $organizations */
             $organizations = [];
-            foreach (range(0, 35) as $index) {
+            foreach (range(0, 39) as $index) {
+                $address = new PostalAddress();
+                $address->setCountry('FR')
+                    ->setPostalCode(sprintf('%02d000', $index));
                 $organizations[$index] = new Organization();
                 $organizations[$index]->setLabel("Organization-$index")
                     ->setLegalName("Legal name $index")
                     ->setAcronymDefinition("Definition $index")
+                    ->setAddress($address)
                     ->setCreator($organiser);
                 $this->addReference("organization_$index", $organizations[$index]);
                 $manager->persist($organizations[$index]);

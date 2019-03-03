@@ -13,15 +13,6 @@
     <div class="card">
     <div class="card-header">
         {{ form(form_search) }}
-        {#<form class="form-inline" action="{{ path('search') }}" method="get">#}
-            {#<div class="input-group mb-2">#}
-                {#<input type="text" class="form-control" name="search"#}
-                       {#placeholder="Recherche&hellip;" value="{{ criteria }}">#}
-                {#<div class="input-group-append">#}
-                    {#<button class="btn btn-secondary my-0" type="submit"><span class="fa fa-search"></span></button>#}
-                {#</div>#}
-            {#</div>#}
-        {#</form>#}
         <ul class="nav nav-tabs card-header-tabs" id="entityTab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" href="#persons" aria-controls="persons" role="tab" data-toggle="tab">
@@ -76,16 +67,26 @@
                                             </ul>
                                         </div>
                                         <div class="col-sm-2">
+                                            {% if person.facebook is not empty %}
                                             <a href="{{ person.facebook }}" title=""><span
                                                         class="fab fa-facebook-square"></span><br/></a>
+                                            {% endif %}
+                                            {% if person.facebook is not empty %}
                                             <a href="{{ person.instagram }}" title=""><span
                                                         class="fab fa-instagram"></span><br/></a>
+                                            {% endif %}
+                                            {% if person.facebook is not empty %}
                                             <a href="{{ person.linkedIn }}" title=""><span
                                                         class="fab fa-linkedin"></span><br/></a>
+                                            {% endif %}
+                                            {% if person.facebook is not empty %}
                                             <a href="{{ person.twitter }}" title=""><span
                                                         class="fab fa-twitter-square"></span><br/></a>
+                                            {% endif %}
+                                            {% if person.facebook is not empty %}
                                             <a href="{{ person.youtube }}" title=""><span
                                                         class="fab fa-twitter-square"></span></a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

@@ -43,8 +43,8 @@ class PersonFixtures extends Fixture implements DependentFixtureInterface
             $organiser = $this->getReference('user_organiser');
             /** @var Organization[] $organizations */
             $organizations = [];
-            foreach (range(0, 10) as $index) {
-                $organizations[$index] = $this->getReference("organization_$index");
+            foreach (range(0, 9) as $index) {
+                $organizations[$index] = $this->getReference("organization_3$index");
             }
             /** @var Category[] $categories */
             $categories = [];

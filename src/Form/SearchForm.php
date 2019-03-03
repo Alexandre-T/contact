@@ -18,6 +18,7 @@
 namespace App\Form;
 
 use App\Form\Type\CategoryType;
+use App\Form\Type\DepartmentType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -52,13 +53,13 @@ class SearchForm extends AbstractType
                 'help' => null,
                 'required' => false,
             ])
+            //TODO add Department Type
+            //TODO add Region Type
+            ->add('department', DepartmentType::class)
             ->add('submit', SubmitType::class, [
                 'label' => 'form.submit.search',
             ])
-            ->setMethod('get')
-            //TODO add Department Type
-            //TODO add Region Type
-        ;
+            ->setMethod('get');
     }
 
     /**

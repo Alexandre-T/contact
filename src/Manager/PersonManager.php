@@ -192,6 +192,18 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
                 ->setParameter('id', $search['category']);
         }
 
+        if (!empty($search['department'])) {
+            /*$qb->leftJoin('p.address', 'a')
+                ->andWhere($qb->expr()->like('a.postalCode', ':department'))
+                ->andWhere('a.country = :france');*/
+            $qb->leftJoin('p.memberOf', 'm')
+                ->leftJoin('m.address', 'ao')
+                ->orWhere($qb->expr()->like('ao.postalCode', ':department'))
+                ->andWhere('ao.country = :france')
+                ->setParameter('department', $search['department'].'%')
+                ->setParameter('france', 'FR');
+        }
+
         $qb->getQuery();
 
         $pagination = $this->paginator->paginate($qb, $page, $limit);
