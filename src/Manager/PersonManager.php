@@ -159,19 +159,19 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
     /**
      * Get pagination for a class.
      *
-     * @param string $search
-     * @param int    $page
-     * @param int    $limit
+     * @param array $search
+     * @param int   $page
+     * @param int   $limit
      *
      * @return PaginationInterface
      */
-    public function search(string $search, int $page = 1, int $limit = self::LIMIT): PaginationInterface
+    public function search(array $search, int $page = 1, int $limit = self::LIMIT): PaginationInterface
     {
-        $search = "%$search%";
-
         $qb = $this->repository->createQueryBuilder('p');
 
-        $qb->orWhere($qb->expr()->like('p.birthName', ':search'))
+        if (!empty($search['search'])) {
+            $data = "%{$search['search']}%";
+            $qb->orWhere($qb->expr()->like('p.birthName', ':search'))
                 ->orWhere($qb->expr()->like('p.email', ':search'))
                 ->orWhere($qb->expr()->like('p.facebook', ':search'))
                 ->orWhere($qb->expr()->like('p.familyName', ':search'))
@@ -182,12 +182,14 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
                 ->orWhere($qb->expr()->like('p.twitter', ':search'))
                 ->orWhere($qb->expr()->like('p.url', ':search'))
                 ->orWhere($qb->expr()->like('p.youtube', ':search'))
-                ->setParameter('search', $search)
-                ->getQuery();
+                ->setParameter('search', $data);
+        }
+
+        //TODO Add filter when rubric and dpt and region are not empty
+
+        $qb->getQuery();
 
         $pagination = $this->paginator->paginate($qb, $page, $limit);
-        dump($this->paginator);
-        dump($pagination);
 
         return $pagination;
     }

@@ -35,6 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          @ORM\Index(name="ndx_person_alumni", columns={"school_id"}),
  *          @ORM\Index(name="ndx_person_birthCountry", columns={"per_nationality"}),
  *          @ORM\Index(name="ndx_person_birthName", columns={"per_birthName", "per_givenName"}),
+ *          @ORM\Index(name="ndx_person_category", columns={"category_id"}),
  *          @ORM\Index(name="ndx_person_creator", columns={"creator_id"}),
  *          @ORM\Index(name="ndx_person_familyName", columns={"per_familyName", "per_givenName"}),
  *          @ORM\Index(name="ndx_person_member", columns={"organization_id"})
@@ -65,7 +66,6 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
      */
     private $id;
 
-    //FIXME add these columns : Tel, Smartphone
     /**
      * Postal address.
      *
@@ -220,6 +220,16 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
      * @Gedmo\Versioned()
      */
     private $url;
+
+    /**
+     * Category.
+     *
+     * @var Category
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="people", fetch="EAGER")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="cat_id", nullable=false)
+     */
+    private $category;
 
     /**
      * Return available genders.
@@ -575,6 +585,30 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
     public function setFamilyName(string $familyName): self
     {
         $this->familyName = $familyName;
+
+        return $this;
+    }
+
+    /**
+     * Category getter.
+     *
+     * @return Category|null
+     */
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    /**
+     * Category fluent setter.
+     *
+     * @param Category|null $category
+     *
+     * @return Person
+     */
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

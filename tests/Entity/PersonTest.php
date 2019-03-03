@@ -17,6 +17,7 @@
 
 namespace App\Tests\Entity;
 
+use App\Entity\Category;
 use App\Entity\Organization;
 use App\Entity\Person;
 use App\Entity\PostalAddress;
@@ -48,6 +49,7 @@ class PersonTest extends TestCase
         self::assertNull($this->person->getAddress());
         self::assertNull($this->person->getAlumnus());
         self::assertNull($this->person->getBirthName());
+        self::assertNull($this->person->getCategory());
         self::assertNull($this->person->getCreated());
         self::assertNull($this->person->getCreator());
         self::assertNull($this->person->getEmail());
@@ -92,6 +94,17 @@ class PersonTest extends TestCase
 
         self::assertEquals($this->person, $this->person->setMemberOf($actual));
         self::assertEquals($expected, $this->person->getMemberOf());
+    }
+
+    /**
+     * Test the method GetCategory.
+     */
+    public function testGetCategory()
+    {
+        $expected = $actual = new Category();
+
+        self::assertEquals($this->person, $this->person->setCategory($actual));
+        self::assertEquals($expected, $this->person->getCategory());
     }
 
     /**

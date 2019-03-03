@@ -17,6 +17,7 @@
 
 namespace App\Controller;
 
+use App\Form\SearchForm;
 use App\Manager\PersonManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,7 +30,6 @@ use Symfony\Component\Routing\Annotation\Route;
  * Realises all search.
  *
  * @Security("is_granted('ROLE_READER')")
- *
  */
 class SearchController extends AbstractController
 {
@@ -48,14 +48,16 @@ class SearchController extends AbstractController
      */
     public function index(Request $request, PersonManager $personManager)
     {
-        $search = $request->query->getAlpha('search', 'xxxxxxxxxx');
         $personPage = $request->query->getInt('page', 1);
 
-        $personPaginator = $personManager->search($search, $personPage, self::LIMIT_PER_PAGE);
+        $form = $this->createForm(SearchForm::class);
+        $form->handleRequest($request);
+
+        $personPaginator = $personManager->search($form->getData(), $personPage, self::LIMIT_PER_PAGE);
 
         return $this->render('search/index.html.twig', [
+            'form_search' => $form->createView(),
             'personPaginator' => $personPaginator,
-            'criteria' => $search,
         ]);
     }
 }

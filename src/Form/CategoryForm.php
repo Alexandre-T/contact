@@ -17,7 +17,7 @@
 
 namespace App\Form;
 
-use App\Entity\Person;
+use App\Entity\Category;
 use App\Form\Type\BirthNameType;
 use App\Form\Type\CategoryType;
 use App\Form\Type\CountryType;
@@ -39,9 +39,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Person form class.
+ * Category form class.
  */
-class PersonForm extends AbstractType
+class CategoryForm extends AbstractType
 {
     /**
      * Builds the form.
@@ -75,7 +75,7 @@ class PersonForm extends AbstractType
             ->add('telephone', TelephoneType::class)
             ->add('url', UrlType::class)
             ->add('address', PostalAddressForm::class, [
-                'label' => 'form.person.field.address',
+                'label' => 'form.category.field.address',
             ])
             ->add('alumnus', OrganizationType::class, [
                 'label' => 'form.field.alumnus',
@@ -105,7 +105,7 @@ class PersonForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Person::class,
+            'data_class' => Category::class,
         ]);
     }
 }

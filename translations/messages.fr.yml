@@ -150,6 +150,7 @@ form:
     address: 'Adresse'
     alumnus: 'Ancien élève de'
     birth-name: 'Nom de naissance'
+    category: 'Rubrique'
     email: 'Adresse email'
     family-name: 'Nom de famille'
     gender: 'Genre'

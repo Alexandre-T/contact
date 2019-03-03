@@ -15,6 +15,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use App\Entity\Organization;
 use App\Entity\Person;
 use App\Entity\PostalAddress;
@@ -45,10 +46,16 @@ class PersonFixtures extends Fixture implements DependentFixtureInterface
             foreach (range(0, 10) as $index) {
                 $organizations[$index] = $this->getReference("organization_$index");
             }
+            /** @var Category[] $categories */
+            $categories = [];
+            foreach (range(0, 5) as $index) {
+                $categories[$index] = $this->getReference("category_$index");
+            }
 
             $person = new Person();
             $person->setGivenName('Jane')
                 ->setBirthName('Birth')
+                ->setCategory($categories[5])
                 ->setFamilyName('Doe')
                 ->setNationality('FR')
                 ->setJobTitle('Depute')
@@ -77,6 +84,7 @@ class PersonFixtures extends Fixture implements DependentFixtureInterface
 
             $person = new Person();
             $person->setGivenName('John')
+                ->setCategory($categories[1])
                 ->setFamilyName('Doe')
                 ->setNationality('FR')
                 ->setJobTitle('Designer')
@@ -109,6 +117,7 @@ class PersonFixtures extends Fixture implements DependentFixtureInterface
                 $persons[$index] = new Person();
                 $persons[$index]->setGivenName("Given$index")
                     ->setBirthName("Birth$index")
+                    ->setCategory($categories[$index % 5])
                     ->setFamilyName("Doe$index")
                     ->setNationality('FR')
                     ->setGender($index % Person::OTHER)
@@ -145,6 +154,7 @@ class PersonFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
+            CategoryFixtures::class,
             OrganizationFixtures::class,
             UserFixtures::class,
         ];
