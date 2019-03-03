@@ -27,6 +27,7 @@
                 </a>
                 {% endif %}
             </div>
+            {% if is_granted('ROLE_READER') %}
             <form class="form-inline" action="{{ path('search') }}" method="get">
                 <div class="input-group mr-sm-1">
                     <input type="text" class="form-control" name="search" placeholder="Recherche&hellip;">
@@ -35,6 +36,7 @@
                     </div>
                 </div>
             </form>
+            {% endif %}
             <div class="navbar-nav ml-auto">
                 {% if is_granted('ROLE_MANAGE_USER') %}
                 <a class="nav-item nav-link" href="{{ path('administration_user_index') }}" title="{{ 'nav.user.title' | trans }}">

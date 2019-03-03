@@ -18,6 +18,7 @@
 namespace App\Controller;
 
 use App\Manager\PersonManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,6 +27,9 @@ use Symfony\Component\Routing\Annotation\Route;
  * Search controller class.
  *
  * Realises all search.
+ *
+ * @Security("is_granted('ROLE_READER')")
+ *
  */
 class SearchController extends AbstractController
 {
