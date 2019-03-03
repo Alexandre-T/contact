@@ -189,6 +189,28 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
     private $nationality;
 
     /**
+     * Smartphone number.
+     *
+     * @Assert\Length(max="20")
+     *
+     * @ORM\Column(type="string", length=20, nullable=true)
+     *
+     * @Gedmo\Versioned()
+     */
+    private $smartphone;
+
+    /**
+     * Telephone number.
+     *
+     * @Assert\Length(max="20")
+     *
+     * @ORM\Column(type="string", length=20, nullable=true)
+     *
+     * @Gedmo\Versioned()
+     */
+    private $telephone;
+
+    /**
      * Website contact.
      *
      * @Assert\Url()
@@ -365,6 +387,54 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
     public function setNationality(?string $nationality): self
     {
         $this->nationality = $nationality;
+
+        return $this;
+    }
+
+    /**
+     * Smartphone getter.
+     *
+     * @return string|null
+     */
+    public function getSmartphone(): ?string
+    {
+        return $this->smartphone;
+    }
+
+    /**
+     * Smartphone fluent setter.
+     *
+     * @param string|null $smartphone
+     *
+     * @return Person
+     */
+    public function setSmartphone(?string $smartphone): self
+    {
+        $this->smartphone = $smartphone;
+
+        return $this;
+    }
+
+    /**
+     * Telephone getter.
+     *
+     * @return string|null
+     */
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * Telephone fluent setter.
+     *
+     * @param string|null $telephone
+     *
+     * @return Person
+     */
+    public function setTelephone(?string $telephone): self
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }

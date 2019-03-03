@@ -28,6 +28,7 @@ use App\Form\Type\InstagramType;
 use App\Form\Type\JobTitleType;
 use App\Form\Type\LinkedInType;
 use App\Form\Type\OrganizationType;
+use App\Form\Type\TelephoneType;
 use App\Form\Type\TwitterType;
 use App\Form\Type\UrlType;
 use App\Form\Type\YoutubeType;
@@ -65,6 +66,11 @@ class PersonForm extends AbstractType
                 'required' => false,
             ])
             ->add('gender', GenderType::class)
+            ->add('smartphone', TelephoneType::class, [
+                'label' => 'form.field.smartphone',
+                'help' => 'form.help.smartphone',
+            ])
+            ->add('telephone', TelephoneType::class)
             ->add('url', UrlType::class)
             ->add('address', PostalAddressForm::class, [
                 'label' => 'form.person.field.address',
