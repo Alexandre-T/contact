@@ -15,16 +15,10 @@
         {{ form(form_search) }}
         <ul class="nav nav-tabs card-header-tabs" id="entityTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" href="#persons" aria-controls="persons" role="tab" data-toggle="tab">
+                <span class="nav-link active" role="tab">
                     <span class="fas fa-address-card"></span>
                     {{ 'search.tab.person %count%' | trans({'%count%': personPaginator.totalItemCount }) }}
-                </a>
-            <li class="nav-item">
-                <a class="nav-link" href="#organizations" aria-controls="organizations"
-                   role="tab" data-toggle="tab">
-                    <span class="fa fa-file-archive"></span>
-                    {{ 'search.tab.organization %count%' | trans({'%count%': 0}) }}
-                </a>
+                </span>
             </li>
         </ul>
     </div>
@@ -98,13 +92,6 @@
             <div class="text-right">
                 {{ knp_pagination_render(personPaginator) }}
             </div>
-        </div>
-        <div role="tabpanel" class="tab-pane fade" id="organizations">
-            {% if 0 == 0 %}
-                <div class="alert alert-info">
-                    {{ 'search.organization.empty' | trans }}
-                </div>
-            {% endif %}
         </div>
     </div>
 {% endblock container %}
