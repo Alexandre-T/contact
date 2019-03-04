@@ -111,14 +111,17 @@ class OrganizationController extends AbstractController
      *
      * @param Organization        $organization
      * @param OrganizationManager $organizationManager
+     * @param Request             $request
      *
      * @return Response
      */
-    public function showAction(Organization $organization, OrganizationManager $organizationManager)
+    public function showAction(Organization $organization, OrganizationManager $organizationManager, Request $request)
     {
+        $page = $request->query->getInt('page', 1);
         $deleteForm = $this->createDeleteForm($organization);
         $logs = $organizationManager->retrieveLogs($organization);
         $addressLogs = $organizationManager->retrieveLogs($organization->getAddress());
+        $contactPagination = $organizationManager->getContacts($organization, $page, self::LIMIT_PER_PAGE);
 
         return $this->render('organization/show.html.twig', [
             'isDeletable' => $organizationManager->isDeletable($organization),
@@ -126,6 +129,7 @@ class OrganizationController extends AbstractController
             'addressLogs' => $addressLogs,
             'information' => $organization,
             'organization' => $organization,
+            'pagination' => $contactPagination,
             'deletable' => $organizationManager->isDeletable($organization),
             'delete_form' => $deleteForm->createView(),
         ]);

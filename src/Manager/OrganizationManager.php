@@ -28,6 +28,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Loggable\Entity\LogEntry;
 use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
@@ -165,6 +166,24 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
         $organization->setAddress($postalAddress);
 
         return $organization;
+    }
+
+    /**
+     * Get paginated contact from an organization.
+     *
+     * @param Organization $organization
+     * @param int          $page
+     * @param int          $limit
+     *
+     * @return PaginationInterface
+     */
+    public function getContacts(Organization $organization, int $page, int $limit): PaginationInterface
+    {
+        $qb = $this->personRepository->createQueryBuilder('p');
+        $qb->where('p.memberOf = :organization')
+            ->setParameter('organization', $organization);
+
+        return $this->paginator->paginate($qb, $page, $limit);
     }
 
     /**

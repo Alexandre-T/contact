@@ -24,74 +24,7 @@
     </div>
     <div class="card-body tab-content">
         <div role="tabpanel" class="tab-pane fade show active" id="persons">
-            <div class="text-right">
-                {{ knp_pagination_render(personPaginator) }}
-            </div>
-            {% if personPaginator.items is empty %}
-                <div class="alert alert-info">
-                    {{ 'search.person.empty' | trans }}
-                </div>
-            {% else %}
-                <div class="row">
-                    {% for person in personPaginator.items %}
-                        <div class="col-sm-4">
-                            <div class="card my-2">
-                                <h5 class="card-header">
-                                    <a href="{{ path('person_show', {'id': person.id}) }}"
-                                       class="text-dark"><u>{{ person.label }}</u></a>
-                                    <span class="fas fa-address-card float-right"></span>
-                                </h5>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-10 d-flex align-items-start flex-column">
-                                            <p class="mb-auto text-center mx-auto">
-                                                <strong class="d-block">{{ person.jobTitle }}</strong>
-                                                {% if person.memberOf %}
-                                                    <a href="{{ path('organization_show', {'id': person.memberOf.id}) }}"
-                                                       class="text-secondary">
-                                                        <u>{{ person.memberOf.label }}</u>
-                                                    </a>
-                                                {% endif %}
-                                            </p>
-                                            <ul class="list-unstyled font-small mb-0">
-                                                <li>{{ 'form.field.tel' | trans }}: {{ person.telephone }}</li>
-                                                <li>{{ 'form.field.smartphone' | trans }}
-                                                    : {{ person.smartphone }}</li>
-                                                <li>{{ 'form.field.email' | trans }}: {{ person.email }}</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            {% if person.facebook is not empty %}
-                                            <a href="{{ person.facebook }}" title=""><span
-                                                        class="fab fa-facebook-square"></span><br/></a>
-                                            {% endif %}
-                                            {% if person.facebook is not empty %}
-                                            <a href="{{ person.instagram }}" title=""><span
-                                                        class="fab fa-instagram"></span><br/></a>
-                                            {% endif %}
-                                            {% if person.facebook is not empty %}
-                                            <a href="{{ person.linkedIn }}" title=""><span
-                                                        class="fab fa-linkedin"></span><br/></a>
-                                            {% endif %}
-                                            {% if person.facebook is not empty %}
-                                            <a href="{{ person.twitter }}" title=""><span
-                                                        class="fab fa-twitter-square"></span><br/></a>
-                                            {% endif %}
-                                            {% if person.facebook is not empty %}
-                                            <a href="{{ person.youtube }}" title=""><span
-                                                        class="fab fa-youtube-square"></span></a>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-            <div class="text-right">
-                {{ knp_pagination_render(personPaginator) }}
-            </div>
+            {% include '_contacts.html.twig' with { 'pagination': personPaginator } %}
         </div>
     </div>
 {% endblock container %}

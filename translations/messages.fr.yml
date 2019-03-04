@@ -114,6 +114,7 @@ entity:
     general: 'Généralités'
     logs: 'Historique des modifications'
     informations: 'Informations'
+    contacts: 'messages'
   user:
     created %name%: 'L’utilisateur « %name% » a été créé avec succès.'
     deleted %name%: 'L’utilisateur « %name% » a été supprimé avec succès.'

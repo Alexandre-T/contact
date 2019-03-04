@@ -11,6 +11,21 @@
     </h1>
 {% endblock headline %}
 
+{% block content_tabs_header %}
+    <li class="nav-item">
+        <a class="nav-link" href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab">
+            <span class="fas fa-users"></span>
+            {{ 'search.tab.person %count%' | trans({'%count%': pagination.totalItemCount }) }}
+        </a>
+    </li>
+{% endblock content_tabs_header %}
+
+{% block content_other_tabs %}
+    <div role="tabpanel" class="tab-pane fade" id="contacts">
+        {% include '_contacts.html.twig' with { 'pagination': pagination } %}
+    </div>
+{% endblock content_other_tabs %}
+
 {% block content_settings %}
     {% include 'default/_social.html.twig' with {'entity': organization} %}
     <dl class="row">

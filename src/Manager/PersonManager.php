@@ -76,7 +76,7 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
      * PersonManager constructor.
      *
      * @param EntityManagerInterface $entityManager
-     * @param PaginatorInterface $paginator
+     * @param PaginatorInterface     $paginator
      */
     public function __construct(EntityManagerInterface $entityManager, PaginatorInterface $paginator)
     {
@@ -101,7 +101,7 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
      */
     public function getDefaultSortField(): string
     {
-        return self::ALIAS . '.familyName';
+        return self::ALIAS.'.familyName';
     }
 
     /**
@@ -160,8 +160,8 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
      * Get pagination for a class.
      *
      * @param array $search
-     * @param int $page
-     * @param int $limit
+     * @param int   $page
+     * @param int   $limit
      *
      * @return PaginationInterface
      */
@@ -208,7 +208,7 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
                         )
                     )
                 )
-                ->setParameter('department', $search['department'] . '%')
+                ->setParameter('department', $search['department'].'%')
                 ->setParameter('france', 'FR')
             ;
         }

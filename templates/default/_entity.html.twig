@@ -10,30 +10,30 @@
                 {# <!-- Nav tabs --> #}
                 <ul class="nav nav-tabs card-header-tabs" id="entityTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#general" aria-controls="home" role="tab" data-toggle="tab">
-                            <span class="fa fa-info-circle"></span>
+                        <a class="nav-link active" href="#general" aria-controls="general" role="tab" data-toggle="tab">
+                            <span class="fas fa-info-circle"></span>
                             {{ 'entity.tab.general' | trans }}
                         </a>
                     </li>
                     {% block content_tabs_header %}{% endblock content_tabs_header %}
                     <li class="nav-item">
-                        <a class="nav-link {{ logs is not defined ? 'disabled' }}" href="#logs" aria-controls="profile"
+                        <a class="nav-link {{ logs is not defined ? 'disabled' }}" href="#logs" aria-controls="logs"
                            role="tab" data-toggle="tab">
-                            <span class="fa fa-file-archive"></span>
+                            <span class="fas fa-file-archive"></span>
                             {{ 'entity.tab.logs' | trans }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ addressLogs is not defined ? 'disabled' }}" href="#addressLogs"
-                           aria-controls="profile" role="tab" data-toggle="tab">
+                           aria-controls="addressLogs" role="tab" data-toggle="tab">
                             <span class="fa fa-home"></span>
                             {{ 'entity.tab.address-logs' | trans }}
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ information is not defined ? 'disabled' }}" href="#informations"
-                           aria-controls="messages" role="tab" data-toggle="tab">
-                            <span class="fa fa-clock"></span>
+                           aria-controls="informations" role="tab" data-toggle="tab">
+                            <span class="fas fa-clock"></span>
                             {{ 'entity.tab.informations' | trans }}
                         </a>
                     </li>
@@ -45,6 +45,7 @@
                     <div role="tabpanel" class="tab-pane fade show active" id="general">
                         {% block content_settings %}{% endblock content_settings %}
                     </div>
+                    {% block content_other_tabs %}{% endblock content_other_tabs %}
                     <div role="tabpanel" class="tab-pane fade" id="logs">
                         {% block content_logs %}
                         {% if logs is defined and logs | length > 0 %}
@@ -61,6 +62,7 @@
                     {% endblock content_logs %}
                     <div role="tabpanel" class="tab-pane" id="informations">
                         {% block content_information %}
+                            {# TODO Put this in a sub template and use it in each show view #}
                             {% if information is defined %}
                                 <div class="panel panel-default" id="default-creator-information">
                                     <div class="panel-heading">
