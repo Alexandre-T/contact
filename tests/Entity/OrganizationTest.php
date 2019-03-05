@@ -48,6 +48,8 @@ class OrganizationTest extends TestCase
         self::assertNull($this->organization->getCreator());
         self::assertNull($this->organization->getLabel());
         self::assertNull($this->organization->getLegalName());
+        self::assertNotNull($this->organization->getServices());
+        self::assertEmpty($this->organization->getServices());
         self::assertNull($this->organization->getUpdated());
     }
 

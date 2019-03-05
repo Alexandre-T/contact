@@ -38,7 +38,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          @ORM\Index(name="ndx_person_category", columns={"category_id"}),
  *          @ORM\Index(name="ndx_person_creator", columns={"creator_id"}),
  *          @ORM\Index(name="ndx_person_familyName", columns={"per_familyName", "per_givenName"}),
- *          @ORM\Index(name="ndx_person_member", columns={"organization_id"})
+ *          @ORM\Index(name="ndx_person_member", columns={"organization_id"}),
+ *          @ORM\Index(name="ndx_person_service", columns={"service_id"})
  *     },
  *     uniqueConstraints={
  *          @ORM\UniqueConstraint(name="uk_person_address", columns={"address_id"})
@@ -230,6 +231,16 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
      * @ORM\JoinColumn(name="category_id", referencedColumnName="cat_id", nullable=false)
      */
     private $category;
+
+    /**
+     * Service.
+     *
+     * @var Service
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="people", fetch="EAGER")
+     * @ORM\JoinColumn(name="service_id", referencedColumnName="ser_id", nullable=true)
+     */
+    private $service;
 
     /**
      * Return available genders.
@@ -609,6 +620,30 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Service getter.
+     *
+     * @return Service|null
+     */
+    public function getService(): ?Service
+    {
+        return $this->service;
+    }
+
+    /**
+     * Service fluent setter.
+     *
+     * @param Service|null $service
+     *
+     * @return Person
+     */
+    public function setService(?Service $service): self
+    {
+        $this->service = $service;
 
         return $this;
     }
