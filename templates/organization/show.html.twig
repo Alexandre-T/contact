@@ -18,11 +18,20 @@
             {{ 'search.tab.person %count%' | trans({'%count%': pagination.totalItemCount }) }}
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#services" aria-controls="contacts" role="tab" data-toggle="tab">
+            <span class="fas fa-users"></span>
+            {{ 'search.tab.service %count%' | trans({'%count%': organization.services | length }) }}
+        </a>
+    </li>
 {% endblock content_tabs_header %}
 
 {% block content_other_tabs %}
     <div role="tabpanel" class="tab-pane fade" id="contacts">
         {% include '_contacts.html.twig' with { 'pagination': pagination } %}
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="services">
+        {% include '_services.html.twig' with { 'services': organization.services } %}
     </div>
 {% endblock content_other_tabs %}
 

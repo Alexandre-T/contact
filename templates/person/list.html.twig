@@ -4,7 +4,7 @@
 
 {% block headline %}
     <h1>
-        <span class="fas fa-fw fa-users"></span>
+        <span class="far fa-fw fa-address-book"></span>
         {{ 'title.person.list'|trans }}
     </h1>
 {% endblock %}
@@ -15,7 +15,7 @@
     <table class="table">
         <thead>
         <tr>
-            <td headers="person-logo"><span class="fas fa-users"></span></td>
+            <td headers="person-logo"><span class="far fa-address-book"></span></td>
             <th id="person-label">
                 {{ knp_pagination_sortable(pagination, 'form.field.label' | trans, 'label')}}
                 <span class="{{ faSort(pagination.isSorted('label'), direction, 'alpha') }}"></span>

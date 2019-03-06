@@ -1,0 +1,11 @@
+{% if services is empty %}
+    <p class="alert alert-info">
+        {{ 'search.service.empty' | trans }}
+    </p>
+{% else %}
+    <ul>
+        {% for service in services %}
+            <li>{{ service.name }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}

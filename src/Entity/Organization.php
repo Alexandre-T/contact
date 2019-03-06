@@ -134,7 +134,7 @@ class Organization implements EntityInterface, InformationInterface, SocialInter
     /**
      * Services.
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="organization", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="organization", orphanRemoval=true, cascade={"persist"})
      */
     private $services;
 

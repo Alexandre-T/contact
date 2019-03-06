@@ -17,6 +17,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Organization;
 use App\Entity\PostalAddress;
+use App\Entity\Service;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -57,6 +58,12 @@ class OrganizationFixtures extends Fixture implements DependentFixtureInterface
                     ->setAcronymDefinition("Definition $index")
                     ->setAddress($address)
                     ->setCreator($organiser);
+                foreach (range(0,$index % 10) as $subIndex) {
+                    $service = new Service();
+                    $service->setCreator($organiser);
+                    $service->setName("Service O$index-$subIndex");
+                    $organizations[$index]->addService($service);
+                }
                 $this->addReference("organization_$index", $organizations[$index]);
                 $manager->persist($organizations[$index]);
             }

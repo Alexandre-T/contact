@@ -112,9 +112,9 @@ entity:
   tab:
     address-logs: 'Changements d’adresse'
     general: 'Généralités'
-    logs: 'Historique des modifications'
+    logs: 'Historique'
     informations: 'Informations'
-    contacts: 'messages'
+    contacts: 'Contacts'
   user:
     created %name%: 'L’utilisateur « %name% » a été créé avec succès.'
     deleted %name%: 'L’utilisateur « %name% » a été supprimé avec succès.'
@@ -333,7 +333,10 @@ search:
   tab:
     person %count%: 'Contacts (%count%)'
     organization %count%: 'Organisations (%count%)'
+    service %count%: 'Services (%count%)'
   person:
     empty: 'Aucun contact ne correspond à votre recherche.'
   organization:
     empty: 'Aucun contact ne correspond à votre recherche'
+  service:
+    empty: 'Aucun service'
