@@ -239,6 +239,8 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Service", inversedBy="people", fetch="EAGER")
      * @ORM\JoinColumn(name="service_id", referencedColumnName="ser_id", nullable=true)
+     *
+     * @Gedmo\Versioned
      */
     private $service;
 
