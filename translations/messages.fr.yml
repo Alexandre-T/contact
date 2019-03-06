@@ -149,6 +149,8 @@ form:
       street: 'Entrez l’adresse'
   error:
     country: 'Le pays sélectionné n’est pas valide, veuillez sélectionner un pays dans la liste'
+    loading:
+      service: 'Une erreur est survenue en chargeant les services de cette organisation.'
   field:
     acronym-definition: 'Nom complet'
     address: 'Adresse'

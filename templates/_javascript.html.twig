@@ -26,9 +26,8 @@
           serviceSelect.append('<option value="' + service.id + '">' + service.name + '</option>');
         });
       },
-      error: function (err) {
-        {# FIXME translate #}
-        alert("An error ocurred while loading data ..." + JSON.stringify(err));
+      error: function () {
+        alert(`{{ 'form.error.loading.service' | trans }}`);
       }
     });
   });
