@@ -58,7 +58,7 @@ class OrganizationFixtures extends Fixture implements DependentFixtureInterface
                     ->setAcronymDefinition("Definition $index")
                     ->setAddress($address)
                     ->setCreator($organiser);
-                foreach (range(0,$index % 10) as $subIndex) {
+                foreach (range(0, $index % 10) as $subIndex) {
                     $service = new Service();
                     $service->setCreator($organiser);
                     $service->setName("Service O$index-$subIndex");
