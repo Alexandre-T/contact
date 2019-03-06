@@ -1,6 +1,6 @@
 <script>
   $('#app_person_memberOf').change(function () {
-    var organizationSelector = $(this);
+    const organizationSelector = $(this);
 
     // Request the services of the selected organization.
     $.ajax({
@@ -10,8 +10,15 @@
       data: {
         organization: organizationSelector.val()
       },
+      beforeSend: function() {
+        const serviceSelect = $("#app_person_service");
+
+        // Remove current options
+        serviceSelect.html('');
+        serviceSelect.append(`<option value>{{ 'form.loading.service' | trans }}</option>`);
+      },
       success: function (services) {
-        var serviceSelect = $("#app_person_service");
+        const serviceSelect = $("#app_person_service");
 
         // Remove current options
         serviceSelect.html('');

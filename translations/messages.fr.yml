@@ -202,6 +202,8 @@ form:
     twitter: 'Entrez le lien complet vers le compte Twitter'
     url: 'Entrez le site web de ce contact'
     youtube: 'Entrez le lien complet vers la chaîne Youtube'
+  loading:
+    service: 'Chargement des services de cette organisation'
   placeholder:
     member-of: 'Sélectionnez une organisation'
     service: 'Sélectionnez d’abord une organisation'
