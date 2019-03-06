@@ -31,12 +31,12 @@ use App\Form\Type\InstagramType;
 use App\Form\Type\JobTitleType;
 use App\Form\Type\LinkedInType;
 use App\Form\Type\OrganizationType;
+use App\Form\Type\ServiceType;
 use App\Form\Type\TelephoneType;
 use App\Form\Type\TwitterType;
 use App\Form\Type\UrlType;
 use App\Form\Type\YoutubeType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -105,10 +105,6 @@ class PersonForm extends AbstractType
                 'label' => 'form.field.alumnus',
                 'help' => 'form.help.alumnus',
             ])
-//            ->add('memberOf', OrganizationType::class, [
-//                'label' => 'form.field.member-of',
-//                'help' => 'form.help.member-of',
-//            ])
             ->add('nationality', CountryType::class, [
                 'label' => 'form.field.nationality',
                 'help' => 'form.help.nationality',
@@ -130,11 +126,6 @@ class PersonForm extends AbstractType
         $form->add('memberOf', OrganizationType::class, [
             'required' => true,
             'data' => $organization,
-            'label' => 'form.field.member-of',
-            'help' => 'form.help.member-of',
-            //FIXME translate
-            'placeholder' => 'Select an organization...',
-            'class' => Organization::class,
         ]);
 
         // Services empty, unless there is a selected City (Edit View)
@@ -147,17 +138,14 @@ class PersonForm extends AbstractType
 
             $services = $serviceRepository->createQueryBuilder('s')
                 ->where('s.organization = :organization')
+                ->orderBy('s.name')
                 ->setParameter('organization', $organization)
                 ->getQuery()
                 ->getResult();
         }
 
         // Add the Services field with the properly data
-        $form->add('service', EntityType::class, array(
-            'required' => true,
-            //FIXME translate
-            'placeholder' => 'Select a City first ...',
-            'class' => Service::class,
+        $form->add('service', ServiceType::class, array(
             'choices' => $services,
         ));
     }

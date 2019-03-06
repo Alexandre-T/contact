@@ -10,3 +10,8 @@
 {% endblock %}
 
 {% block content_settings %}{% include 'person/_form.html.twig' %}{% endblock content_settings %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% include '_javascript.html.twig' %}
+{% endblock javascripts %}

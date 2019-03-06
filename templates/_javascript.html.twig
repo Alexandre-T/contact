@@ -17,8 +17,9 @@
         serviceSelect.html('');
 
         // Empty value ...
-        {# FIXME translate #}
-        serviceSelect.append('<option value> Select a service of ' + organizationSelector.find("option:selected").text() + ' ...</option>');
+        let organization = organizationSelector.find("option:selected").text();
+        let text = `{{ "form.placeholder.new-service ${organization}" | trans }}`;
+        serviceSelect.append(`<option value>${text}</option>`);
 
 
         $.each(services, function (key, service) {

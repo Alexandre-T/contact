@@ -17,16 +17,16 @@
 
 namespace App\Form\Type;
 
-use App\Entity\Organization;
-use App\Repository\OrganizationRepository;
+use App\Entity\Service;
+use App\Repository\ServiceRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Organization Type class.
+ * Service Type class.
  */
-class OrganizationType extends AbstractType
+class ServiceType extends AbstractType
 {
     /**
      * Set default options.
@@ -38,14 +38,14 @@ class OrganizationType extends AbstractType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'class' => Organization::class,
-            'choice_label' => 'label',
-            'label' => 'form.field.member-of',
-            'help' => 'form.help.member-of',
-            'placeholder' => 'form.placeholder.member-of',
-            'query_builder' => function (OrganizationRepository $or) {
-                return $or->createQueryBuilder('o')
-                    ->orderBy('o.label', 'ASC');
+            'class' => Service::class,
+            'choice_label' => 'name',
+            'label' => 'form.field.service',
+            'help' => 'form.help.service',
+            'placeholder' => 'form.placeholder.service',
+            'query_builder' => function (ServiceRepository $or) {
+                return $or->createQueryBuilder('s')
+                    ->orderBy('s.name', 'ASC');
             },
             'required' => false,
         ]);

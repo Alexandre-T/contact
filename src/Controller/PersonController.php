@@ -234,7 +234,7 @@ class PersonController extends AbstractController
     /**
      * @Route("/service/organization.json", name="service_by_organization", methods={"get"})
      *
-     * @param Request $request
+     * @param Request           $request
      * @param ServiceRepository $serviceRepository
      *
      * @return JsonResponse

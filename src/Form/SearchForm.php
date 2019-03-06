@@ -53,7 +53,6 @@ class SearchForm extends AbstractType
                 'help' => null,
                 'required' => false,
             ])
-            //TODO add Department Type
             //TODO add Region Type
             ->add('department', DepartmentType::class)
             ->add('submit', SubmitType::class, [
@@ -70,7 +69,6 @@ class SearchForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            //'data_class' => Category::class,
             'csrf_protection' => false,
         ]);
     }
