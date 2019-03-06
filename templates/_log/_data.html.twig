@@ -4,7 +4,11 @@
             {% if value.id is not empty %}
                 <dt class="col-sm-4 text-right">{{ ('entity.log.data.' ~ key | hyphenize ) | trans }}</dt>
                 {# FIXME remplacer value #}
-                <dd class="col-sm-8">{{ value.id }}</dd>
+                {% if key == 'organization' %}
+                    <dd class="col-sm-8">{{ value.id }}</dd>
+                {% else %}
+                    <dd class="col-sm-8">{{ value.id }}</dd>
+                {% endif %}
             {% endif %}
         {% elseif key == 'password' %}
             <dt class="col-sm-4 text-right">{{ 'entity.log.data.password' | trans }}</dt>
@@ -21,8 +25,6 @@
         {% elseif key == 'roles' %}
             <dt class="col-sm-4 text-right">{{ 'entity.log.data.roles' | trans }}</dt>
             <dd class="col-sm-8">{{ log.data.roles | roles }}</dd>
-        {#{% elseif key == 'alumnus' or key == 'memberOf' %}#}
-        {#{% elseif key == 'country' or key == 'nationality' %}#}
         {% elseif not(value is empty and creating) %}
             {# TODO add a crypt extension to display email #}
             <dt class="col-sm-4 text-right">{{ ('entity.log.data.' ~ key | hyphenize ) | trans }}</dt>
