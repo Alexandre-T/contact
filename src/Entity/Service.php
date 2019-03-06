@@ -208,4 +208,14 @@ class Service implements EntityInterface, InformationInterface
 
         return $this;
     }
+
+    /**
+     * Return name of service.
+     *
+     * @return string|null
+     */
+    public function __toString(): ?string
+    {
+        return $this->getName();
+    }
 }

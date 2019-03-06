@@ -20,10 +20,12 @@ namespace App\Controller;
 use App\Entity\Person;
 use App\Form\PersonForm;
 use App\Manager\PersonManager;
+use App\Repository\ServiceRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,6 +40,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class PersonController extends AbstractController
 {
+    /**
+     * Limit of persons per page for listing.
+     */
+    const LIMIT_PER_PAGE = 25;
+
     /**
      * List all persons action.
      *
@@ -102,11 +109,6 @@ class PersonController extends AbstractController
     }
 
     /**
-     * Limit of persons per page for listing.
-     */
-    const LIMIT_PER_PAGE = 25;
-
-    /**
      * Find and display a person entity.
      *
      * @Route("/{id}", name="person_show", methods={"get"})
@@ -131,6 +133,27 @@ class PersonController extends AbstractController
             'deletable' => $personManager->isDeletable($person),
             'delete_form' => $deleteForm->createView(),
         ]);
+    }
+
+    /**
+     * Creates a form to delete a person entity.
+     *
+     * @param Person $person The person entity
+     *
+     * @return FormInterface The form
+     */
+    private function createDeleteForm(Person $person): FormInterface
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('person_delete', array('id' => $person->getId())))
+            ->setMethod('DELETE')
+            ->add('delete', SubmitType::class, [
+                'attr' => ['class' => 'btn-danger confirm-delete'],
+                //TODO add icon
+                //'icon' => 'trash-o',
+                'label' => 'modal.entity.delete.yes',
+            ])
+            ->getForm();
     }
 
     /**
@@ -209,24 +232,28 @@ class PersonController extends AbstractController
     }
 
     /**
-     * Creates a form to delete a person entity.
+     * @Route("/service/organization.json", name="service_by_organization", methods={"get"})
      *
-     * @param Person $person The person entity
+     * @param Request $request
+     * @param ServiceRepository $serviceRepository
      *
-     * @return FormInterface The form
+     * @return JsonResponse
+     *
+     * @Security("is_granted('ROLE_MANAGE_CONTACT')")
      */
-    private function createDeleteForm(Person $person): FormInterface
+    public function listServiceOfOrganization(Request $request, ServiceRepository $serviceRepository): JsonResponse
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('person_delete', array('id' => $person->getId())))
-            ->setMethod('DELETE')
-            ->add('delete', SubmitType::class, [
-                'attr' => ['class' => 'btn-danger confirm-delete'],
-                //TODO add icon
-                //'icon' => 'trash-o',
-                'label' => 'modal.entity.delete.yes',
-            ])
-            ->getForm()
-            ;
+        $organizationId = $request->query->getInt('organization', 0);
+        $services = $serviceRepository->findBy(['organization' => $organizationId]);
+
+        $responseArray = [];
+        foreach ($services as $service) {
+            $responseArray[] = array(
+                'id' => $service->getId(),
+                'name' => $service->getName(),
+            );
+        }
+
+        return new JsonResponse($responseArray);
     }
 }

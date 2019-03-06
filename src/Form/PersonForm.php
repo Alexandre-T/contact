@@ -17,7 +17,9 @@
 
 namespace App\Form;
 
+use App\Entity\Organization;
 use App\Entity\Person;
+use App\Entity\Service;
 use App\Form\Type\BirthNameType;
 use App\Form\Type\CategoryType;
 use App\Form\Type\CountryType;
@@ -33,9 +35,14 @@ use App\Form\Type\TelephoneType;
 use App\Form\Type\TwitterType;
 use App\Form\Type\UrlType;
 use App\Form\Type\YoutubeType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -43,6 +50,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PersonForm extends AbstractType
 {
+    /**
+     * Entity manager.
+     *
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * PersonForm constructor.
+     *
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * Builds the form.
      *
@@ -81,10 +105,10 @@ class PersonForm extends AbstractType
                 'label' => 'form.field.alumnus',
                 'help' => 'form.help.alumnus',
             ])
-            ->add('memberOf', OrganizationType::class, [
-                'label' => 'form.field.member-of',
-                'help' => 'form.help.member-of',
-            ])
+//            ->add('memberOf', OrganizationType::class, [
+//                'label' => 'form.field.member-of',
+//                'help' => 'form.help.member-of',
+//            ])
             ->add('nationality', CountryType::class, [
                 'label' => 'form.field.nationality',
                 'help' => 'form.help.nationality',
@@ -95,6 +119,76 @@ class PersonForm extends AbstractType
             ->add('twitter', TwitterType::class)
             ->add('youtube', YoutubeType::class)
         ;
+
+        // 3. Add 2 event listeners for the form
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData']);
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit']);
+    }
+
+    protected function addElements(FormInterface $form, Organization $organization = null)
+    {
+        $form->add('memberOf', OrganizationType::class, [
+            'required' => true,
+            'data' => $organization,
+            'label' => 'form.field.member-of',
+            'help' => 'form.help.member-of',
+            //FIXME translate
+            'placeholder' => 'Select an organization...',
+            'class' => Organization::class,
+        ]);
+
+        // Services empty, unless there is a selected City (Edit View)
+        $services = [];
+
+        // If there is a city stored in the Person entity, load the services of it
+        if ($organization) {
+            // Fetch Services of the City if there's a selected city
+            $serviceRepository = $this->entityManager->getRepository(Service::class);
+
+            $services = $serviceRepository->createQueryBuilder('s')
+                ->where('s.organization = :organization')
+                ->setParameter('organization', $organization)
+                ->getQuery()
+                ->getResult();
+        }
+
+        // Add the Services field with the properly data
+        $form->add('service', EntityType::class, array(
+            'required' => true,
+            //FIXME translate
+            'placeholder' => 'Select a City first ...',
+            'class' => Service::class,
+            'choices' => $services,
+        ));
+    }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function onPreSubmit(FormEvent $event)
+    {
+        $form = $event->getForm();
+        $data = $event->getData();
+
+        // Search for selected City and convert it into an Entity
+        $organization = $this->entityManager->getRepository(Organization::class)->find($data['memberOf']);
+
+        $this->addElements($form, $organization);
+    }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function onPreSetData(FormEvent $event)
+    {
+        /** @var Person $person */
+        $person = $event->getData();
+        $form = $event->getForm();
+
+        // When you create a new person, the Organization is always empty
+        $organization = $person->getMemberOf() ? $person->getMemberOf() : null;
+
+        $this->addElements($form, $organization);
     }
 
     /**
@@ -107,5 +201,18 @@ class PersonForm extends AbstractType
         $resolver->setDefaults([
             'data_class' => Person::class,
         ]);
+    }
+
+    /**
+     * Returns the prefix of the template block name for this type.
+     *
+     * The block prefix defaults to the underscored short class name with
+     * the "Type" suffix removed (e.g. "UserProfileType" => "user_profile").
+     *
+     * @return string The prefix of the template block name
+     */
+    public function getBlockPrefix()
+    {
+        return 'app_person';
     }
 }

@@ -1,0 +1,34 @@
+<script>
+  $('#app_person_memberOf').change(function () {
+    var organizationSelector = $(this);
+
+    // Request the services of the selected organization.
+    $.ajax({
+      url: "{{ path('service_by_organization') }}",
+      type: "GET",
+      dataType: "JSON",
+      data: {
+        organization: organizationSelector.val()
+      },
+      success: function (services) {
+        var serviceSelect = $("#app_person_service");
+
+        // Remove current options
+        serviceSelect.html('');
+
+        // Empty value ...
+        {# FIXME translate #}
+        serviceSelect.append('<option value> Select a service of ' + organizationSelector.find("option:selected").text() + ' ...</option>');
+
+
+        $.each(services, function (key, service) {
+          serviceSelect.append('<option value="' + service.id + '">' + service.name + '</option>');
+        });
+      },
+      error: function (err) {
+        {# FIXME translate #}
+        alert("An error ocurred while loading data ..." + JSON.stringify(err));
+      }
+    });
+  });
+</script>

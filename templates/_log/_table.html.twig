@@ -1,16 +1,12 @@
 <table class="table">
     <thead>
     <tr>
-        <th class="text-center" id="logs-version"
-            scope="col">{{ 'entity.log.version' | trans }}</th>
-        <th class="text-center" id="logs-action"
-            scope="col">{{ 'entity.log.action' | trans }}</th>
-        <th class="text-center" id="logs-date"
-            scope="col">{{ 'entity.log.date' | trans }}</th>
-        <th class="text-center" id="logs-user"
-            scope="col">{{ 'entity.log.user' | trans }}</th>
-        <th class="text-center" id="logs-value"
-            scope="col">{{ 'entity.log.new-value' | trans }}</th>
+        <th class="text-center" id="logs-action" scope="col">{{ 'entity.log.action' | trans }}</th>
+        <th class="text-center" id="logs-date" scope="col">
+            {{ 'entity.log.date' | trans }}<br>
+            {{ 'entity.log.user' | trans }}
+        </th>
+        <th class="text-center" id="logs-value" scope="col">{{ 'entity.log.new-value' | trans }}</th>
     </tr>
     </thead>
     {% include '_log/_logs.html.twig' with {'logs': logs} %}
