@@ -1,11 +1,21 @@
+<a href="#" class="btn btn-outline-primary float-right">Créer</a>
 {% if services is empty %}
     <p class="alert alert-info">
         {{ 'search.service.empty' | trans }}
     </p>
 {% else %}
-    <ul>
+    <ul class="list-unstyled">
         {% for service in services %}
-            <li>{{ service.name }}</li>
+            <li class="btn-group">
+                <span class="btn disabled btn-outline-secondary">{{ service.name }}</span>
+                <a class="btn btn-outline-secondary" href="#" title="..." data-toggle="tooltip" data-placement="bottom">
+                    <span class="fas fa-edit"></span>
+                </a>
+                <a class="btn btn-outline-danger"  href="#" title="..."  data-toggle="tooltip" data-placement="bottom">
+                    <span class="fas fa-trash"></span>
+                </a>
+            </li>
         {% endfor %}
     </ul>
+
 {% endif %}
