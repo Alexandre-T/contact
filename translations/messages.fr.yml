@@ -132,6 +132,8 @@ entity:
     created %name%: 'Le contact « %name% » a été créé avec succès.'
     deleted %name%: 'Le contact « %name% » a été supprimé avec succès.'
     updated %name%: 'Le contact « %name% » a été modifié avec succès.'
+  service:
+    created %name%: 'messages'
 
 form:
   address:
@@ -353,3 +355,5 @@ search:
     empty: 'Aucun contact ne correspond à votre recherche'
   service:
     empty: 'Aucun service'
+service:
+  delete: 'Supprimer ce service'

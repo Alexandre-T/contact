@@ -63,13 +63,13 @@ class PostalAddressRepositoryTest extends KernelTestCase
     public function testFindByFrenchDepartment()
     {
         //Allier (to test postal code with 03 and 33)
-        $expected = 1;
+        $expected = 3;
         $postalAddresses = $this->postalAddressRepository->findByFrenchDepartment(3);
         self::assertNotEmpty($postalAddresses);
         self::assertCount($expected, $postalAddresses);
 
         //Gironde
-        $expected = 2;
+        $expected = 5;
         $postalAddresses = $this->postalAddressRepository->findByFrenchDepartment(33);
         self::assertNotEmpty($postalAddresses);
         self::assertCount($expected, $postalAddresses);

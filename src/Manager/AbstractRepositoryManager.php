@@ -18,11 +18,14 @@
 namespace App\Manager;
 
 use App\Entity\EntityInterface;
+use App\Entity\InformationInterface;
 use App\Entity\User;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Gedmo\Loggable\Entity\LogEntry;
+use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -30,13 +33,48 @@ use Knp\Component\Pager\PaginatorInterface;
  * Abstract manager class.
  *
  * Provides useful function for main repository.
- *
- * @property EntityManagerInterface entityManager
- * @property EntityRepository repository
- * @property PaginatorInterface paginator
  */
 abstract class AbstractRepositoryManager implements ManagerInterface
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
+
+    /**
+     * @var PaginatorInterface
+     */
+    protected $paginator;
+
+    /**
+     * @var EntityRepository
+     */
+    protected $repository;
+
+    /**
+     * @var LogEntryRepository
+     */
+    protected $logRepository;
+
+    /**
+     * AbstractRepositoryManager constructor.
+     *
+     * @param EntityManagerInterface $entityManager
+     * @param PaginatorInterface     $paginator
+     */
+    public function __construct(EntityManagerInterface $entityManager, PaginatorInterface $paginator)
+    {
+        $this->entityManager = $entityManager;
+        $this->logRepository = $entityManager->getRepository(LogEntry::class);
+        $this->paginator = $paginator;
+        $this->repository = $this->getMainRepository();
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    abstract protected function getMainRepository(): EntityRepository;
+
     /**
      * Return the number of current entities registered in database.
      *
@@ -133,6 +171,22 @@ abstract class AbstractRepositoryManager implements ManagerInterface
             $limit,
             ['defaultSortFieldName' => $this->getDefaultSortField(), 'defaultSortDirection' => 'ASC' == $sortOrder ? $sortOrder : 'DESC']
         );
+    }
+
+    /**
+     * Retrieve logs of the services.
+     *
+     * @param InformationInterface $entity
+     *
+     * @return LogEntry[]
+     */
+    public function retrieveLogs($entity): array
+    {
+        if (empty($entity)) {
+            return [];
+        }
+
+        return $this->logRepository->getLogEntries($entity);
     }
 
     /**

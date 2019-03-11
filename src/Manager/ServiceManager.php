@@ -18,26 +18,25 @@
 namespace App\Manager;
 
 use App\Entity\EntityInterface;
-use App\Entity\Person;
-use App\Entity\PostalAddress;
+use App\Entity\Service;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
- * Person Manager.
+ * Service Manager.
  *
  * @category Manager
  *
  * @author  Alexandre Tranchant <alexandre.tranchant@gmail.com>
  * @license CeCILL-B V1
  */
-class PersonManager extends AbstractRepositoryManager implements ManagerInterface
+class ServiceManager extends AbstractRepositoryManager implements ManagerInterface
 {
     /**
      * Const for the alias query.
      */
-    const ALIAS = 'person';
+    const ALIAS = 'service';
 
     /**
      * Return the main repository.
@@ -46,7 +45,7 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
      */
     protected function getMainRepository(): EntityRepository
     {
-        return $this->entityManager->getRepository(Person::class);
+        return $this->entityManager->getRepository(Service::class);
     }
 
     /**
@@ -64,7 +63,7 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
      */
     public function getDefaultSortField(): string
     {
-        return self::ALIAS.'.familyName';
+        return self::ALIAS.'.name';
     }
 
     /**
@@ -87,20 +86,6 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
     public function isDeletable(EntityInterface $entity): bool
     {
         return true;
-    }
-
-    /**
-     * Create a new person.
-     *
-     * @return Person
-     */
-    public function createPerson(): Person
-    {
-        $person = new Person();
-        $postalAddress = new PostalAddress();
-        $person->setAddress($postalAddress);
-
-        return $person;
     }
 
     /**
@@ -179,7 +164,7 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
     protected function addHiddenField(QueryBuilder $queryBuilder): QueryBuilder
     {
         return $queryBuilder
-            ->addSelect('person.familyName as HIDDEN family')
-            ->addSelect('person.jobTitle as HIDDEN job');
+            ->addSelect('service.familyName as HIDDEN family')
+            ->addSelect('service.jobTitle as HIDDEN job');
     }
 }

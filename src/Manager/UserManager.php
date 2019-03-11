@@ -19,12 +19,8 @@ namespace App\Manager;
 
 use App\Entity\EntityInterface;
 use App\Entity\User;
-use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
-use Gedmo\Loggable\Entity\LogEntry;
-use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
-use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * User Manager.
@@ -42,45 +38,13 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface
     const ALIAS = 'user';
 
     /**
-     * Entity manager.
+     * Return the main repository.
      *
-     * @var EntityManagerInterface
+     * @return EntityRepository
      */
-    protected $entityManager;
-
-    /**
-     * Knp Paginator.
-     *
-     * @var PaginatorInterface
-     */
-    protected $paginator;
-
-    /**
-     * Repository.
-     *
-     * @var UserRepository
-     */
-    protected $repository;
-
-    /**
-     * Log repository.
-     *
-     * @var LogEntryRepository
-     */
-    private $logRepository;
-
-    /**
-     * UserManager constructor.
-     *
-     * @param EntityManagerInterface $entityManager
-     * @param PaginatorInterface     $paginator
-     */
-    public function __construct(EntityManagerInterface $entityManager, PaginatorInterface $paginator)
+    protected function getMainRepository(): EntityRepository
     {
-        $this->entityManager = $entityManager;
-        $this->paginator = $paginator;
-        $this->repository = $this->entityManager->getRepository(User::class);
-        $this->logRepository = $this->entityManager->getRepository(LogEntry::class);
+        return $this->entityManager->getRepository(User::class);
     }
 
     /**
@@ -121,20 +85,6 @@ class UserManager extends AbstractRepositoryManager implements ManagerInterface
     public function isDeletable(EntityInterface $entity): bool
     {
         return 0 === $this->repository->count(['creator' => $entity]);
-    }
-
-    /**
-     * Retrieve logs of the axe.
-     *
-     * @param User $entity
-     *
-     * @return LogEntry[]
-     */
-    public function retrieveLogs($entity): array
-    {
-        return $this->logRepository->getLogEntries($entity);
-
-        //return LogFactory::createUserLogs($logs);
     }
 
     /**

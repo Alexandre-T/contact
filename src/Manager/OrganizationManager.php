@@ -18,18 +18,12 @@
 namespace App\Manager;
 
 use App\Entity\EntityInterface;
-use App\Entity\InformationInterface;
 use App\Entity\Organization;
 use App\Entity\Person;
 use App\Entity\PostalAddress;
-use App\Repository\OrganizationRepository;
-use App\Repository\PersonRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
-use Gedmo\Loggable\Entity\LogEntry;
-use Gedmo\Loggable\Entity\Repository\LogEntryRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
-use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * Organization Manager.
@@ -47,53 +41,13 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
     const ALIAS = 'organization';
 
     /**
-     * Entity manager.
+     * Return the main repository.
      *
-     * @var EntityManagerInterface
+     * @return EntityRepository
      */
-    protected $entityManager;
-
-    /**
-     * Knp Paginator.
-     *
-     * @var PaginatorInterface
-     */
-    protected $paginator;
-
-    /**
-     * Repository.
-     *
-     * @var OrganizationRepository
-     */
-    protected $repository;
-
-    /**
-     * Log repository.
-     *
-     * @var LogEntryRepository
-     */
-    private $logRepository;
-
-    /**
-     * Person repository.
-     *
-     * @var PersonRepository
-     */
-    private $personRepository;
-
-    /**
-     * OrganizationManager constructor.
-     *
-     * @param EntityManagerInterface $entityManager
-     * @param PaginatorInterface     $paginator
-     */
-    public function __construct(EntityManagerInterface $entityManager, PaginatorInterface $paginator)
+    protected function getMainRepository(): EntityRepository
     {
-        $this->entityManager = $entityManager;
-        $this->paginator = $paginator;
-        $this->repository = $this->entityManager->getRepository(Organization::class);
-        $this->personRepository = $this->entityManager->getRepository(Person::class);
-        $this->logRepository = $this->entityManager->getRepository(LogEntry::class);
+        return $this->entityManager->getRepository(Organization::class);
     }
 
     /**
@@ -133,25 +87,11 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
      */
     public function isDeletable(EntityInterface $entity): bool
     {
+        $personRepository = $this->entityManager->getRepository(Person::class);
+
         return
-            0 === $this->personRepository->count(['alumnus' => $entity]) &&
-            0 === $this->personRepository->count(['memberOf' => $entity]);
-    }
-
-    /**
-     * Retrieve logs of the axe.
-     *
-     * @param InformationInterface $entity
-     *
-     * @return LogEntry[]
-     */
-    public function retrieveLogs($entity): array
-    {
-        if (is_null($entity)) {
-            return [];
-        }
-
-        return $this->logRepository->getLogEntries($entity);
+            0 === $personRepository->count(['alumnus' => $entity]) &&
+            0 === $personRepository->count(['memberOf' => $entity]);
     }
 
     /**
@@ -179,7 +119,9 @@ class OrganizationManager extends AbstractRepositoryManager implements ManagerIn
      */
     public function getContacts(Organization $organization, int $page, int $limit): PaginationInterface
     {
-        $qb = $this->personRepository->createQueryBuilder('p');
+        $personRepository = $this->entityManager->getRepository(Person::class);
+
+        $qb = $personRepository->createQueryBuilder('p');
         $qb->where('p.memberOf = :organization')
             ->setParameter('organization', $organization);
 
