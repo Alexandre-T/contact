@@ -21,7 +21,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ServiceController extends AbstractController
 {
     /**
-     * @Route("/new/{organization}", name="service")
+     * @Route("/new/{organization}", name="service_new")
      *
      * @param ServiceManager      $serviceManager
      * @param Request             $request

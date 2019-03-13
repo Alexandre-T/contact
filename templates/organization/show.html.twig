@@ -31,7 +31,7 @@
         {% include '_contacts.html.twig' with { 'pagination': pagination } %}
     </div>
     <div role="tabpanel" class="tab-pane fade" id="services">
-        {% include '_services.html.twig' with { 'services': organization.services } %}
+        {% include '_services.html.twig' with { 'services': organization.services, 'organization': organization } %}
     </div>
 {% endblock content_other_tabs %}
 

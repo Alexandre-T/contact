@@ -1,4 +1,7 @@
-<a href="#" class="btn btn-outline-primary float-right">Créer</a>
+<a href="{{ path('service_new', {'organization': organization.id}) }}" class="btn btn-outline-primary float-right" title="{{ 'action.service.create.title' | trans }}"
+    data-toggle="tooltip">
+    {{ 'action.entity.create.text' | trans }}
+</a>
 {% if services is empty %}
     <p class="alert alert-info">
         {{ 'search.service.empty' | trans }}
@@ -6,7 +9,7 @@
 {% else %}
     <ul class="list-unstyled">
         {% for service in services %}
-            <li class="btn-group">
+            <li class="btn-group mb-1">
                 <span class="btn disabled btn-outline-secondary">{{ service.name }}</span>
                 <a class="btn btn-outline-secondary" href="#" title="..." data-toggle="tooltip" data-placement="bottom">
                     <span class="fas fa-edit"></span>

@@ -54,6 +54,9 @@ action:
       title: 'Consulter la fiche de ce contact'
     edit:
       title: 'Modifier la fiche de ce contact'
+  service:
+    create:
+      title: 'Créer un nouveau service pour cette organisation'
 
 administration:
   created:
@@ -133,7 +136,7 @@ entity:
     deleted %name%: 'Le contact « %name% » a été supprimé avec succès.'
     updated %name%: 'Le contact « %name% » a été modifié avec succès.'
   service:
-    created %name%: 'messages'
+    created %name%: 'Le service « %name% » a été créé avec succès.'
 
 form:
   address:
@@ -329,6 +332,8 @@ title:
   search:
     index: 'Rechercher'
     result: 'Résultats de votre recherche...'
+  service:
+    create: 'messages'
 img:
   business-card:
     alt: 'Homme tendant une carte de visite'

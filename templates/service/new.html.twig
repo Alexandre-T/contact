@@ -1,10 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'default/_entity.html.twig' %}
 
-{% block body %}
-{# TODO #} TODO
+{% block title %}{{ 'title.service.create'|trans }} · {{ parent() }}{% endblock title %}
+
+{% block headline %}
+    <h1>
+        <span class="fa fa-building"></span>
+        {{ 'title.service.create'|trans }}
+    </h1>
 {% endblock %}
 
-{% block title %}
-
-{% endblock %}
-
+{% block content_settings %}
+    {% include 'service/_form.html.twig' %}
+{% endblock content_settings %}
