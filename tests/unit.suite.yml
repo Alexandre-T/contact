@@ -1,0 +1,4 @@
+actor: UnitTester
+modules:
+    enabled:
+        - \App\Tests\Helper\Unit
