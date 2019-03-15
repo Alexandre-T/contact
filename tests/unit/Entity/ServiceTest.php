@@ -51,6 +51,8 @@ class ServiceTest extends TestCase
         self::assertNull($this->service->getId());
         self::assertNull($this->service->getCreated());
         self::assertNull($this->service->getCreator());
+        self::assertNotNull($this->service->getLabel());
+        self::assertEmpty($this->service->getLabel());
         self::assertNull($this->service->getName());
         self::assertNull($this->service->getOrganization());
         self::assertNotNull($this->service->getPeople());
@@ -88,5 +90,6 @@ class ServiceTest extends TestCase
 
         self::assertEquals($this->service, $this->service->setName($actual));
         self::assertEquals($expected, $this->service->getName());
+        self::assertEquals($expected, $this->service->getLabel());
     }
 }

@@ -115,6 +115,16 @@ class Service implements EntityInterface, InformationInterface
     }
 
     /**
+     * Return the service label.
+     *
+     * @return string
+     */
+    public function getLabel(): string
+    {
+        return $this->getName()??'';
+    }
+
+    /**
      * Name getter.
      *
      * @return string|null
