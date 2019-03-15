@@ -11,8 +11,10 @@ sudo: false
 
 # Cache composer packages so "composer install" is faster
 cache:
+  yarn: true
   directories:
     - $HOME/.composer/cache
+    - node_modules
 
 # Base versions to test raw with the Symfony latest version.
 php:
@@ -44,6 +46,9 @@ install:
   - php bin/console doctrine:migrations:migrate -n
   # Data test installation
   - php bin/console doctrine:fixtures:load --env=dev -n
+  # Install assets
+  - yarn install
+  - yarn encore dev
 
 
 # Run script and log coverage in the "build" directory
