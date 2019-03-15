@@ -184,10 +184,12 @@ class PersonController extends AbstractController
             return $this->redirectToRoute('person_show', array('id' => $person->getId()));
         }
         $logs = $personManager->retrieveLogs($person);
+        $addressLogs = $personManager->retrieveLogs($person->getAddress());
 
         return $this->render('person/edit.html.twig', [
             'deletable' => $personManager->isDeletable($person),
             'logs' => $logs,
+            'addressLogs' => $addressLogs,
             'information' => $person,
             'person' => $person,
             'form' => $editForm->createView(),

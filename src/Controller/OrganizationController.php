@@ -165,10 +165,12 @@ class OrganizationController extends AbstractController
             return $this->redirectToRoute('organization_show', array('id' => $organization->getId()));
         }
         $logs = $organizationManager->retrieveLogs($organization);
+        $addressLogs = $organizationManager->retrieveLogs($organization->getAddress());
 
         return $this->render('organization/edit.html.twig', [
             'deletable' => $organizationManager->isDeletable($organization),
             'logs' => $logs,
+            'addressLogs' => $addressLogs,
             'information' => $organization,
             'organization' => $organization,
             'form' => $editForm->createView(),
