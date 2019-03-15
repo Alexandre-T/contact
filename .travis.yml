@@ -63,9 +63,6 @@ script:
   - php vendor/bin/codecept run functional
   # Acceptance test
   - php vendor/bin/codecept run acceptance
-  # Display errors
-  - ls tests/_output/* -lisah
-  - cat tests/_output/*
 
 # After a build, sends a notification to this e-mail with the build results.
 notifications:
