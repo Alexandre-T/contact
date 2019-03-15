@@ -48,6 +48,15 @@ class UserFixtures extends Fixture
                 ->setRoles($roleAdmin)
                 ->setCreator($userAdministrator);
 
+            //All
+            $userAll = new User();
+            $userAll
+                ->setLabel('All power')
+                ->setMail('all@example.org')
+                ->setPlainPassword('all')
+                ->setRoles(array_merge($roleAdmin, $roleOrganiser, $roleReader, $roleUser))
+                ->setCreator($userAdministrator);
+
             //Reader
             $userReader = new User();
             $userReader
@@ -86,12 +95,14 @@ class UserFixtures extends Fixture
             }
 
             //These references are perhaps unused.
+            $this->addReference('user_all', $userAll);
             $this->addReference('user_reader', $userReader);
             $this->addReference('user_user', $userUser);
             $this->addReference('user_organiser', $userOrganiser);
             $this->addReference('user_admin', $userAdministrator);
 
             //Persist dev and test data
+            $manager->persist($userAll);
             $manager->persist($userReader);
             $manager->persist($userUser);
             $manager->persist($userOrganiser);
