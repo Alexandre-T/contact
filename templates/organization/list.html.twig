@@ -41,11 +41,13 @@
                             <span class="fa fa-eye"></span>
                             <span class="sr-only">{{ 'action.organization.show.text' | trans }}</span>
                         </a>
-                        <a class="btn btn-default"  title="{{ 'action.organization.edit.title' | trans }}"
-                           href="{{ path('organization_edit', { 'id': organization.id }) }}">
-                            <span class="fa fa-edit"></span>
-                            <span class="sr-only">{{ 'action.organization.edit.text' | trans }}</span>
-                        </a>
+                        {% if is_granted('ROLE_MANAGE_ORGANIZATION') %}
+                            <a class="btn btn-default"  title="{{ 'action.organization.edit.title' | trans }}"
+                               href="{{ path('organization_edit', { 'id': organization.id }) }}">
+                                <span class="fa fa-edit"></span>
+                                <span class="sr-only">{{ 'action.organization.edit.text' | trans }}</span>
+                            </a>
+                        {% endif %}
                     </div>
                 </td>
             </tr>
@@ -57,11 +59,13 @@
             {{ knp_pagination_render(pagination) }}
         </div>
         <div>
-            <a class="btn btn-outline-primary" href="{{ path('organization_new') }}"
-               data-toggle="tooltip" data-placement="left" title="{{ 'action.organization.create.title' | trans }}">
-                <span class="fa fa-user"></span>
-                {{ 'action.organization.create.text' | trans }}
-            </a>
+            {% if is_granted('ROLE_MANAGE_ORGANIZATION') %}
+                <a class="btn btn-outline-primary" href="{{ path('organization_new') }}"
+                   data-toggle="tooltip" data-placement="left" title="{{ 'action.organization.create.title' | trans }}">
+                    <span class="fa fa-user"></span>
+                    {{ 'action.organization.create.text' | trans }}
+                </a>
+            {% endif %}
         </div>
     </div>
 

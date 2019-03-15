@@ -22,14 +22,7 @@ namespace App\Tests\Helper;
 
 /**
  * Acceptance class.
- *
- * @method amOnPage(string $string)
  */
 class Acceptance extends \Codeception\Module
 {
-
-    public function amOnHomePage()
-    {
-        $this->amOnPage('/');
-    }
 }

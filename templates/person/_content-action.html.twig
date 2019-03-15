@@ -3,20 +3,22 @@
     <span class="fa fa-building"></span>
     <span class="sr-only">{{ 'action.entity.list.text' | trans }}</span>
 </a>
-<a href="{{ path('person_edit', {'id': person.id}) }}" data-toggle="tooltip" data-placement="left"
-   title="{{ 'action.entity.edit.text' | trans }}" class="btn btn-outline-secondary">
-    <span class="fa fa-edit"></span>
-    <span class="sr-only">{{ 'action.entity.edit.text' | trans }}</span>
-</a>
-{% if deletable %}
-    <button class="btn btn-danger btn-mini confirm-delete" data-toggle="tooltip" data-form="form" data-placement="left"
-            title="{{ 'action.entity.delete.title' | trans }}" onclick="$('#confirm-delete').modal('show')">
-        <span class="fa fa-trash"></span>
-        <span class="sr-only">{{ 'action.entity.delete.text' | trans }}</span>
-    </button>
-{% else %}
-    <a href="#" title="" class="btn btn-outline-danger disabled">
-        <span class="fa fa-trash"></span>
-        <span class="sr-only">{{ 'action.entity.delete.text' | trans }}</span>
+{% if is_granted('ROLE_MANAGE_CONTACT') %}
+    <a href="{{ path('person_edit', {'id': person.id}) }}" data-toggle="tooltip" data-placement="left"
+       title="{{ 'action.entity.edit.text' | trans }}" class="btn btn-outline-secondary">
+        <span class="fa fa-edit"></span>
+        <span class="sr-only">{{ 'action.entity.edit.text' | trans }}</span>
     </a>
+    {% if deletable %}
+        <button class="btn btn-danger btn-mini confirm-delete" data-toggle="tooltip" data-form="form" data-placement="left"
+                title="{{ 'action.entity.delete.title' | trans }}" onclick="$('#confirm-delete').modal('show')">
+            <span class="fa fa-trash"></span>
+            <span class="sr-only">{{ 'action.entity.delete.text' | trans }}</span>
+        </button>
+    {% else %}
+        <a href="#" title="" class="btn btn-outline-danger disabled">
+            <span class="fa fa-trash"></span>
+            <span class="sr-only">{{ 'action.entity.delete.text' | trans }}</span>
+        </a>
+    {% endif %}
 {% endif %}

@@ -333,20 +333,38 @@ class SecurityCest
         $I->click('Contacts');
         $I->seeCurrentUrlEquals('/person');
         $I->seeResponseCodeIsSuccessful();
-        //FIXME remove comment
-        //$I->dontSeeLink('Créer');
+        $I->dontSeeLink('Créer');
+        $I->dontSeeLink('Éditer');
+        $I->seeLink('Consulter');
+        $I->click('Consulter', 'a.btn');
+        $id = $I->grabFromCurrentUrl('~(\d+)~');
+        $I->seeCurrentUrlEquals("/person/$id");
+        $I->dontSeeLink('Éditer');
+        $I->dontSeeLink('Supprimer');
         $I->amOnPage('/person/service/organization.json');
         $I->seeResponseCodeIs(403);
         $I->amOnPage('/person/new');
         $I->seeResponseCodeIs(403);
+        $I->amOnPage("/person/$id/edit");
+        $I->seeResponseCodeIs(403);
+//        $I->deleteOnPage("/person/$id");
+//        $I->seeResponseCodeIs(403);
 
         $I->wantToTest('Reader can access organization pages.');
         $I->amOnPage('/');
         $I->click('Organisations');
         $I->seeResponseCodeIsSuccessful();
-        //FIXME remove comment
-        //$I->dontSeeLink('Créer');
+        $I->dontSeeLink('Créer');
+        $I->dontSeeLink('Éditer');
+        $I->seeLink('Consulter');
+        $I->click('Consulter', 'a.btn');
+        $id = $I->grabFromCurrentUrl('~(\d+)~');
+        $I->seeCurrentUrlEquals("/organization/$id");
+        $I->dontSeeLink('Éditer');
+        $I->dontSeeLink('Supprimer');
         $I->amOnPage('/organization/new');
+        $I->seeResponseCodeIs(403);
+        $I->amOnPage("/organization/$id/edit");
         $I->seeResponseCodeIs(403);
 
         $I->wantToTest('Reader can access search page.');
