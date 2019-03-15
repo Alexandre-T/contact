@@ -44,9 +44,6 @@ install:
   - php bin/console doctrine:migrations:migrate -n
   # Data test installation
   - php bin/console doctrine:fixtures:load --env=dev -n
-  # Display errors
-  - ls tests/_output/*.fail.html -lisah
-  - cat tests/_output/*.fail.html
 
 
 # Run script and log coverage in the "build" directory
@@ -61,6 +58,9 @@ script:
   - php vendor/bin/codecept run functional
   # Acceptance test
   - php vendor/bin/codecept run acceptance
+  # Display errors
+  - ls tests/_output/* -lisah
+  - cat tests/_output/*
 
 # After a build, sends a notification to this e-mail with the build results.
 notifications:
