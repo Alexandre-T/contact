@@ -50,11 +50,11 @@ script:
   # Launch server
   - php bin/console server:start
   # Unit test
-  - php bin/codecept run unit
+  - php vendor/bin/codecept run unit
   # Functional test
-  - php bin/codecept run functional
+  - php vendor/bin/codecept run functional
   # Acceptance test
-  - php bin/codecept run acceptance
+  - php vendor/bin/codecept run acceptance
 
 # After a build, sends a notification to this e-mail with the build results.
 notifications:

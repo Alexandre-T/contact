@@ -1,6 +1,8 @@
 {
+    "name": "Contact",
+    "Description": "Contact is an application to store and search information about contacts.",
     "type": "project",
-    "license": "CeCILL-B V1",
+    "license": "CECILL-B",
     "require": {
         "php": "^7.1.3",
         "ext-ctype": "*",
