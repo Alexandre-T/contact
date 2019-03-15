@@ -37,6 +37,8 @@ install:
   - composer install --verbose
   # Database configuration
   - cp .env.travis .env
+  # Codeception configuration
+  - cp .env.travis .env.test.local
   # Database migration
   - php bin/console doctrine:migrations:migrate -n
   # Data test installation
