@@ -35,6 +35,7 @@ install:
   - psql -c 'create database symfony;' -U postgres
   # Install application
   - composer install --verbose
+  - composer update
   # Database configuration
   - cp .env.travis .env
   # Codeception configuration
@@ -43,6 +44,9 @@ install:
   - php bin/console doctrine:migrations:migrate -n
   # Data test installation
   - php bin/console doctrine:fixtures:load --env=dev -n
+  # Display errors
+  - ls tests/_output/*.fail.html -lisah
+  - cat tests/_output/*.fail.html
 
 
 # Run script and log coverage in the "build" directory
