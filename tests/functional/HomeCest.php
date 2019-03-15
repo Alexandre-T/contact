@@ -15,12 +15,15 @@
  * @see       http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt
  */
 
-
 namespace App\Tests\functional;
-
 
 use App\Tests\FunctionalTester;
 
+/**
+ * Home Cest.
+ *
+ * Functional test home controller.
+ */
 class HomeCest
 {
     public function index(FunctionalTester $I)

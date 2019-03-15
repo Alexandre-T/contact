@@ -18,6 +18,7 @@
 namespace App\Controller;
 
 use App\Form\LoginForm;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,6 +45,10 @@ class SecurityController extends AbstractController
      */
     public function loginAction(AuthenticationUtils $authenticationUtils): Response
     {
+        if ($this->getUser()) {
+            return new RedirectResponse('/');
+        }
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -80,6 +85,10 @@ class SecurityController extends AbstractController
      */
     public function registerAction(): Response
     {
+        if ($this->getUser()) {
+            return new RedirectResponse('/');
+        }
+
         return $this->render('security/register.html.twig');
     }
 }

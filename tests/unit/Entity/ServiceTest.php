@@ -74,7 +74,7 @@ class ServiceTest extends TestCase
     public function testGetOrganization()
     {
         $expected = $actual = new Organization();
-        
+
         self::assertEquals($this->service, $this->service->setOrganization($actual));
         self::assertEquals($expected, $this->service->getOrganization());
     }
