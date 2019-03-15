@@ -333,7 +333,7 @@ title:
     index: 'Rechercher'
     result: 'Résultats de votre recherche...'
   service:
-    create: 'messages'
+    create: 'Création d’un nouveau service'
 img:
   business-card:
     alt: 'Homme tendant une carte de visite'
@@ -362,3 +362,5 @@ search:
     empty: 'Aucun service'
 service:
   delete: 'Supprimer ce service'
+  show: 'Consulter ce service'
+  edit: 'Éditer ce service'

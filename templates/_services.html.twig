@@ -1,7 +1,9 @@
-<a href="{{ path('service_new', {'organization': organization.id}) }}" class="btn btn-outline-primary float-right" title="{{ 'action.service.create.title' | trans }}"
-    data-toggle="tooltip">
-    {{ 'action.entity.create.text' | trans }}
-</a>
+{% if is_granted('ROLE_MANAGE_ORGANIZATION') %}
+    <a href="{{ path('service_new', {'organization': organization.id}) }}" class="btn btn-outline-primary float-right" title="{{ 'action.service.create.title' | trans }}"
+        data-toggle="tooltip">
+        {{ 'action.entity.create.text' | trans }}
+    </a>
+{% endif %}
 {% if services is empty %}
     <p class="alert alert-info">
         {{ 'search.service.empty' | trans }}
@@ -11,12 +13,20 @@
         {% for service in services %}
             <li class="btn-group mb-1">
                 <span class="btn disabled btn-outline-secondary">{{ service.name }}</span>
-                <a class="btn btn-outline-secondary" href="#" title="..." data-toggle="tooltip" data-placement="bottom">
-                    <span class="fas fa-edit"></span>
+                <a class="btn btn-outline-secondary" href="#" title="{{ 'service.show' | trans }}" data-toggle="tooltip" data-placement="bottom">
+                    <span class="fas fa-eye"></span>
+                    <span class="sr-only">{{ 'action.entity.create.text' | trans }}</span>
                 </a>
-                <a class="btn btn-outline-danger"  href="#" title="{{ 'service.delete' | trans }}"  data-toggle="tooltip" data-placement="bottom">
-                    <span class="fas fa-trash"></span>
-                </a>
+                {% if is_granted('ROLE_MANAGE_ORGANIZATION') %}
+                    <a class="btn btn-outline-secondary" href="#" title="{{ 'service.edit' | trans }}" data-toggle="tooltip" data-placement="bottom">
+                        <span class="fas fa-edit"></span>
+                        <span class="sr-only">{{ 'action.entity.edit.text' | trans }}</span>
+                    </a>
+                    <a class="btn btn-outline-danger"  href="#" title="{{ 'service.delete' | trans }}"  data-toggle="tooltip" data-placement="bottom">
+                        <span class="fas fa-trash"></span>
+                        <span class="sr-only">{{ 'action.entity.delete.text' | trans }}</span>
+                    </a>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>
