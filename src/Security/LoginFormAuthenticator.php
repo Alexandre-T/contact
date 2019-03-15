@@ -226,7 +226,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $this->logger->notice('Connection successful: %username%', ['%username%' => $token->getUser()->getUsername()]);
 
         //Message for interface.
-        //FIXME flash bag is translated two times and generates a warn.
+        //TODO flash bag is translated two times and generates a warn.
         //But if I don't translate it the username will be lost.
         $this->flashBag->add(
             'success',
