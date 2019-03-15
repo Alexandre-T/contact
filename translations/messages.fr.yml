@@ -97,6 +97,7 @@ entity:
       locality: 'Nouvelle ville'
       mail: 'Nouvel email'
       member-of: 'Nouvelle organisation'
+      name: 'Nouveau nom'
       nationality: 'Nouvelle nationalité'
       password: 'Nouveau mot de passe'
       post-office-box-number: 'Nouveau complément'
@@ -137,6 +138,8 @@ entity:
     updated %name%: 'Le contact « %name% » a été modifié avec succès.'
   service:
     created %name%: 'Le service « %name% » a été créé avec succès.'
+    deleted %name%: 'Le service « %name% » a été supprimé avec succès.'
+    updated %name%: 'Le service « %name% » a été modifié avec succès.'
 
 form:
   address:
@@ -175,6 +178,7 @@ form:
     legal-name: 'Nom juridique'
     member-of: 'Membre de'
     nationality: 'Nationalité'
+    organization: 'Organisation'
     search: 'Recherche'
     service: 'Service'
     smartphone: 'Mobile'
@@ -221,6 +225,11 @@ form:
     help:
       mail: 'Entrez votre adresse email'
       password: 'Entrez votre mot de passe'
+  service:
+    field:
+      name: 'Service'
+    help:
+      name: 'Entrez le nom du service'
   submit:
     search: 'Recherche'
   user:
@@ -334,6 +343,8 @@ title:
     result: 'Résultats de votre recherche...'
   service:
     create: 'Création d’un nouveau service'
+    edit %name%: 'Modification du service « %name% »'
+    show %name%: 'Fiche du service « %name% »'
 img:
   business-card:
     alt: 'Homme tendant une carte de visite'

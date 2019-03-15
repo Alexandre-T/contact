@@ -42,7 +42,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @Gedmo\Loggable
  *
- * @UniqueEntity("label", message="error.service.name.unique")
+ * @UniqueEntity("name", message="error.service.name.unique")
  */
 class Service implements EntityInterface, InformationInterface
 {
@@ -121,7 +121,7 @@ class Service implements EntityInterface, InformationInterface
      */
     public function getLabel(): string
     {
-        return $this->getName()??'';
+        return $this->getName() ?? '';
     }
 
     /**

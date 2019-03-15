@@ -1,0 +1,27 @@
+{% extends 'default/_entity.html.twig' %}
+
+{% block title %}
+    {{ 'title.service.show %name%'|trans({'%name%': service.label}) }} · {{ parent() }}
+{% endblock %}
+
+{% block headline %}
+    <h1>
+        <span class="fas fa-briefcase"></span>
+        {{ 'title.service.show %name%'|trans({'%name%': service.label}) }}
+    </h1>
+{% endblock %}
+
+{% block content_settings %}
+    <dl class="row">
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.organization'| trans }}</dt>
+        <dd class="col-sm-8">
+            <a href="{{ path('organization_show', {'id': service.organization.id }) }}" title="{{ 'action.organization.show.title' | trans }}">
+                {{ service.organization.label }}
+            </a>
+        </dd>
+        <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.label'| trans }}</dt>
+        <dd class="col-sm-8">{{ service.label }}</dd>
+    </dl>
+{% endblock %}
+
+{% block content_action %}{% include 'service/_content-action.html.twig' %}{% endblock content_action %}

@@ -23,13 +23,15 @@
                             {{ 'entity.tab.logs' | trans }}
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ addressLogs is not defined ? 'disabled' }}" href="#addressLogs"
-                           aria-controls="addressLogs" role="tab" data-toggle="tab">
-                            <span class="fa fa-home"></span>
-                            {{ 'entity.tab.address-logs' | trans }}
-                        </a>
-                    </li>
+                    {% if addressLogs is defined %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#addressLogs"
+                               aria-controls="addressLogs" role="tab" data-toggle="tab">
+                                <span class="fa fa-home"></span>
+                                {{ 'entity.tab.address-logs' | trans }}
+                            </a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link {{ information is not defined ? 'disabled' }}" href="#informations"
                            aria-controls="informations" role="tab" data-toggle="tab">
@@ -53,12 +55,14 @@
                             {% include '_log/_table.html.twig' with {'logs': logs} %}
                         {% endif %}
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="addressLogs">
-                        {% if addressLogs is defined and addressLogs | length > 0 %}
-                            <h3>{{ 'entity.addressLog.title' | trans }}</h3>
-                            {% include '_log/_table.html.twig' with {'logs': addressLogs} %}
-                        {% endif %}
-                    </div>
+                    {% if addressLogs is defined %}
+                        <div role="tabpanel" class="tab-pane" id="addressLogs">
+                            {% if addressLogs | length > 0 %}
+                                <h3>{{ 'entity.addressLog.title' | trans }}</h3>
+                                {% include '_log/_table.html.twig' with {'logs': addressLogs} %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
                     {% endblock content_logs %}
                     <div role="tabpanel" class="tab-pane" id="informations">
                         {% block content_information %}
