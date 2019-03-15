@@ -159,4 +159,221 @@ class SecurityCest
         $I->seeResponseCodeIsSuccessful();
         $I->seeCurrentUrlEquals('/login');
     }
+
+    /**
+     * Test organiser access.
+     *
+     * @param AcceptanceTester $I
+     */
+    public function tryToTestOrganiserAccess(AcceptanceTester $I)
+    {
+        $I->wantTo('be connected as organiser.');
+        $I->amOnPage('/login');
+        $I->seeResponseCodeIsSuccessful();
+        $I->fillField('Adresse email', 'organiser@example.org');
+        $I->fillField('Mot de passe', 'organiser');
+        $I->click(' Se connecter'); //Be careful Se connecter began with ALT+0160 character
+        $I->seeCookie('PHPSESSID');
+        $I->seeCurrentUrlEquals('/');
+
+        //We are connected as administrator and are on home page
+        $I->wantToTest('organiser see links');
+        $I->seeLink('Contacts');
+        $I->seeLink('Organisations');
+        $I->dontSeeLink('Utilisateurs');
+
+        $I->wantToTest('Organiser can access home page.');
+        $I->click(' Accueil');
+        $I->seeCurrentUrlEquals('/');
+        $I->seeResponseCodeIsSuccessful();
+
+        $I->wantToTest('Organiser can access contact pages.');
+        $I->click('Contacts');
+        $I->seeCurrentUrlEquals('/person');
+        $I->seeResponseCodeIsSuccessful();
+        $I->click('Créer');
+        $I->seeCurrentUrlEquals('/person/new');
+        $I->seeResponseCodeIsSuccessful();
+        $I->amOnPage('/person/service/organization.json');
+        $I->seeResponseCodeIsSuccessful();
+
+        $I->wantToTest('Organiser can access organization pages.');
+        $I->amOnPage('/');
+        $I->click('Organisations');
+        $I->seeResponseCodeIsSuccessful();
+        $I->click('Créer');
+        $I->amOnPage('/organization/new');
+        $I->seeResponseCodeIsSuccessful();
+
+        $I->wantToTest('Organiser can access search page.');
+        $I->amOnPage('/search');
+        $I->seeResponseCodeIsSuccessful();
+
+        $I->wantToTest('Organiser cannot access admin pages.');
+        $I->amOnPage('/administration/user');
+        $I->seeResponseCodeIs(403);
+        $I->amOnPage('/administration/user/new');
+        $I->seeResponseCodeIs(403);
+
+        $I->wantToTest('Organiser cannot access register page.');
+        $I->amOnPage('/register');
+        //$I->seeResponseCodeIsRedirection();
+        $I->seeCurrentUrlEquals('/');
+
+        $I->wantToTest('Organiser cannot access login page.');
+        $I->amOnPage('/login');
+        //$I->seeResponseCodeIsRedirection();
+        $I->seeCurrentUrlEquals('/');
+
+        $I->wantToTest('Organiser can access logout page.');
+        $I->click('Déconnexion');
+        //$I->seeResponseCodeIsRedirection();
+        $I->amOnPage('/');
+        $I->seeLink('Connexion');
+        $I->seeLink('Inscription');
+    }
+
+    /**
+     * Test banned access.
+     *
+     * @param AcceptanceTester $I
+     */
+    public function tryToTestBannedAccess(AcceptanceTester $I)
+    {
+        $I->wantTo('be connected as banned user.');
+        $I->amOnPage('/login');
+        $I->seeResponseCodeIsSuccessful();
+        $I->fillField('Adresse email', 'user@example.org');
+        $I->fillField('Mot de passe', 'user');
+        $I->click(' Se connecter'); //Be careful Se connecter began with ALT+0160 character
+        $I->seeCookie('PHPSESSID');
+        $I->seeCurrentUrlEquals('/');
+
+        //We are connected as administrator and are on home page
+        $I->wantToTest('users see links');
+        $I->dontSeeLink('Contacts');
+        $I->dontSeeLink('Organisations');
+        $I->dontSeeLink('Utilisateurs');
+
+        $I->wantToTest('Banned user can access home page.');
+        $I->click(' Accueil');
+        $I->seeCurrentUrlEquals('/');
+        $I->seeResponseCodeIsSuccessful();
+
+        $I->wantToTest('Banned user cannot access contact pages.');
+        $I->amOnPage('/person');
+        $I->seeResponseCodeIs(403);
+        $I->amOnPage('/person/new');
+        $I->seeResponseCodeIs(403);
+        $I->amOnPage('/person/service/organization.json');
+        $I->seeResponseCodeIs(403);
+
+        $I->wantToTest('Banned user cannot access organization pages.');
+        $I->amOnPage('/organization');
+        $I->seeResponseCodeIs(403);
+        $I->amOnPage('/organization/new');
+        $I->seeResponseCodeIs(403);
+
+        $I->wantToTest('Administrator cannot access search page.');
+        $I->amOnPage('/search');
+        $I->seeResponseCodeIs(403);
+
+        $I->wantToTest('Banned user cannot access admin pages.');
+        $I->amOnPage('/administration/user');
+        $I->seeResponseCodeIs(403);
+        $I->amOnPage('/administration/user/new');
+        $I->seeResponseCodeIs(403);
+
+        $I->wantToTest('Banned user cannot access register page.');
+        $I->amOnPage('/register');
+        //$I->seeResponseCodeIsRedirection();
+        $I->seeCurrentUrlEquals('/');
+
+        $I->wantToTest('Banned user cannot access login page.');
+        $I->amOnPage('/login');
+        //$I->seeResponseCodeIsRedirection();
+        $I->seeCurrentUrlEquals('/');
+
+        $I->wantToTest('Banned user can access logout page.');
+        $I->click('Déconnexion');
+        //$I->seeResponseCodeIsRedirection();
+        $I->amOnPage('/');
+        $I->seeLink('Connexion');
+        $I->seeLink('Inscription');
+    }
+
+    /**
+     * Test reader access.
+     *
+     * @param AcceptanceTester $I
+     */
+    public function tryToTestReaderAccess(AcceptanceTester $I)
+    {
+        $I->wantTo('be connected as reader.');
+        $I->amOnPage('/login');
+        $I->seeResponseCodeIsSuccessful();
+        $I->fillField('Adresse email', 'reader@example.org');
+        $I->fillField('Mot de passe', 'reader');
+        $I->click(' Se connecter'); //Be careful Se connecter began with ALT+0160 character
+        $I->seeCookie('PHPSESSID');
+        $I->seeCurrentUrlEquals('/');
+
+        //We are connected as administrator and are on home page
+        $I->wantToTest('reader see links');
+        $I->seeLink('Contacts');
+        $I->seeLink('Organisations');
+        $I->dontSeeLink('Utilisateurs');
+
+        $I->wantToTest('Reader can access home page.');
+        $I->click(' Accueil');
+        $I->seeCurrentUrlEquals('/');
+        $I->seeResponseCodeIsSuccessful();
+
+        $I->wantToTest('Reader can access contact pages.');
+        $I->click('Contacts');
+        $I->seeCurrentUrlEquals('/person');
+        $I->seeResponseCodeIsSuccessful();
+        //FIXME remove comment
+        //$I->dontSeeLink('Créer');
+        $I->amOnPage('/person/service/organization.json');
+        $I->seeResponseCodeIs(403);
+        $I->amOnPage('/person/new');
+        $I->seeResponseCodeIs(403);
+
+        $I->wantToTest('Reader can access organization pages.');
+        $I->amOnPage('/');
+        $I->click('Organisations');
+        $I->seeResponseCodeIsSuccessful();
+        //FIXME remove comment
+        //$I->dontSeeLink('Créer');
+        $I->amOnPage('/organization/new');
+        $I->seeResponseCodeIs(403);
+
+        $I->wantToTest('Reader can access search page.');
+        $I->amOnPage('/search');
+        $I->seeResponseCodeIsSuccessful();
+
+        $I->wantToTest('Reader cannot access admin pages.');
+        $I->amOnPage('/administration/user');
+        $I->seeResponseCodeIs(403);
+        $I->amOnPage('/administration/user/new');
+        $I->seeResponseCodeIs(403);
+
+        $I->wantToTest('Reader cannot access register page.');
+        $I->amOnPage('/register');
+        //$I->seeResponseCodeIsRedirection();
+        $I->seeCurrentUrlEquals('/');
+
+        $I->wantToTest('Reader cannot access login page.');
+        $I->amOnPage('/login');
+        //$I->seeResponseCodeIsRedirection();
+        $I->seeCurrentUrlEquals('/');
+
+        $I->wantToTest('Reader can access logout page.');
+        $I->click('Déconnexion');
+        //$I->seeResponseCodeIsRedirection();
+        $I->amOnPage('/');
+        $I->seeLink('Connexion');
+        $I->seeLink('Inscription');
+    }
 }

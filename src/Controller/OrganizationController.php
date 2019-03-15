@@ -77,6 +77,8 @@ class OrganizationController extends AbstractController
      * @param TranslatorInterface $trans
      *
      * @return RedirectResponse |Response
+     *
+     * @Security("is_granted('ROLE_MANAGE_ORGANIZATION')")
      */
     public function newAction(OrganizationManager $organizationManager, Request $request, TranslatorInterface $trans)
     {
@@ -146,6 +148,8 @@ class OrganizationController extends AbstractController
      * @param TranslatorInterface $trans
      *
      * @return RedirectResponse|Response
+     *
+     * @Security("is_granted('ROLE_MANAGE_ORGANIZATION')")
      */
     public function editAction(Organization $organization, Request $request, OrganizationManager $organizationManager, TranslatorInterface $trans)
     {
@@ -183,6 +187,8 @@ class OrganizationController extends AbstractController
      * @param TranslatorInterface $trans
      *
      * @return RedirectResponse
+     *
+     * @Security("is_granted('ROLE_MANAGE_ORGANIZATION')")
      */
     public function deleteAction(Organization $organization, Request $request, OrganizationManager $organizationManager, TranslatorInterface $trans): RedirectResponse
     {

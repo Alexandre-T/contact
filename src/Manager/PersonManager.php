@@ -112,7 +112,7 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
      *
      * @return PaginationInterface
      */
-    public function search(array $search, int $page = 1, int $limit = self::LIMIT): PaginationInterface
+    public function search(?array $search = [], int $page = 1, int $limit = self::LIMIT): PaginationInterface
     {
         $qb = $this->repository->createQueryBuilder('p');
 
