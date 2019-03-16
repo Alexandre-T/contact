@@ -130,9 +130,7 @@
                         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
                             <span class="fa fa-undo-alt"></span>&nbsp;{{ 'modal.entity.delete.cancel' | trans }}
                         </button>
-                        {% if delete_form is defined %}
-                            {{ form_widget(delete_form.delete) }}
-                        {% endif %}
+                        {{ form_widget(delete_form.delete) }}
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
