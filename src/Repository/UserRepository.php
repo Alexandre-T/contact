@@ -74,7 +74,6 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         $user = $this->findOneByMail($username);
 
         if (!$user) {
-            //TODO Translate it
             throw new UsernameNotFoundException('No user found for username '.$username);
         }
 
