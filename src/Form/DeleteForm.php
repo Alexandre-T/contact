@@ -17,8 +17,8 @@
 
 namespace App\Form;
 
+use App\Form\Type\ConfirmationType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -28,17 +28,12 @@ class DeleteForm extends AbstractType
      * Build the form.
      *
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('delete', SubmitType::class, [
-                'attr' => ['class' => 'btn-danger confirm-delete'],
-                //TODO add icon
-                //'icon' => 'trash-o',
-                'label' => 'modal.entity.delete.yes',
-            ])
+            ->add('delete', ConfirmationType::class)
         ;
     }
 
