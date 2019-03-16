@@ -150,7 +150,9 @@ class PersonController extends AbstractController
      */
     public function editAction(Person $person, Request $request, PersonManager $personManager, TranslatorInterface $trans)
     {
-        $deleteForm = $this->createForm(DeleteForm::class, $person);
+        $deleteForm = $this->createForm(DeleteForm::class, $person, [
+            'action' => $this->generateUrl('person_delete', ['id' => $person->getId()]),
+        ]);
         $editForm = $this->createForm(PersonForm::class, $person);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {

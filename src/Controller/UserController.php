@@ -146,7 +146,9 @@ class UserController extends AbstractController
      */
     public function editAction(User $user, Request $request, UserManager $userManager, TranslatorInterface $trans)
     {
-        $deleteForm = $this->createForm(DeleteForm::class, $user);
+        $deleteForm = $this->createForm(DeleteForm::class, $user, [
+            'action' => $this->generateUrl('administration_user_delete', ['id' => $user->getId()]),
+        ]);
         $editForm = $this->createForm(UserForm::class, $user);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {

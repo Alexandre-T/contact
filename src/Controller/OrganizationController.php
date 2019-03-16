@@ -152,7 +152,9 @@ class OrganizationController extends AbstractController
      */
     public function editAction(Organization $organization, Request $request, OrganizationManager $organizationManager, TranslatorInterface $trans)
     {
-        $deleteForm = $this->createForm(DeleteForm::class, $organization);
+        $deleteForm = $this->createForm(DeleteForm::class, $organization, [
+            'action' => $this->generateUrl('organization_delete', ['id' => $organization->getId()]),
+        ]);
         $editForm = $this->createForm(OrganizationForm::class, $organization);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {

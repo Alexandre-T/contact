@@ -76,7 +76,9 @@ class ServiceController extends AbstractController
      */
     public function editAction(Service $service, Request $request, ServiceManager $serviceManager, TranslatorInterface $trans)
     {
-        $deleteForm = $this->createForm(DeleteForm::class, $service);
+        $deleteForm = $this->createForm(DeleteForm::class, $service, [
+            'action' => $this->generateUrl('service_delete', ['id' => $service->getId()]),
+        ]);
         $editForm = $this->createForm(ServiceForm::class, $service);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {
