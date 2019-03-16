@@ -25,15 +25,6 @@ namespace App\Tests;
 class SecurityCest
 {
     /**
-     * Before each test.
-     *
-     * @param AcceptanceTester $I
-     */
-    public function _before(AcceptanceTester $I)
-    {
-    }
-
-    /**
      * Test administrator access.
      *
      * @param AcceptanceTester $I
@@ -83,7 +74,9 @@ class SecurityCest
         $I->seeResponseCodeIs(403);
 
         $I->wantToTest('Administrator cannot access search page.');
-        $I->amOnPage('/search');
+        $I->amOnPage('/search/index');
+        $I->seeResponseCodeIs(403);
+        $I->amOnPage('/search/mail');
         $I->seeResponseCodeIs(403);
 
         $I->wantToTest('Administrator cannot access register page.');
@@ -147,8 +140,10 @@ class SecurityCest
         $I->seeCurrentUrlEquals('/login');
 
         $I->wantToTest('Anonymous user cannot access search pages.');
-        $I->amOnPage('/search');
+        $I->amOnPage('/search/index');
         $I->seeResponseCodeIsSuccessful();
+        $I->seeCurrentUrlEquals('/login');
+        $I->amOnPage('/search/mail');
         $I->seeCurrentUrlEquals('/login');
 
         $I->wantToTest('Anonymous user cannot access admin pages.');
@@ -206,7 +201,9 @@ class SecurityCest
         $I->seeResponseCodeIsSuccessful();
 
         $I->wantToTest('Organiser can access search page.');
-        $I->amOnPage('/search');
+        $I->amOnPage('/search/index');
+        $I->seeResponseCodeIsSuccessful();
+        $I->amOnPage('/search/mail');
         $I->seeResponseCodeIsSuccessful();
 
         $I->wantToTest('Organiser cannot access admin pages.');
@@ -275,7 +272,9 @@ class SecurityCest
         $I->seeResponseCodeIs(403);
 
         $I->wantToTest('Administrator cannot access search page.');
-        $I->amOnPage('/search');
+        $I->amOnPage('/search/index');
+        $I->seeResponseCodeIs(403);
+        $I->amOnPage('/search/mail');
         $I->seeResponseCodeIs(403);
 
         $I->wantToTest('Banned user cannot access admin pages.');
@@ -368,7 +367,9 @@ class SecurityCest
         $I->seeResponseCodeIs(403);
 
         $I->wantToTest('Reader can access search page.');
-        $I->amOnPage('/search');
+        $I->amOnPage('/search/index');
+        $I->seeResponseCodeIsSuccessful();
+        $I->amOnPage('/search/mail');
         $I->seeResponseCodeIsSuccessful();
 
         $I->wantToTest('Reader cannot access admin pages.');
