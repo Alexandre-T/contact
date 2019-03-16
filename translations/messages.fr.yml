@@ -57,6 +57,9 @@ action:
   service:
     create:
       title: 'Créer un nouveau service pour cette organisation'
+  export-mail:
+    text: 'Adresses email'
+    title: 'Exporter toutes leurs adresses email.'
 
 administration:
   created:
@@ -232,6 +235,7 @@ form:
       name: 'Entrez le nom du service'
   submit:
     search: 'Recherche'
+    export-mail: 'Exporter les emails'
   user:
     field:
       username: 'Nom de l’utilisateur'

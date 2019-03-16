@@ -1,5 +1,12 @@
-<div class="text-right">
-    {{ knp_pagination_render(pagination) }}
+<div class="d-flex justify-content-between">
+    <div class="text-left">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+    {% if  form_export is defined %}
+        <div class="flex-fill text-right">
+            {{ form(form_export) }}
+        </div>
+    {% endif %}
 </div>
 {% if pagination.items is empty %}
     <div class="alert alert-info">

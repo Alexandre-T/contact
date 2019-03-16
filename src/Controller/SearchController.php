@@ -17,6 +17,7 @@
 
 namespace App\Controller;
 
+use App\Form\ExportForm;
 use App\Form\SearchForm;
 use App\Manager\PersonManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -39,7 +40,12 @@ class SearchController extends AbstractController
     const LIMIT_PER_PAGE = 15;
 
     /**
-     * @Route("/search", name="search")
+     * Export limit.
+     */
+    const EXPORT_LIMIT = 99999;
+
+    /**
+     * @Route("/search/index", name="search")
      *
      * @param Request       $request
      * @param PersonManager $personManager
@@ -51,13 +57,41 @@ class SearchController extends AbstractController
         $personPage = $request->query->getInt('page', 1);
 
         $form = $this->createForm(SearchForm::class);
+        $exportForm = $this->createForm(ExportForm::class);
         $form->handleRequest($request);
+        $exportForm->setData($form->getData());
 
         $personPaginator = $personManager->search($form->getData(), $personPage, self::LIMIT_PER_PAGE);
 
         return $this->render('search/index.html.twig', [
             'form_search' => $form->createView(),
+            'form_export' => $exportForm->createView(),
             'personPaginator' => $personPaginator,
         ]);
+    }
+
+    /**
+     * @Route("/search/mail", name="search_mail")
+     *
+     * @param Request       $request
+     * @param PersonManager $personManager
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function mail(Request $request, PersonManager $personManager)
+    {
+        $form = $this->createForm(SearchForm::class);
+        $form->handleRequest($request);
+
+        $personPaginator = $personManager->search($form->getData(), 1, self::EXPORT_LIMIT);
+
+        $response = $this->render('search/export.csv.twig', [
+            'personPaginator' => $personPaginator,
+        ]);
+
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', 'attachment; filename="teams.csv"');
+
+        return $response;
     }
 }

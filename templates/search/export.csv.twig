@@ -1,0 +1,5 @@
+{%- for contact in personPaginator.items %}
+{% if contact.email is not empty -%}
+{{ contact.label }} <{{ contact.email }}>
+{% endif %}
+{% endfor %}

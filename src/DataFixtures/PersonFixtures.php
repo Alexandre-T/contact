@@ -56,6 +56,7 @@ class PersonFixtures extends Fixture implements DependentFixtureInterface
             $person->setGivenName('Jane')
                 ->setBirthName('Birth')
                 ->setCategory($categories[5])
+                ->setEmail('jane.doe@example.org')
                 ->setFamilyName('Doe')
                 ->setNationality('FR')
                 ->setJobTitle('Depute')
@@ -85,6 +86,7 @@ class PersonFixtures extends Fixture implements DependentFixtureInterface
             $person = new Person();
             $person->setGivenName('John')
                 ->setCategory($categories[1])
+                ->setEmail('john.doe@example.org')
                 ->setFamilyName('Doe')
                 ->setNationality('FR')
                 ->setJobTitle('Designer')
@@ -118,6 +120,7 @@ class PersonFixtures extends Fixture implements DependentFixtureInterface
                 $persons[$index]->setGivenName("Given$index")
                     ->setBirthName("Birth$index")
                     ->setCategory($categories[$index % 5])
+                    ->setEmail("email.$index@example.org")
                     ->setFamilyName("Doe$index")
                     ->setNationality('FR')
                     ->setGender($index % Person::OTHER)
