@@ -17,14 +17,13 @@
 
 namespace App\Controller;
 
+use App\Form\DeleteForm;
 use App\Form\UserForm;
 use App\Entity\User;
 use App\Manager\UserManager;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -120,7 +119,7 @@ class UserController extends AbstractController
      */
     public function showAction(User $user, UserManager $userManager)
     {
-        $deleteForm = $this->createDeleteForm($user);
+        $deleteForm = $this->createForm(DeleteForm::class, $user);
         $logs = $userManager->retrieveLogs($user);
 
         return $this->render('administration/user/show.html.twig', [
@@ -147,7 +146,7 @@ class UserController extends AbstractController
      */
     public function editAction(User $user, Request $request, UserManager $userManager, TranslatorInterface $trans)
     {
-        $deleteForm = $this->createDeleteForm($user);
+        $deleteForm = $this->createForm(DeleteForm::class, $user);
         $editForm = $this->createForm(UserForm::class, $user);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -184,7 +183,7 @@ class UserController extends AbstractController
      */
     public function deleteAction(User $user, Request $request, UserManager $userManager, TranslatorInterface $trans)
     {
-        $form = $this->createDeleteForm($user);
+        $form = $this->createForm(DeleteForm::class, $user);
         $form->handleRequest($request);
         $isDeletable = $userManager->isDeletable($user);
 
@@ -202,27 +201,5 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('administration_user_index');
-    }
-
-    /**
-     * Creates a form to delete a user entity.
-     *
-     * @param User $user The user entity
-     *
-     * @return FormInterface The form
-     */
-    private function createDeleteForm(User $user)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('administration_user_delete', array('id' => $user->getId())))
-            ->setMethod('DELETE')
-            ->add('delete', SubmitType::class, [
-                'attr' => ['class' => 'btn-danger confirm-delete'],
-                //TODO add icon
-                //'icon' => 'trash-o',
-                'label' => 'modal.entity.delete.yes',
-            ])
-            ->getForm()
-            ;
     }
 }
