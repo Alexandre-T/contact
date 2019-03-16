@@ -38,8 +38,8 @@ class ConfirmationType extends SubmitType implements SubmitButtonTypeInterface
         $resolver->setDefaults([
             'attr' => ['class' => 'btn-danger confirm-delete'],
             'label' => 'modal.entity.delete.yes',
-            //TODO add icon
-            //'icon' => 'trash-o',
+            'icon' => 'trash',
+            'icon_family' => 'solid',
         ]);
     }
 

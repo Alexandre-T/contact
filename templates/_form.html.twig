@@ -30,3 +30,34 @@
         </div>
         {##}</fieldset>
 {%- endblock form_address %}
+
+{% block button_widget %}
+    {% spaceless %}
+        {%- set attr = attr|merge({class: (attr.class|default('btn-secondary') ~ ' btn')|trim}) -%}
+        {%- if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                    '%name%': name,
+                    '%id%': id,
+                }) %}
+            {%- elseif label is same as(false) -%}
+                {% set translation_domain = false %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+        <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
+            {% if icon is not empty and icon_family is same as(null) %}
+                <span class="fa fa-{{ icon }}"></span>
+            {% elseif icon is not empty and icon_family == 'solid' %}
+                <span class="fas fa-{{ icon }}"></span>
+            {% elseif icon is not empty and icon_family == 'regular' %}
+                <span class="far fa-{{ icon }}"></span>
+            {% elseif icon is not empty and icon_family == 'light' %}
+                <span class="fal fa-{{ icon }}"></span>
+            {% elseif icon is not empty and icon_family == 'brands' %}
+                <span class="fab fa-{{ icon }}"></span>
+            {% endif %}
+            {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</button>
+    {% endspaceless %}
+{% endblock button_widget %}
