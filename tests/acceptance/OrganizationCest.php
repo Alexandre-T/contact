@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the contact Application.
+ * This file is part of the organization Application.
  *
  * PHP version 7.2
  *
@@ -18,11 +18,11 @@
 namespace App\Tests;
 
 /**
- * Contact Cest.
+ * Organization Cest.
  *
  * Test all actions available for organiser.
  */
-class ContactCest
+class OrganizationCest
 {
     public function _before(AcceptanceTester $I)
     {
@@ -36,60 +36,58 @@ class ContactCest
     }
 
     /**
-     * Test the contact CRUD.
+     * Test the organization CRUD.
      *
      * @param AcceptanceTester $I
      */
     public function tryToTest(AcceptanceTester $I)
     {
-        $I->click('Contacts');
+        $I->click('Organisations');
         $I->seeResponseCodeIsSuccessful();
-        $I->seeCurrentUrlEquals('/person');
-        $I->see('Jane Doe (Birth)');
-        $I->seeLink('Organization-30');
-        $I->seeLink('Consulter');
+        $I->seeCurrentUrlEquals('/organization');
+        $I->see('Organization-0');
+        $I->see('Legal name 0');
         $I->seeLink('Éditer');
         $I->seeLink('2');
         $I->seeLink('Suivant »');
 
         $I->click('Créer');
-        $I->fillField('Nom de famille', 'ACodeception');
-        $I->fillField('Nom de naissance', 'ANaissance');
-        $I->fillField('Prénom', 'APrénom');
+        $I->fillField('Nom', 'ACodeception');
+        $I->fillField('Nom juridique', 'AJuridique');
+        $I->fillField('Nom complet', 'ANom');
         $I->fillField('Complément', 'Box 42');
-        $I->selectText('Rubrique', 'Universitaire');
-        $I->selectText('Membre de', 'Organization-0');
-        $I->selectText('Nationalité', 'France');
-        $I->selectText('Pays', 'France');
         $I->fillField('Code postal', '42180');
+        $I->selectText('Pays', 'France');
         $I->click('Enregistrer');
         $I->seeResponseCodeIsSuccessful();
         $id = $I->grabFromCurrentUrl('~(\d+)~');
-        $I->seeCurrentUrlEquals("/person/$id");
-        $I->see('a été créé avec succès');
+        $I->seeCurrentUrlEquals("/organization/$id");
+        $I->see('Cette nouvelle organisation a été correctement enregistrée');
         $I->seeLink('Lister');
         $I->seeLink('Éditer');
-        $I->see('Nouvelle rubrique');
-        $I->see('Nouveau prénom');
-        $I->dontSee('Nouveau site web');
+        $I->see('Nouveau libellé');
+        $I->see('Nouveau nom juridique');
+        $I->see('Nouveau code postal');
         $I->see('Nouveau complément');
+        $I->see('Nouveau pays');
+        $I->dontSee('Nouvelle rue');
         $I->click('Éditer');
         $I->seeResponseCodeIsSuccessful();
-        $I->seeCurrentUrlEquals("/person/$id/edit");
-        $I->fillField('Site web', 'https://codeception.com');
+        $I->seeCurrentUrlEquals("/organization/$id/edit");
+        $I->fillField('Adresse', 'Adresse 42');
         $I->fillField('Complément', 'Box Codeception 42');
         $I->click('Enregistrer');
         $I->seeResponseCodeIsSuccessful();
-        $I->see('a été modifié avec succès');
-        $I->seeCurrentUrlEquals("/person/$id");
-        $I->seeLink('https://codeception.com');
+        $I->see('Les modifications sur cette organisation ont été correctement enregistrées');
+        $I->seeCurrentUrlEquals("/organization/$id");
         $I->see('Box Codeception 42');
-        $I->see('Nouveau site web');
+        $I->see('Nouvelle rue');
         $I->see('Nouveau complément');
         $I->see('Box 42');
         $I->see('organiser@example.org');
         $I->submitForm('#delete_form_delete', []);
-        $I->see('a été supprimé avec succès');
-        $I->seeCurrentUrlEquals('/person');
+        $I->see('Cette organisation n’est plus référencée dans l’application');
+        $I->seeCurrentUrlEquals('/organization');
+        $I->dontSee('ACodeception');
     }
 }

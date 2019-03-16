@@ -14,28 +14,19 @@
             {{ form_row(form.label) }}
             {{ form_row(form.legalName) }}
             {{ form_row(form.acronymDefinition) }}
-            <p class="text-right">
-                <button class="btn btn-primary" type="button" onclick="$('#nav-form-address-tab').tab('show');">
-                    {{ 'action.next' | trans }}
-                    <span class="fa fa-arrow-right"></span>
-                </button>
-            </p>
-        </div>
-    </div>
-    <div class="tab-pane fade" id="form-address-tab" role="tabpanel" aria-labelledby="nav-form-address-tab">
-        <div class="m-0  border border-top-0 p-2 pt-4">
-            {{ form_row(form.address) }}
-            <div class="d-flex justify-content-between">
-                <button class="btn btn-secondary" type="button" onclick="$('#nav-form-general-tab').tab('show');">
-                    <span class="fa fa-arrow-left"></span>
-                    {{ 'action.previous' | trans }}
-                </button>
-                <button class="btn btn-primary" type="submit">
+            <div class="offset-sm-3 d-flex justify-content-between">
+                <button class="btn btn-primary ml-2" type="submit">
                     <span class="fa fa-save"></span>
                     {{ 'action.save.text' | trans }}
+                </button>
+                <button class="btn btn-outline-secondary" type="button"
+                        onclick="$('#nav-form-address-tab').tab('show');">
+                    {{ 'action.next' | trans }}
+                    <span class="fa fa-arrow-right"></span>
                 </button>
             </div>
         </div>
     </div>
+    {% include 'default/_form_address_tab.html.twig' with {'form': form} %}
 </div>
 {{ form_end(form) }}
