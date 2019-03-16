@@ -60,6 +60,7 @@ action:
   export-mail:
     text: 'Adresses email'
     title: 'Exporter toutes leurs adresses email.'
+  search: 'Rechercher'
 
 administration:
   created:

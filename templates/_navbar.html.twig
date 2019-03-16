@@ -32,7 +32,10 @@
                 <div class="input-group mr-sm-1">
                     <input type="text" class="form-control" name="search_form[search]" placeholder="Recherche&hellip;">
                     <div class="input-group-append">
-                        <button class="btn btn-secondary my-0" type="submit"><span class="fa fa-search"></span></button>
+                        <button class="btn btn-secondary my-0" type="submit">
+                            <span class="fas fa-search"></span>
+                            <span class="sr-only">{{ 'action.search' | trans }}</span>
+                        </button>
                     </div>
                 </div>
             </form>
