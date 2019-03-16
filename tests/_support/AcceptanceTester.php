@@ -37,7 +37,25 @@ class AcceptanceTester extends \Codeception\Actor
 {
     use _generated\AcceptanceTesterActions;
 
-    /*
-     * Define custom actions here
+    /**
+     * Select option by text.
+     *
+     * @param string $field
+     * @param string $value
      */
+    public function selectText(string $field, string $value): void
+    {
+        $this->selectOption($field, ['text' => $value]);
+    }
+
+    /**
+     * Select option by value.
+     *
+     * @param string $field
+     * @param string $value
+     */
+    public function selectValue(string $field, string $value): void
+    {
+        $this->selectOption($field, ['value' => $value]);
+    }
 }

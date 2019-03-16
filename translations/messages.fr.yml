@@ -1,5 +1,10 @@
 action:
   close: 'Fermer'
+  email:
+    title: 'Envoyer un email'
+  export-mail:
+    text: 'Adresses email'
+    title: 'Exporter toutes leurs adresses email.'
   entity:
     create:
       text: 'Créer'
@@ -28,9 +33,20 @@ action:
       title: 'Consulter la fiche de l’organisation'
     list:
       text: 'Lister'
+  person:
+    create:
+      title: 'Créer un nouveau contact'
+    show:
+      title: 'Consulter la fiche de ce contact'
+    edit:
+      title: 'Modifier la fiche de ce contact'
+  service:
+    create:
+      title: 'Créer un nouveau service pour cette organisation'
   previous: 'Précédent'
   save:
     text: 'Enregistrer'
+  search: 'Rechercher'
   user:
     create:
       text: 'Créer'
@@ -47,20 +63,8 @@ action:
     show:
       text: 'Consulter'
       title: 'Consulter la fiche de l’utilisateur'
-  person:
-    create:
-      title: 'Créer un nouveau contact'
-    show:
-      title: 'Consulter la fiche de ce contact'
-    edit:
-      title: 'Modifier la fiche de ce contact'
-  service:
-    create:
-      title: 'Créer un nouveau service pour cette organisation'
-  export-mail:
-    text: 'Adresses email'
-    title: 'Exporter toutes leurs adresses email.'
-  search: 'Rechercher'
+  url:
+    title: 'Consulter ce site web (dans une nouvelle fenêtre)'
 
 administration:
   created:
@@ -87,6 +91,7 @@ entity:
       acronym-definition: 'Nouvelle définition'
       alumnus: 'Nouvelle école'
       birth-name: 'Nouveau nom de naissance'
+      category: 'Nouvelle rubrique'
       country: 'Nouveau pays'
       email: 'Nouvel email'
       facebook: 'Nouveau Facebook'

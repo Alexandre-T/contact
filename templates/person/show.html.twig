@@ -23,8 +23,8 @@
             {% if person.memberOf is empty -%}
                 <small>{{ 'none' | trans }}</small>
             {%- else -%}
-                <a href="{{ path('organization_show', {id: person.memberOf.id}) }}"
-                   title="{{ 'link.organization.show.title' | trans }}">
+                <a href="{{ path('organization_show', {id: person.memberOf.id}) }}" data-toggle="tooltip"
+                   data-placement="top" title="{{ 'link.organization.show.title' | trans }}">
                     {{ person.memberOf.label }}
                 </a>
             {%- endif %}
@@ -41,13 +41,23 @@
             {%- endif %}
         </dd>
         <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.email'| trans }}</dt>
-        <dd class="col-sm-8">{{ person.email }}</dd>
+        <dd class="col-sm-8">
+            <a href="mailto:{{ person.label }} <{{ person.email }}>" title="{{ 'action.email.title' | trans }}" target="_blank" data-placement="top"
+               data-toggle="tooltip">
+            {{ person.email }}
+            </a>
+        </dd>
         <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.gender'| trans }}</dt>
         <dd class="col-sm-8">{{ person.gender | gender }}</dd>
         <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.nationality'| trans }}</dt>
         <dd class="col-sm-8">{{ person.nationality | country }}</dd>
         <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.url'| trans }}</dt>
-        <dd class="col-sm-8">{{ person.url }}</dd>
+        <dd class="col-sm-8">
+            <a href="{{ person.url }}" title="{{ 'action.url.title' | trans }}" target="_blank" data-placement="top"
+               data-toggle="tooltip">
+                {{ person.url }}
+            </a>
+        </dd>
     </dl>
     {% if person.address and not person.address.empty %}
         <div class="border-top  pt-2">

@@ -11,17 +11,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mr-auto">
-                <a class="nav-item nav-link {{ route == 'home' ? 'active' }}" href="{{ path('home') }}" title="{{ 'nav.home.title' | trans }}">
+                <a class="nav-item nav-link {{ route == 'home' ? 'active' }}" href="{{ path('home') }}" title="{{ 'nav.home.title' | trans }}"
+                    data-toggle="tooltip" data-placement="bottom">
                     <span class="fa fa-home"></span>&nbsp;{{ 'nav.home.text' | trans }}
                 </a>
                 {% if is_granted('ROLE_READ_CONTACT') %}
-                <a class="nav-item nav-link {{ route starts with 'contact' ? 'active' }}" href="{{ path('person_index') }}" title="{{ 'nav.contacts.title' | trans }}">
+                <a class="nav-item nav-link {{ route starts with 'contact' ? 'active' }}" href="{{ path('person_index') }}"
+                   data-toggle="tooltip" data-placement="bottom" title="{{ 'nav.contacts.title' | trans }}">
                     <span class="far fa-address-book"></span>
                     {{ 'nav.contacts.text' | trans }}
                 </a>
                 {% endif %}
                 {% if is_granted('ROLE_READ_ORGANIZATION') %}
-                <a class="nav-item nav-link {{ route starts with 'organization' ? 'active' }}" href="{{ path('organization_index') }}" title="{{ 'nav.organizations.title' | trans }}">
+                <a class="nav-item nav-link {{ route starts with 'organization' ? 'active' }}"
+                   data-toggle="tooltip" data-placement="bottom" href="{{ path('organization_index') }}"
+                   title="{{ 'nav.organizations.title' | trans }}">
                     <span class="fa fa-building"></span>
                     {{ 'nav.organizations.text' | trans }}
                 </a>
@@ -42,22 +46,26 @@
             {% endif %}
             <div class="navbar-nav ml-auto">
                 {% if is_granted('ROLE_MANAGE_USER') %}
-                <a class="nav-item nav-link" href="{{ path('administration_user_index') }}" title="{{ 'nav.user.title' | trans }}">
+                <a class="nav-item nav-link" href="{{ path('administration_user_index') }}" data-toggle="tooltip"
+                   data-placement="bottom" title="{{ 'nav.user.title' | trans }}">
                     <span class="fa fa-users"></span>
                     {{ 'nav.user.text' | trans}}
                 </a>
                 {% endif %}
                 {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <a class="nav-item nav-link" href="{{ path('security_logout') }}" title="{{ 'nav.logout.title' | trans }}">
+                    <a class="nav-item nav-link" href="{{ path('security_logout') }}" title="{{ 'nav.logout.title' | trans }}"
+                       data-toggle="tooltip" data-placement="bottom">
                         <span class="fa fa-sign-out-alt"></span>
                         {{ 'nav.logout.text' | trans}}
                     </a>
                 {% else %}
-                    <a class="nav-item nav-link {{ route == 'security_register' ? 'active' }}" href="{{ path('security_register') }}" title="{{ 'nav.register.title' | trans }}">
+                    <a class="nav-item nav-link {{ route == 'security_register' ? 'active' }}" data-toggle="tooltip"
+                       data-placement="bottom" href="{{ path('security_register') }}" title="{{ 'nav.register.title' | trans }}">
                         <span class="fa fa-sign-in-alt fa-rotate-270"></span>
                         {{ 'nav.register.text' | trans}}
                     </a>
-                    <a class="nav-item nav-link {{ route == 'security_login' ? 'active' }}" href="{{ path('security_login') }}" title="{{ 'nav.login.title' | trans }}">
+                    <a class="nav-item nav-link {{ route == 'security_login' ? 'active' }}" href="{{ path('security_login') }}"
+                       data-toggle="tooltip" data-placement="bottom" title="{{ 'nav.login.title' | trans }}">
                         <span class="fa fa-sign-in-alt"></span>
                         {{ 'nav.login.text' | trans}}
                     </a>

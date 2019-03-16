@@ -18,13 +18,12 @@
 namespace App\Controller;
 
 use App\Entity\Person;
+use App\Form\DeleteForm;
 use App\Form\PersonForm;
 use App\Manager\PersonManager;
 use App\Repository\ServiceRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -120,7 +119,7 @@ class PersonController extends AbstractController
      */
     public function showAction(Person $person, PersonManager $personManager)
     {
-        $deleteForm = $this->createDeleteForm($person);
+        $deleteForm = $this->createForm(DeleteForm::class, $person);
         $logs = $personManager->retrieveLogs($person);
         $addressLogs = $personManager->retrieveLogs($person->getAddress());
 
@@ -133,27 +132,6 @@ class PersonController extends AbstractController
             'deletable' => $personManager->isDeletable($person),
             'delete_form' => $deleteForm->createView(),
         ]);
-    }
-
-    /**
-     * Creates a form to delete a person entity.
-     *
-     * @param Person $person The person entity
-     *
-     * @return FormInterface The form
-     */
-    private function createDeleteForm(Person $person): FormInterface
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('person_delete', array('id' => $person->getId())))
-            ->setMethod('DELETE')
-            ->add('delete', SubmitType::class, [
-                'attr' => ['class' => 'btn-danger confirm-delete'],
-                //TODO add icon
-                //'icon' => 'trash-o',
-                'label' => 'modal.entity.delete.yes',
-            ])
-            ->getForm();
     }
 
     /**
@@ -172,7 +150,7 @@ class PersonController extends AbstractController
      */
     public function editAction(Person $person, Request $request, PersonManager $personManager, TranslatorInterface $trans)
     {
-        $deleteForm = $this->createDeleteForm($person);
+        $deleteForm = $this->createForm(DeleteForm::class, $person);
         $editForm = $this->createForm(PersonForm::class, $person);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -213,7 +191,7 @@ class PersonController extends AbstractController
      */
     public function deleteAction(Person $person, Request $request, PersonManager $personManager, TranslatorInterface $trans): RedirectResponse
     {
-        $form = $this->createDeleteForm($person);
+        $form = $this->createForm(DeleteForm::class, $person);
         $form->handleRequest($request);
         $isDeletable = $personManager->isDeletable($person);
 

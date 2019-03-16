@@ -229,6 +229,8 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="people", fetch="EAGER")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="cat_id", nullable=false)
+     *
+     * @Gedmo\Versioned()
      */
     private $category;
 

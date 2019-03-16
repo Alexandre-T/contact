@@ -4,12 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Organization;
 use App\Entity\Service;
+use App\Form\DeleteForm;
 use App\Form\ServiceForm;
 use App\Manager\ServiceManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,7 +39,7 @@ class ServiceController extends AbstractController
      */
     public function deleteAction(Service $service, Request $request, ServiceManager $serviceManager, TranslatorInterface $trans): RedirectResponse
     {
-        $form = $this->createDeleteForm($service);
+        $form = $deleteForm = $this->createForm(DeleteForm::class, $service);
         $form->handleRequest($request);
         $isDeletable = $serviceManager->isDeletable($service);
         $organization = $service->getOrganization();
@@ -77,7 +76,7 @@ class ServiceController extends AbstractController
      */
     public function editAction(Service $service, Request $request, ServiceManager $serviceManager, TranslatorInterface $trans)
     {
-        $deleteForm = $this->createDeleteForm($service);
+        $deleteForm = $this->createForm(DeleteForm::class, $service);
         $editForm = $this->createForm(ServiceForm::class, $service);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -139,13 +138,12 @@ class ServiceController extends AbstractController
      *
      * @param Service        $service
      * @param ServiceManager $serviceManager
-     * @param Request        $request
      *
      * @return Response
      */
     public function showAction(Service $service, ServiceManager $serviceManager)
     {
-        $deleteForm = $this->createDeleteForm($service);
+        $deleteForm = $deleteForm = $this->createForm(DeleteForm::class, $service);
         $logs = $serviceManager->retrieveLogs($service);
 
         return $this->render('service/show.html.twig', [
@@ -156,27 +154,5 @@ class ServiceController extends AbstractController
             'deletable' => $serviceManager->isDeletable($service),
             'delete_form' => $deleteForm->createView(),
         ]);
-    }
-
-    /**
-     * Creates a form to delete a service entity.
-     *
-     * @param Service $service The service entity
-     *
-     * @return FormInterface The form
-     */
-    private function createDeleteForm(Service $service): FormInterface
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('service_delete', array('id' => $service->getId())))
-            ->setMethod('DELETE')
-            ->add('delete', SubmitType::class, [
-                'attr' => ['class' => 'btn-danger confirm-delete'],
-                //TODO add icon
-                //'icon' => 'trash-o',
-                'label' => 'modal.entity.delete.yes',
-            ])
-            ->getForm()
-            ;
     }
 }

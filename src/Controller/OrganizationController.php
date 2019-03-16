@@ -18,12 +18,11 @@
 namespace App\Controller;
 
 use App\Entity\Organization;
+use App\Form\DeleteForm;
 use App\Form\OrganizationForm;
 use App\Manager\OrganizationManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -120,7 +119,7 @@ class OrganizationController extends AbstractController
     public function showAction(Organization $organization, OrganizationManager $organizationManager, Request $request)
     {
         $page = $request->query->getInt('page', 1);
-        $deleteForm = $this->createDeleteForm($organization);
+        $deleteForm = $deleteForm = $this->createForm(DeleteForm::class, $organization);
         $logs = $organizationManager->retrieveLogs($organization);
         $addressLogs = $organizationManager->retrieveLogs($organization->getAddress());
         $contactPagination = $organizationManager->getContacts($organization, $page, self::LIMIT_PER_PAGE);
@@ -153,7 +152,7 @@ class OrganizationController extends AbstractController
      */
     public function editAction(Organization $organization, Request $request, OrganizationManager $organizationManager, TranslatorInterface $trans)
     {
-        $deleteForm = $this->createDeleteForm($organization);
+        $deleteForm = $this->createForm(DeleteForm::class, $organization);
         $editForm = $this->createForm(OrganizationForm::class, $organization);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -194,7 +193,7 @@ class OrganizationController extends AbstractController
      */
     public function deleteAction(Organization $organization, Request $request, OrganizationManager $organizationManager, TranslatorInterface $trans): RedirectResponse
     {
-        $form = $this->createDeleteForm($organization);
+        $form = $this->createForm(DeleteForm::class, $organization);
         $form->handleRequest($request);
         $isDeletable = $organizationManager->isDeletable($organization);
 
@@ -212,27 +211,5 @@ class OrganizationController extends AbstractController
         }
 
         return $this->redirectToRoute('organization_index');
-    }
-
-    /**
-     * Creates a form to delete a organization entity.
-     *
-     * @param Organization $organization The organization entity
-     *
-     * @return FormInterface The form
-     */
-    private function createDeleteForm(Organization $organization): FormInterface
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('organization_delete', array('id' => $organization->getId())))
-            ->setMethod('DELETE')
-            ->add('delete', SubmitType::class, [
-                'attr' => ['class' => 'btn-danger confirm-delete'],
-                //TODO add icon
-                //'icon' => 'trash-o',
-                'label' => 'modal.entity.delete.yes',
-            ])
-            ->getForm()
-            ;
     }
 }
