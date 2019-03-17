@@ -71,7 +71,30 @@ class OrganizationCest
         $I->see('Nouveau complément');
         $I->see('Nouveau pays');
         $I->dontSee('Nouvelle rue');
-        $I->click('Éditer');
+        $I->click('Créer'); //New service
+        $I->seeResponseCodeIsSuccessful();
+        $I->seeCurrentUrlEquals("/service/new/$id");
+        $I->fillField('Service', 'ServiceCodeception');
+        $I->click('Enregistrer');
+        $I->seeResponseCodeIsSuccessful();
+        $I->seeCurrentUrlEquals("/organization/$id");
+        $I->see('a été créé avec succès');
+        $I->see('ServiceCodeception');
+        $I->click('Éditer', 'li.btn-group');//Service
+        $I->seeResponseCodeIsSuccessful();
+        $serviceId = $I->grabFromCurrentUrl('~(\d+)~');
+        $I->seeCurrentUrlEquals("/service/$serviceId/edit");
+        $I->fillField('Service', 'ServiceCodeception2');
+        $I->click('Enregistrer');
+        $I->seeResponseCodeIsSuccessful();
+        $I->seeCurrentUrlEquals("/service/$serviceId");
+        $I->see('a été modifié avec succès');
+        $I->see('Nouveau nom');
+        $I->submitForm('#delete_form_delete', []);
+        $I->seeResponseCodeIsSuccessful();
+        $I->seeCurrentUrlEquals("/organization/$id");
+        $I->see('a été supprimé avec succès');
+        $I->click('Éditer'); //Organization
         $I->seeResponseCodeIsSuccessful();
         $I->seeCurrentUrlEquals("/organization/$id/edit");
         $I->fillField('Adresse', 'Adresse 42');
