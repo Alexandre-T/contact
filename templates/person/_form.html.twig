@@ -12,28 +12,52 @@
          aria-labelledby="nav-form-general-tab">
         <div class="m-0  border border-top-0 p-2 pt-4">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     {{ form_row(form.familyName) }}
                     {{ form_row(form.birthName) }}
                     {{ form_row(form.givenName) }}
                     {{ form_row(form.category) }}
                     {{ form_row(form.jobTitle) }}
                     {{ form_row(form.email) }}
-                    {{ form_row(form.gender) }}
-                    {{ form_row(form.url) }}
-                    {{ form_row(form.alumnus) }}
                     {{ form_row(form.memberOf) }}
                     {{ form_row(form.service) }}
+                    {{ form_row(form.alumnus) }}
                     {{ form_row(form.nationality) }}
+                    {{ form_row(form.gender) }}
                 </div>
-                <div class="col-sm-6">
-                    {{ form_row(form.facebook) }}
-                    {{ form_row(form.instagram) }}
-                    {{ form_row(form.linkedIn) }}
-                    {{ form_row(form.twitter) }}
-                    {{ form_row(form.youtube) }}
-                    {{ form_row(form.smartphone) }}
-                    {{ form_row(form.telephone) }}
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {{ form_widget(form.facebook) }}
+                        {{ form_help(form.facebook) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(form.instagram) }}
+                        {{ form_help(form.facebook) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(form.linkedIn) }}
+                        {{ form_help(form.linkedIn) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(form.twitter) }}
+                        {{ form_help(form.twitter) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(form.youtube) }}
+                        {{ form_help(form.youtube) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(form.url) }}
+                        {{ form_help(form.url) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(form.smartphone) }}
+                        {{ form_help(form.smartphone) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_widget(form.telephone) }}
+                        {{ form_help(form.telephone) }}
+                    </div>
                 </div>
             </div>
             <div class="text-right">
