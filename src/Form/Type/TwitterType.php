@@ -38,6 +38,8 @@ class TwitterType extends AbstractType
         $resolver->setDefaults([
             'label' => 'form.field.twitter',
             'help' => 'form.help.twitter',
+            'icon' => 'twitter',
+            'icon_family' => 'brands',
             'required' => false,
         ]);
     }

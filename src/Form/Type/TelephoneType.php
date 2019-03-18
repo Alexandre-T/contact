@@ -38,6 +38,8 @@ class TelephoneType extends AbstractType
         $resolver->setDefaults([
             'label' => 'form.field.telephone',
             'help' => 'form.help.telephone',
+            'icon' => 'phone',
+            'icon_family' => 'solid',
             'required' => false,
         ]);
     }

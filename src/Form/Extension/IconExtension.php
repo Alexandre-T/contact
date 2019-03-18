@@ -19,6 +19,7 @@ namespace App\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeExtensionInterface;
 use Symfony\Component\Form\FormView;
@@ -29,7 +30,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * Create an icon in a button class.
  */
-class IconButtonExtension extends AbstractTypeExtension implements FormTypeExtensionInterface
+class IconExtension extends AbstractTypeExtension implements FormTypeExtensionInterface
 {
     /**
      * Builds the form view.
@@ -78,6 +79,9 @@ class IconButtonExtension extends AbstractTypeExtension implements FormTypeExten
      */
     public static function getExtendedTypes(): iterable
     {
-        return [ButtonType::class];
+        return [
+            ButtonType::class,
+            TextType::class,
+        ];
     }
 }

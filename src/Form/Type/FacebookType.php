@@ -38,6 +38,8 @@ class FacebookType extends AbstractType
         $resolver->setDefaults([
             'label' => 'form.field.facebook',
             'help' => 'form.help.facebook',
+            'icon' => 'facebook',
+            'icon_family' => 'brands',
             'required' => false,
         ]);
     }

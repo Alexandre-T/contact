@@ -38,6 +38,8 @@ class YoutubeType extends AbstractType
         $resolver->setDefaults([
             'label' => 'form.field.youtube',
             'help' => 'form.help.youtube',
+            'icon' => 'youtube',
+            'icon_family' => 'brands',
             'required' => false,
         ]);
     }

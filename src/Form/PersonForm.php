@@ -95,6 +95,7 @@ class PersonForm extends AbstractType
             ->add('smartphone', TelephoneType::class, [
                 'label' => 'form.field.smartphone',
                 'help' => 'form.help.smartphone',
+                'icon' => 'mobile-alt',
             ])
             ->add('telephone', TelephoneType::class)
             ->add('url', UrlType::class)

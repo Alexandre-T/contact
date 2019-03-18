@@ -61,3 +61,37 @@
             {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</button>
     {% endspaceless %}
 {% endblock button_widget %}
+
+{% block form_widget_simple -%}
+    {% if type is not defined or type != 'hidden' %}
+        {%- set attr = attr|merge({class: (attr.class|default('') ~ (type|default('') == 'file' ? ' custom-file-input' : ' form-control'))|trim}) -%}
+    {% endif %}
+    {%- if type is defined and (type == 'range' or type == 'color') %}
+        {# Attribute "required" is not supported #}
+        {%- set required = false -%}
+    {% endif %}
+    {%- if icon is defined and icon is not empty -%}
+        <div class="input-group{{ group_class|default('') }}">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <span class="input-group-addon">
+                        {% if icon is not empty and icon_family is same as(null) %}
+                            <span class="fa fa-fw fa-{{ icon }}"></span>
+                        {% elseif icon is not empty and icon_family == 'solid' %}
+                            <span class="fas fa-fw fa-{{ icon }}"></span>
+                        {% elseif icon is not empty and icon_family == 'regular' %}
+                            <span class="far fa-fw fa-{{ icon }}"></span>
+                        {% elseif icon is not empty and icon_family == 'light' %}
+                            <span class="fal fa-fw fa-{{ icon }}"></span>
+                        {% elseif icon is not empty and icon_family == 'brands' %}
+                            <span class="fab fa-fw fa-{{ icon }}"></span>
+                        {% endif %}
+                    </span>
+                </span>
+            </div>
+            {{- parent() -}}
+        </div>
+    {%- else -%}
+        {{- parent() -}}
+    {%- endif -%}
+{%- endblock form_widget_simple %}

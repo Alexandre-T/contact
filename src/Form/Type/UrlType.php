@@ -38,6 +38,8 @@ class UrlType extends AbstractType
         $resolver->setDefaults([
             'label' => 'form.field.url',
             'help' => 'form.help.url',
+            'icon' => 'firefox',
+            'icon_family' => 'brands',
             'required' => false,
         ]);
     }

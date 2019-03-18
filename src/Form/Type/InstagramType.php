@@ -38,6 +38,8 @@ class InstagramType extends AbstractType
         $resolver->setDefaults([
             'label' => 'form.field.instagram',
             'help' => 'form.help.instagram',
+            'icon' => 'instagram',
+            'icon_family' => 'brands',
             'required' => false,
         ]);
     }

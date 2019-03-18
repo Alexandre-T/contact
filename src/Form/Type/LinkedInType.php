@@ -38,6 +38,8 @@ class LinkedInType extends AbstractType
         $resolver->setDefaults([
             'label' => 'form.field.linked-in',
             'help' => 'form.help.linked-in',
+            'icon' => 'linkedin',
+            'icon_family' => 'brands',
             'required' => false,
         ]);
     }
