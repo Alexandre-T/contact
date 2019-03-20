@@ -59,6 +59,8 @@ class PersonTest extends TestCase
         self::assertNull($this->person->getJobTitle());
         self::assertNull($this->person->getMemberOf());
         self::assertNull($this->person->getNationality());
+        self::assertNotNull($this->person->getThematics());
+        self::assertEmpty($this->person->getThematics());
         self::assertNull($this->person->getUpdated());
         self::assertNull($this->person->getUrl());
     }

@@ -17,6 +17,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -245,6 +247,23 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
      * @Gedmo\Versioned
      */
     private $service;
+
+    /**
+     * Thematics.
+     *
+     * @var Thematic[]|Collection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Thematic")
+     */
+    private $thematics;
+
+    /**
+     * Person constructor.
+     */
+    public function __construct()
+    {
+        $this->thematics = new ArrayCollection();
+    }
 
     /**
      * Return available genders.
@@ -648,6 +667,46 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
     public function setService(?Service $service): self
     {
         $this->service = $service;
+
+        return $this;
+    }
+
+    /**
+     * Thematic getter.
+     *
+     * @return Collection|Thematic[]
+     */
+    public function getThematics(): Collection
+    {
+        return $this->thematics;
+    }
+
+    /**
+     * Thematic fluent adder.
+     *
+     * @param Thematic $thematic
+     * @return Person
+     */
+    public function addThematic(Thematic $thematic): self
+    {
+        if (!$this->thematics->contains($thematic)) {
+            $this->thematics[] = $thematic;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Thematic fluent remover.
+     *
+     * @param Thematic $thematic
+     * @return Person
+     */
+    public function removeThematic(Thematic $thematic): self
+    {
+        if ($this->thematics->contains($thematic)) {
+            $this->thematics->removeElement($thematic);
+        }
 
         return $this;
     }
