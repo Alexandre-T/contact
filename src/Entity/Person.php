@@ -254,6 +254,7 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
      * @var Thematic[]|Collection
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Thematic")
+     * @ORM\JoinTable(name="data.tj_person_thematic")
      */
     private $thematics;
 
