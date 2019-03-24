@@ -60,7 +60,7 @@ class ThematicTest extends TestCase
         self::assertEquals($this->thematic, $this->thematic->setCode($actual));
         self::assertEquals($expected, $this->thematic->getCode());
     }
-    
+
     /**
      * Test the method GetLabel.
      */

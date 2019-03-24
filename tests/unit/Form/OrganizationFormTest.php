@@ -6,7 +6,7 @@
  *
  * (c) Alexandre Tranchant <alexandre.tranchant@gmail.com>
  *
- * @login Entity
+ * @organization Entity
  *
  * @author    Alexandre Tranchant <alexandre.tranchant@gmail.com>
  * @copyright 2019 Cerema
@@ -17,10 +17,12 @@
 
 namespace App\Tests\unit\Form;
 
-use App\Form\LoginForm;
+use App\Entity\Organization;
+use App\Entity\PostalAddress;
+use App\Form\OrganizationForm;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class LoginFormTest extends TypeTestCase
+class OrganizationFormTest extends TypeTestCase
 {
     /**
      * Test submitted data.
@@ -28,16 +30,26 @@ class LoginFormTest extends TypeTestCase
     public function testSubmitValidData()
     {
         $formData = [
-            'mail' => 'mail',
+            'label' => 'label',
+            'legalName' => 'legalName',
+            'acronymDefinition' => 'acronym',
         ];
 
-        // $objectToCompare will retrieve data from the form submission; pass it as the second argument
-        $form = $this->factory->create(LoginForm::class);
+        $organizationToCompare = new Organization();
+        // $organization will retrieve data from the form submission; pass it as the second argument
+        $form = $this->factory->create(OrganizationForm::class, $organizationToCompare);
+
+        $organization = new Organization();
+        $organization->setLabel('label');
+        $organization->setLegalName('legalName');
+        $organization->setAcronymDefinition('acronym');
+        $organization->setAddress(new PostalAddress());
 
         // submit the data to the form directly
         $form->submit($formData);
-
         self::assertTrue($form->isSynchronized());
+
+        self::assertEquals($organization, $organizationToCompare);
 
         $view = $form->createView();
         $children = $view->children;

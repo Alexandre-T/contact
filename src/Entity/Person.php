@@ -686,6 +686,7 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
      * Thematic fluent adder.
      *
      * @param Thematic $thematic
+     *
      * @return Person
      */
     public function addThematic(Thematic $thematic): self
@@ -701,6 +702,7 @@ class Person implements EntityInterface, InformationInterface, SocialInterface
      * Thematic fluent remover.
      *
      * @param Thematic $thematic
+     *
      * @return Person
      */
     public function removeThematic(Thematic $thematic): self

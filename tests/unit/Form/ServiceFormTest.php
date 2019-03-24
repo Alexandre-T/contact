@@ -6,7 +6,7 @@
  *
  * (c) Alexandre Tranchant <alexandre.tranchant@gmail.com>
  *
- * @login Entity
+ * @service Entity
  *
  * @author    Alexandre Tranchant <alexandre.tranchant@gmail.com>
  * @copyright 2019 Cerema
@@ -17,10 +17,11 @@
 
 namespace App\Tests\unit\Form;
 
-use App\Form\LoginForm;
+use App\Entity\Service;
+use App\Form\ServiceForm;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class LoginFormTest extends TypeTestCase
+class ServiceFormTest extends TypeTestCase
 {
     /**
      * Test submitted data.
@@ -28,16 +29,21 @@ class LoginFormTest extends TypeTestCase
     public function testSubmitValidData()
     {
         $formData = [
-            'mail' => 'mail',
+            'name' => 'name',
         ];
 
-        // $objectToCompare will retrieve data from the form submission; pass it as the second argument
-        $form = $this->factory->create(LoginForm::class);
+        $serviceToCompare = new Service();
+        // $service will retrieve data from the form submission; pass it as the second argument
+        $form = $this->factory->create(ServiceForm::class, $serviceToCompare);
+
+        $service = new Service();
+        $service->setName('name');
 
         // submit the data to the form directly
         $form->submit($formData);
-
         self::assertTrue($form->isSynchronized());
+
+        self::assertEquals($service, $serviceToCompare);
 
         $view = $form->createView();
         $children = $view->children;

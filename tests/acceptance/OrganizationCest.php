@@ -80,7 +80,7 @@ class OrganizationCest
         $I->seeCurrentUrlEquals("/organization/$id");
         $I->see('a été créé avec succès');
         $I->see('ServiceCodeception');
-        $I->click('Éditer', 'li.btn-group');//Service
+        $I->click('Éditer', 'li.btn-group'); //Service
         $I->seeResponseCodeIsSuccessful();
         $serviceId = $I->grabFromCurrentUrl('~(\d+)~');
         $I->seeCurrentUrlEquals("/service/$serviceId/edit");

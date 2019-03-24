@@ -90,6 +90,7 @@ class Thematic
      * Code fluent setter.
      *
      * @param string $code
+     *
      * @return Thematic
      */
     public function setCode(string $code): self
@@ -113,6 +114,7 @@ class Thematic
      * Label fluent setter.
      *
      * @param string $label
+     *
      * @return Thematic
      */
     public function setLabel(string $label): self
