@@ -45,6 +45,8 @@ class SearchController extends AbstractController
     const EXPORT_LIMIT = 99999;
 
     /**
+     * Search page.
+     *
      * @Route("/search/index", name="search")
      *
      * @param Request       $request
@@ -71,6 +73,8 @@ class SearchController extends AbstractController
     }
 
     /**
+     * Export mail from search results.
+     *
      * @Route("/search/mail", name="search_mail")
      *
      * @param Request       $request
