@@ -1,4 +1,9 @@
 namespace: App\Tests
+coverage:
+    enabled: true
+    remote: false
+    include:
+        - src/*
 paths:
     tests: tests
     output: tests/_output

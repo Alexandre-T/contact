@@ -50,6 +50,8 @@ install:
   # Install assets
   - yarn install
   - yarn encore dev
+  # directories for coveralls
+  - mkdir tests/_output/coveralls -p
 
 
 # Run script and log coverage in the "build" directory
@@ -59,11 +61,16 @@ script:
   # Launch server
   - php bin/console server:start --no-interaction
   # Unit test
-  - php vendor/bin/codecept run unit
+  - php vendor/bin/codecept run unit --coverage --coverage-html --coverage-xml
   # Functional test
   - php vendor/bin/codecept run functional
   # Acceptance test
   - php vendor/bin/codecept run acceptance
+
+after_success:
+  - mkdir build/logs -p
+  - cp tests/_output/coverage.xml build/logs/clover.xml
+  - php vendor/bin/php-coveralls -v
 
 # After a build, sends a notification to this e-mail with the build results.
 notifications:
