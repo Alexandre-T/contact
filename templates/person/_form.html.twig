@@ -3,6 +3,8 @@
     <div class="nav nav-tabs" id="nav-form-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-form-general-tab" data-toggle="tab" href="#form-general-tab"
            role="tab" aria-controls="form-general-tab" aria-selected="true">{{ 'Organization' | trans }}</a>
+        <a class="nav-item nav-link" id="nav-form-thematic-tab" data-toggle="tab" href="#form-thematic-tab" role="tab"
+           aria-controls="form-address-tab" aria-selected="false">{{ 'Thematic' | trans }}</a>
         <a class="nav-item nav-link" id="nav-form-address-tab" data-toggle="tab" href="#form-address-tab" role="tab"
            aria-controls="form-address-tab" aria-selected="false">{{ 'Address' | trans }}</a>
     </div>
@@ -66,10 +68,29 @@
                     {{ 'action.save.text' | trans }}
                 </button>
                 <button class="btn btn-outline-secondary" type="button"
-                        onclick="$('#nav-form-address-tab').tab('show');">
+                        onclick="$('#nav-form-thematic-tab').tab('show');">
                     {{ 'action.next' | trans }}
                     <span class="fa fa-arrow-right"></span>
                 </button>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="form-thematic-tab" role="tabpanel" aria-labelledby="nav-form-thematic-tab">
+        <div class="m-0 border border-top-0 p-2 pt-4">
+            {{ form_row(form.thematics) }}
+            <div class="offset-sm-3 mt-0">
+                <div class="d-flex justify-content-between">
+                    <button class="ml-2 mt-0 btn btn-outline-secondary" type="button"
+                            onclick="$('#nav-form-general-tab').tab('show');">
+                        <span class="fa fa-arrow-left"></span>
+                        {{ 'action.previous' | trans }}
+                    </button>
+                    <button class="ml-2 mt-0 btn btn-outline-secondary" type="button"
+                            onclick="$('#nav-form-address-tab').tab('show');">
+                        <span class="fa fa-arrow-right"></span>
+                        {{ 'action.next' | trans }}
+                    </button>
+                </div>
             </div>
         </div>
     </div>

@@ -127,6 +127,8 @@ class PersonFixtures extends Fixture implements DependentFixtureInterface
                     ->setMemberOf($organizations[$index % 10])
                     ->setSmartphone(sprintf('06-62-00-00-%02d', $index))
                     ->setTelephone(sprintf('05-56-00-00-%02d', $index))
+                    ->addThematic($this->getReference('thematic_'.$index))
+                    ->addThematic($this->getReference('thematic_'.($index + 1)))
                     ->setFacebook("http://www.facebook.com/jane-doe$index")
                     ->setInstagram("https://www.instagram.com/jane-doe$index")
                     ->setLinkedIn("https://www.linkedin.com/jane-doe$index")
@@ -159,6 +161,7 @@ class PersonFixtures extends Fixture implements DependentFixtureInterface
         return [
             CategoryFixtures::class,
             OrganizationFixtures::class,
+            ThematicFixtures::class,
             UserFixtures::class,
         ];
     }

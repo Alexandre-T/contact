@@ -33,6 +33,7 @@ use App\Form\Type\LinkedInType;
 use App\Form\Type\OrganizationType;
 use App\Form\Type\ServiceType;
 use App\Form\Type\TelephoneType;
+use App\Form\Type\ThematicType;
 use App\Form\Type\TwitterType;
 use App\Form\Type\UrlType;
 use App\Form\Type\YoutubeType;
@@ -106,6 +107,7 @@ class PersonForm extends AbstractType
                 'label' => 'form.field.alumnus',
                 'help' => 'form.help.alumnus',
             ])
+            ->add('thematics', ThematicType::class)
             ->add('nationality', CountryType::class, [
                 'label' => 'form.field.nationality',
                 'help' => 'form.help.nationality',

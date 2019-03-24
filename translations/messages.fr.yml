@@ -196,6 +196,7 @@ form:
     twitter: 'Twitter'
     url: 'Site web'
     youtube: 'Youtube'
+    thematics: 'Thématiques'
   help:
     acronym-definition: 'Entrez la signification de l’acronyme de l’organisation.'
     alumnus: 'Choisissez l’école de ce contact pour faire des recherches sur les anciens élèves d’une école'
@@ -217,6 +218,7 @@ form:
     nationality: 'Sélectionnez le pays dans la liste.'
     smartphone: 'Entrez le numéro de mobile'
     telephone: 'Entrez le numéro de fixe'
+    thematics: 'Sélectionnez les thématiques sur lesquelles ce contact travaille'
     twitter: 'Entrez le lien complet vers le compte Twitter'
     url: 'Entrez le site web de ce contact'
     youtube: 'Entrez le lien complet vers la chaîne Youtube'
@@ -385,3 +387,4 @@ service:
   delete: 'Supprimer ce service'
   show: 'Consulter ce service'
   edit: 'Éditer ce service'
+Thematic: 'Thématiques'

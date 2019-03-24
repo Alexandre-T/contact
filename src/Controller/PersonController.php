@@ -21,6 +21,7 @@ use App\Entity\Person;
 use App\Form\DeleteForm;
 use App\Form\PersonForm;
 use App\Manager\PersonManager;
+use App\Manager\ThematicManager;
 use App\Repository\ServiceRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -112,15 +113,17 @@ class PersonController extends AbstractController
      *
      * @Route("/{id}", name="person_show", methods={"get"})
      *
-     * @param Person        $person
-     * @param PersonManager $personManager
+     * @param Person          $person
+     * @param PersonManager   $personManager
+     * @param ThematicManager $thematicManager
      *
      * @return Response
      */
-    public function showAction(Person $person, PersonManager $personManager)
+    public function showAction(Person $person, PersonManager $personManager, ThematicManager $thematicManager)
     {
         $deleteForm = $this->createForm(DeleteForm::class, $person);
         $logs = $personManager->retrieveLogs($person);
+        $thematics = $thematicManager->retrieveAll();
         $addressLogs = $personManager->retrieveLogs($person->getAddress());
 
         return $this->render('person/show.html.twig', [
@@ -129,6 +132,7 @@ class PersonController extends AbstractController
             'addressLogs' => $addressLogs,
             'information' => $person,
             'person' => $person,
+            'thematics' => $thematics,
             'deletable' => $personManager->isDeletable($person),
             'delete_form' => $deleteForm->createView(),
         ]);

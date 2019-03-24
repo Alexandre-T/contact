@@ -78,6 +78,18 @@
             </dl>
         </div>
     {% endif %}
+    {% if person.thematics and not person.thematics.empty %}
+        <div class="border-top  pt-2">
+            <dl class="row">
+                <dt class="col-sm-4 text-truncate text-right">{{ 'form.field.thematics' | trans }}</dt>
+                {% for thematic in person.thematics %}
+                    <dd class="col-sm-8 {% if not loop.first %} offset-sm-4{% endif %}">
+                        {{ thematic.label }}<br />
+                    </dd>
+                {% endfor %}
+            </dl>
+        </div>
+    {% endif %}
 
 {% endblock content_settings %}
 
