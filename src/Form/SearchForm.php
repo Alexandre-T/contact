@@ -19,6 +19,7 @@ namespace App\Form;
 
 use App\Form\Type\CategoryType;
 use App\Form\Type\DepartmentType;
+use App\Form\Type\ThematicType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -52,6 +53,10 @@ class SearchForm extends AbstractType
             ->add('category', CategoryType::class, [
                 'help' => null,
                 'required' => false,
+            ])
+            ->add('thematic', ThematicType::class, [
+                'multiple' => false,
+                'expanded' => false,
             ])
             //TODO add Region Type
             ->add('department', DepartmentType::class)

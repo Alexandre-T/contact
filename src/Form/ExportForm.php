@@ -46,6 +46,7 @@ class ExportForm extends AbstractType
             ->add('category', HiddenType::class)
             ->add('department', HiddenType::class)
             ->add('region', HiddenType::class)
+            ->add('thematic', HiddenType::class)
             ->add('submit', SubmitType::class, [
                 'label' => 'form.submit.export-mail',
             ])

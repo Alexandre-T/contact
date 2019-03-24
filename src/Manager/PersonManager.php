@@ -139,6 +139,12 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
                 ->setParameter('id', $search['category']);
         }
 
+        if(!empty($search['thematic'])) {
+            $qb->leftJoin('p.thematics', 't')
+                ->andWhere('t.id = :thematic')
+                ->setParameter('thematic', $search['thematic']);
+        }
+
         if (!empty($search['department'])) {
             $qb->leftJoin('p.address', 'a')
                 ->leftJoin('p.memberOf', 'm')

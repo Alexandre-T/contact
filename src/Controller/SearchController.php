@@ -80,7 +80,7 @@ class SearchController extends AbstractController
      */
     public function mail(Request $request, PersonManager $personManager)
     {
-        $form = $this->createForm(SearchForm::class);
+        $form = $this->createForm(ExportForm::class);
         $form->handleRequest($request);
 
         $personPaginator = $personManager->search($form->getData(), 1, self::EXPORT_LIMIT);
