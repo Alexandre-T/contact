@@ -76,7 +76,7 @@ class ContactCest
         $I->click('Éditer');
         $I->seeResponseCodeIsSuccessful();
         $I->seeCurrentUrlEquals("/person/$id/edit");
-        $I->fillField('Site web', 'https://codeception.com');
+        $I->fillField('app_person[url]', 'https://codeception.com');
         $I->fillField('Complément', 'Box Codeception 42');
         $I->click('Enregistrer');
         $I->seeResponseCodeIsSuccessful();
