@@ -19,6 +19,7 @@ namespace App\Form;
 
 use App\Form\Type\CategoryType;
 use App\Form\Type\DepartmentType;
+use App\Form\Type\RegionType;
 use App\Form\Type\ThematicType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -45,7 +46,6 @@ class SearchForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            //FIXME replace with a searchType
             ->add('search', TextType::class, [
                 'label' => 'form.field.search',
                 'required' => false,
@@ -58,7 +58,7 @@ class SearchForm extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
             ])
-            //TODO add Region Type
+            ->add('region', RegionType::class)
             ->add('department', DepartmentType::class)
             ->add('submit', SubmitType::class, [
                 'label' => 'form.submit.search',
