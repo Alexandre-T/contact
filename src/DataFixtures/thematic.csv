@@ -1,84 +1,21 @@
-C1004;Electricité, Gaz
-C1010;Hydraulique
-C1015;Production, distribution d'énergie (OBSOLETE)
-C1020;Chauffage urbain
-C1025;Soutien aux actions de MDE
 C1030;Autres énergies
-C1502;Eau (Traitement, Adduction, Distribution)
-C1505;Assainissement collectif
-C1507;Assainissement non collectif
-C1510;Collecte des déchets des ménages et déchets assimilés
-C1515;Traitement des déchets des ménages et déchets assimilés
-C1520;Lutte contre les nuisances sonores
 C1525;Qualité de l'air
 C1540;Autres actions environnementales
-C2005;Création/Suppression/Extension/Translation des cimetières et sites funéraires
-C2010;Crématorium
-C2015;Service extérieur de Pompes funèbres
-C2510;Aide sociale facultative
-C2515;Activités sanitaires
-C2520;Action sociale
-C2525;CIAS
-C3005;Dispositifs contractuels de développement urbain, de développement local et d’insertion économique et sociale
-C3015;PLIE (plan local pour l'insertion et l'emploi)
-C3020;CUCS (contrat urbain de cohésion sociale)
-C3025;Rénovation urbaine (ANRU)
-C3210;Conseil intercommunal de sécurité et de prévention de la délinquance
-C3220;Contrat local de sécurité transports
 C3505;Création, aménagement, entretien et gestion de zone d’activités industrielle, commerciale, tertiaire, artisanale ou touristique
 C3510;Création, aménagement, entretien et gestion de zone d’activités portuaire ou aéroportuaire
-C3515;Action de développement économique (soutien des activités industrielles, commerciales ou de l'emploi, soutien des activités agricoles et forestières…)
-C4005;Construction ou aménagement, entretien, gestion d’équipements ou d’établissements culturels, socioculturels, socio-éducatifs, sportifs (OBSOLETE)
-C4006;Construction, aménagement, entretien, gestion d'équipements ou d'établissements culturels, socio-culturels, socio-éducatifs
-C4007;Construction, aménagement, entretien, gestion d'équipements ou d'établissements sportifs
 C4010;Établissements scolaires
-C4015;Activités péri-scolaires
-C4017;Actions de soutien à l'enseignement supérieur
-C4020;Activités culturelles ou socioculturelles
-C4025;Activités sportives
 C4505;Schéma de cohérence territoriale (SCOT)
-C4510;Schéma de secteur
 C4515;Plans locaux d’urbanisme
-C4520;Création et réalisation de zone d’aménagement concertée (ZAC)
-C4525;Constitution de réserves foncières
 C4530;Organisation des transports urbains
-C4531;Transports scolaires
 C4532;Organisation des transports non urbains
 C4535;Prise en considération d’un programme d’aménagement d’ensemble et détermination des secteurs d’aménagement au sens du code de l’urbanisme
-C4540;Voies navigables et ports intérieurs (OBSOLETE)
-C4545;Aménagement rural (OBSOLETE)
 C4550;Plans de déplacement urbains
-C4555;Études et programmation
-C4560;Délivrance des autorisations d'occupation du sol (Permis de construire...)
 C5005;Création, aménagement, entretien de la voirie
-C5010;Signalisation (OBSOLETE)
-C5015;Parcs de stationnement
-C5210;Tourisme
-C5220;Thermalisme
 C5505;Programme local de l’habitat
-C5510;Politique du logement non social
-C5515;Politique du logement social
-C5520;Politique du logement étudiant
-C5525;Action et aide financière en faveur du logement social d'intérêt communautaire
-C5530;Action en faveur du logement des personnes défavorisées par des opérations d’intérêt communautaire
 C5535;Opération programmée d'amélioration de l'habitat (OPAH)
-C5540;Amélioration du parc immobilier bâti d'intérêt communautaire
-C5545;Droit de préemption urbain (DPU) pour la mise en œuvre de la politique communautaire d'équilibre social de l'habitat
-C5550;Actions de réhabilitation et résorption de l’habitat insalubre
-C5555;Délégations des aides à la pierre (article 61 - Loi LRL)
 C7005;Ports
 C7010;Aérodromes
 C7015;Voies navigables
 C7020;Eclairage public
 C7025;Pistes cyclables
-C7030;Abattoirs, abattoirs-marchés et marchés d'intérêt national, halles, foires
-C9905;Préparation et réalisation des enquêtes de recensement de la population
-C9910;Préfiguration et fonctionnement des Pays
-C9915;Gestion de personnel (policiers-municipaux et garde-champêtre...)
-C9920;Acquisition en commun de matériel
-C9922;Gestion d'un centre de secours
-C9925;Infrastructure de télécommunication (téléphonie mobile...)
-C9930;NTIC (Internet, câble…)
-C9935;Réalisation d'aire d'accueil ou de terrains de passage des gens du voyage
-C9950;Archives
 C9999;Autres
