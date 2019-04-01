@@ -8,6 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "alexandret/phpcas-guard-bundle": "@dev",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "gedmo/doctrine-extensions": "^2.4",
         "knplabs/knp-paginator-bundle": "^2.8",
