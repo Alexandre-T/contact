@@ -14,20 +14,30 @@
 {% block container %}
     <table class="table">
         <thead>
-        <tr>
-            <td headers="person-logo"><span class="far fa-address-book"></span></td>
-            <th id="person-label">
+        <tr class="bg-light">
+            <th headers="person-logo" class="align-middle"><span class="fas fa-fw fa-address-book"></span></th>
+            <th id="person-label" class="align-middle">
                 {{ knp_pagination_sortable(pagination, 'form.field.label' | trans, 'label')}}
                 <span class="{{ faSort(pagination.isSorted('label'), direction, 'alpha') }}"></span>
             </th>
-            <th id="person-legal">
+            <th id="person-legal" class="align-middle">
                 {{ knp_pagination_sortable(pagination, 'form.field.job-title' | trans, 'job-title')}}
                 <span class="{{ faSort(pagination.isSorted('legal'), direction, 'alpha') }}"></span>
             </th>
-            <th id="organization">
-                Organization
+            <th id="organization" class="align-middle">
+                Organisation
             </th>
-            <th id="user-actions">Actions</th>
+            <th id="user-actions">
+                {% if is_granted('ROLE_MANAGE_CONTACT') %}
+                    <a class="btn btn-outline-primary" href="{{ path('person_new') }}"
+                       data-toggle="tooltip" data-placement="left" title="{{ 'action.person.create.title' | trans }}">
+                        <span class="fa fa-user"></span>
+                        {{ 'action.entity.create.text' | trans }}
+                    </a>
+                {% else  %}
+                    Actions
+                {% endif %}
+            </th>
         </tr>
         </thead>
         <tbody>

@@ -14,17 +14,27 @@
 {% block container %}
     <table class="table">
         <thead>
-        <tr>
-            <td headers="organization-logo"><span class="fa fa-building"></span></td>
-            <th id="organization-label">
+        <tr class="bg-light">
+            <th headers="organization-logo" class="align-middle"><span class="fa fa-building"></span></th>
+            <th id="organization-label" class="align-middle">
                 {{ knp_pagination_sortable(pagination, 'form.field.label' | trans, 'label')}}
                 <span class="{{ faSort(pagination.isSorted('label'), direction, 'alpha') }}"></span>
             </th>
-            <th id="organization-legal">
+            <th id="organization-legal" class="align-middle">
                 {{ knp_pagination_sortable(pagination, 'form.field.legal-name' | trans, 'legal')}}
                 <span class="{{ faSort(pagination.isSorted('legal'), direction, 'alpha') }}"></span>
             </th>
-            <th id="user-actions">Actions</th>
+            <th id="user-actions" class="align-middle">
+                {% if is_granted('ROLE_MANAGE_ORGANIZATION') %}
+                    <a class="btn btn-outline-primary" href="{{ path('organization_new') }}"
+                       data-toggle="tooltip" data-placement="left" title="{{ 'action.organization.create.title' | trans }}">
+                        <span class="fa fa-user"></span>
+                        {{ 'action.organization.create.text' | trans }}
+                    </a>
+                {% else %}
+                    Actions
+                {% endif %}
+            </th>
         </tr>
         </thead>
         <tbody>
