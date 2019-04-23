@@ -154,18 +154,18 @@ class PersonManager extends AbstractRepositoryManager implements ManagerInterfac
                 ->setParameter('france', 'FR');
         }
         if (!empty($search['department'])) {
-            $qb->leftJoin('p.address', 'a')
-                ->leftJoin('p.memberOf', 'm')
-                ->leftJoin('m.address', 'ao')
+            $qb->leftJoin('p.address', 'da')
+                ->leftJoin('p.memberOf', 'dm')
+                ->leftJoin('dm.address', 'dao')
                 ->andWhere(
                     $qb->expr()->orX(
                         $qb->expr()->andX(
-                            $qb->expr()->like('a.postalCode', ':department'),
-                            $qb->expr()->eq('a.country', ':france')
+                            $qb->expr()->like('da.postalCode', ':department'),
+                            $qb->expr()->eq('da.country', ':france')
                         ),
                         $qb->expr()->andX(
-                            $qb->expr()->like('ao.postalCode', ':department'),
-                            $qb->expr()->eq('ao.country', ':france')
+                            $qb->expr()->like('dao.postalCode', ':department'),
+                            $qb->expr()->eq('dao.country', ':france')
                         )
                     )
                 )
