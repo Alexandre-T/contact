@@ -1,8 +1,10 @@
 {% if is_granted('ROLE_MANAGE_ORGANIZATION') %}
-    <a href="{{ path('service_new', {'organization': organization.id}) }}" class="btn btn-outline-primary float-right" title="{{ 'action.service.create.title' | trans }}"
-        data-toggle="tooltip">
-        {{ 'action.entity.create.text' | trans }}
-    </a>
+    <p class="text-right">
+        <a href="{{ path('service_new', {'organization': organization.id}) }}" class="btn btn-outline-primary mb-2" title="{{ 'action.service.create.title' | trans }}"
+            data-toggle="tooltip">
+            {{ 'action.entity.create.text' | trans }}
+        </a>
+    </p>
 {% endif %}
 {% if services is empty %}
     <p class="alert alert-info">
